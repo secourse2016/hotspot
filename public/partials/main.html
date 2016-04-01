@@ -1,82 +1,3 @@
-<!-- MAIN BANNER -->
-  <div class="row">
-    <div class="jumbotron banner">
-      <div class="container">
-      
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="jumbotron">
-                <h3>Book Travel</h3>
-
-                <input name="originAirports"
-                id="originAirports"
-                type="text"
-                placeholder="Flying From"
-                ng-model="selectedOrigin"
-                uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
-                class="form-control",
-                typeahead-on-select="SetOriginAirport($item.iata)">
-
-                <input name="destinationAirports"
-                id="destinationAirports"
-                type="text"
-                placeholder="Flying To"
-                ng-model="selectedDestination"
-                uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
-                class="form-control",
-                typeahead-on-select="SetDestinationAirport($item.iata)">
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <p class="input-group">
-                      <input type="text"
-                             class="form-control"
-                             uib-datepicker-popup="{{format}}"
-                             ng-model="dt"
-                             is-open="popup1.opened"
-                             ng-required="true"
-                             close-text="Close"
-                             alt-input-formats="altInputFormats" />
-                      <span class="input-group-btn">
-                        <button type="button"
-                                class="btn btn-default"
-                                ng-click="open1()">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                       </button>
-                      </span>
-                    </p>
-                  </div>
-
-                  <div class="col-md-6">
-                    <p class="input-group">
-                      <input type="text"
-                             class="form-control"
-                             uib-datepicker-popup
-                             ng-model="dt"
-                             is-open="popup2.opened"
-                             ng-required="true"
-                             close-text="Close" />
-                      <span class="input-group-btn">
-                        <button type="button"
-                                class="btn btn-default"
-                                ng-click="open2()">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                       </button>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-              <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- MAIN BANNER -->
-
 <!-- PROMOTIONAL OFFERS -->
   <div class="row">
    <div class="col-sm-6 col-md-4">
@@ -113,3 +34,86 @@
    </div>
   </div>
 <!-- PROMOTIONAL OFFERS -->
+
+<!-- MAIN BANNER -->
+
+      <!-- <div class="container"> -->
+
+        <div class="row ">
+
+          <div class="col-md-3">
+            <div class="jumbotron main-banner">
+                <h3>Book Travel</h3>
+                <div class="row">
+                  <div class="col-md-1">
+
+                  </div>
+                  <div class="col-md-10">
+
+
+                <input name="originAirports"
+                id="originAirports"
+                type="text"
+                placeholder="Flying From"
+                ng-model="selectedOrigin"
+                uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
+                class="form-control",
+                typeahead-on-select="SetOriginAirport($item.iata)">
+
+                <input name="destinationAirports"
+                id="destinationAirports"
+                type="text"
+                placeholder="Flying To"
+                ng-model="selectedDestination"
+                uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
+                class="form-control",
+                typeahead-on-select="SetDestinationAirport($item.iata)">
+
+                    <p class="input-group">
+                      <input type="text"
+                             class="form-control"
+                             placeholder="Outgoing flight date"
+                             uib-datepicker-popup="{{format}}"
+                             ng-model="dt"
+                             is-open="popup1.opened"
+                             ng-required="true"
+                             close-text="Close"
+                             alt-input-formats="altInputFormats" />
+                      <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open1()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+                    </p>
+
+
+                    <p class="input-group">
+                      <input type="text"
+                             class="form-control"
+                             placeholder="Incoming flight date"
+                             uib-datepicker-popup
+                             ng-model="dt"
+                             is-open="popup2.opened"
+                             ng-required="true"
+                             close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open2()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+                    </p>
+
+
+              <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+
+<!-- MAIN BANNER -->
