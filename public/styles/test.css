@@ -1,0 +1,25 @@
+.jumbotron{
+  text-align: center;
+  background: rgba(170, 170, 170, 0);
+  /*opacity: 0.70;*/
+  width: 1200px;
+  margin:0 auto;
+  margin-top: 70px;
+  border-radius: 10px;
+}
+.navbar{
+  background: transparent;
+  background-color: transparent ;
+  height: 70px;
+  border-color: transparent;
+}
+
+body{
+  background-size: cover;
+}
+ .jumbotron2{
+   text-align: center;
+   background: rgba(170, 170, 170, 0.4);
+   border-radius: 10px;
+   width: 30%;
+ }
