@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html ng-app="swiss ">
+<!doctype html>
+
+<html ng-app="Swiss">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Swiss Airlines</title>
     <link rel="shortcut icon" href="/images/flag.png">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
     <script src="/js/jquery-2.2.0.min.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="/js/angular-route.min.js"></script>
@@ -18,19 +19,27 @@
     <link rel="stylesheet" href="/styles/test.css">
 
   </head>
-  <body background = "/images/plane2.jpg">
-  <div class="container">
-    <nav class='navbar navbar-inverse navbar-fixed-top'>
-      <div class="container">
-        <div class="navbar-header">
-          <a><img class="logo" src="/images/logo.png" alt="" /></a>
-      </div>
-    </div>
-    </div>
-    </nav>
-       <div class="jumbotron">
-         <img src="/images/welcome.png"/>
-      </div>
+    <body background="/images/plane2.jpg">
 
-  </body>
+    <!-- TOP NAVBAR -->
+    <div class="container">
+      <nav class='navbar navbar-inverse navbar-fixed-top'>
+        <div class="container">
+          <div class="navbar-header">
+            <a><img class="logo" src="/images/logo.png" alt="" /></a>
+        </div>
+      </div>
+      </div>
+      </nav>
+    <!-- TOP NAVBAR -->
+
+    <div class="jumbotron jumbotron2">
+      <img src="/images/welcome.png"/>
+    </div>
+
+    <!-- ANGULAR DYNAMIC TEMPLATING -->
+    <div ng-view style="width:80%;margin:auto auto"></div>
+    <!-- ANGULAR DYNAMIC TEMPLATING -->
+
+    </body>
 </html>

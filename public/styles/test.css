@@ -1,7 +1,6 @@
 .jumbotron{
   text-align: center;
   background: rgba(170, 170, 170, 0);
-  /*opacity: 0.70;*/
   width: 1200px;
   margin:0 auto;
   margin-top: 70px;
@@ -17,9 +16,15 @@
 body{
   background-size: cover;
 }
- .jumbotron2{
+
+.main-banner{
+  width : 75%;
+  background: rgba(170, 170, 170, 0.4);
+}
+
+ /*.jumbotron2{
    text-align: center;
    background: rgba(170, 170, 170, 0.4);
    border-radius: 10px;
    width: 30%;
- }
+ }*/
