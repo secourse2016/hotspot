@@ -1,0 +1,114 @@
+<div class="row ">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron main-banner">
+        <h3>Book Travel</h3>
+        <div class="row">
+          <div class="col-md-1">
+
+          </div>
+          <div class="col-md-10">
+
+
+        <input name="originAirports"
+        id="originAirports"
+        type="text"
+        placeholder="Flying From"
+        ng-model="selectedOrigin"
+        uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
+        class="form-control",
+        typeahead-on-select="SetOriginAirport($item.iata)">
+
+        <input name="destinationAirports"
+        id="destinationAirports"
+        type="text"
+        placeholder="Flying To"
+        ng-model="selectedDestination"
+        uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
+        class="form-control",
+        typeahead-on-select="SetDestinationAirport($item.iata)">
+
+        <p>
+          Please enter your personal information:
+        </p>
+
+        <!-- form -->
+        <div class="form-group">
+          <label for="fname">First Name:</label>
+          <input type="text" class="form-control" id="fname">
+        </div>
+
+        <div class="form-group">
+          <label for="lname">Last Name:</label>
+          <input type="text" class="form-control" id="lname">
+        </div>
+
+
+
+        <form role="form">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+        </form>
+
+
+
+
+        <div class="form-group">
+          <label for="passport">Passport Number:</label>
+          <textarea class="form-control" rows="5" id="passport"></textarea>
+        </div>
+
+        <p class="input-group">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Issue Date"
+                 uib-datepicker-popup="{{format}}"
+                 ng-model="dt"
+                 is-open="popup1.opened"
+                 ng-required="true"
+                 close-text="Close"
+                 alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="open1()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+           </button>
+          </span>
+        </p>
+
+        <p class="input-group">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Expiry Date"
+                 uib-datepicker-popup="{{format}}"
+                 ng-model="dt"
+                 is-open="popup1.opened"
+                 ng-required="true"
+                 close-text="Close"
+                 alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="open1()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+           </button>
+          </span>
+        </p>
+
+
+      <!-- checkbox confirming the above flights, confirm button is grey if not checked -->
+      <!-- form -->
+      <!-- confirm buffton -->
+      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+
+      <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
