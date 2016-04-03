@@ -45,7 +45,13 @@
           </div>
           <div class="col-md-4">
             <div class="jumbotron main-banner">
-                <h3>Book Travel</h3>
+                <h2>Book a Flight</h2>
+                <div class="row">
+                  <div class="radio trip-option">
+                    <label><input type="radio" ng-model= "trip.type" value ="one" >One Way Trip</label>
+                    <label><input type="radio" ng-model= "trip.type" value ="round">Round Trip</label>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-1">
 
@@ -62,6 +68,9 @@
                 class="form-control",
                 typeahead-on-select="SetOriginAirport($item.iata)">
 
+                <div class="col-xs-12" style="height:25px;"></div>
+
+
                 <input name="destinationAirports"
                 id="destinationAirports"
                 type="text"
@@ -70,6 +79,8 @@
                 uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
                 class="form-control",
                 typeahead-on-select="SetDestinationAirport($item.iata)">
+
+                <div class="col-xs-12" style="height:25px;"></div>
 
                     <p class="input-group">
                       <input type="text"
@@ -90,8 +101,10 @@
                       </span>
                     </p>
 
+                    <div class="col-xs-12" style="height:8px;"></div>
 
-                    <p class="input-group">
+
+                    <p class="input-group" ng-show="trip.type == 'round'">
                       <input type="text"
                              class="form-control"
                              placeholder="Incoming flight date"
@@ -110,12 +123,16 @@
                     </p>
 
 
+
               <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
             </div>
+
               </div>
+
+
             </div>
           </div>
         </div>
       <!-- </div> -->
-
+<div class="col-xs-12" style="height:50px;"></div>
 <!-- MAIN BANNER -->
