@@ -7,7 +7,7 @@
   border-radius: 10px;
 }
 .navbar{
-  background: transparent;
+  background-image: url('/images/gradient.png');
   background-color: transparent ;
   height: 70px;
   border-color: transparent;
@@ -15,14 +15,24 @@
 
 body{
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
 
 .main-banner{
   width : 75%;
-  background: rgba(170, 170, 170, 0.4);
+  background: rgba(170, 170, 170, 0.7);
 }
 
- /*.jumbotron2{
+.trip-option{
+
+}
+
+
+.ng-invalid.ng-dirty { border-color: red; } .ng-valid.ng-dirty { border-color: green; }
+/*.jumbotron2{
+  opacity: 1;
    text-align: center;
    background: rgba(170, 170, 170, 0.4);
    border-radius: 10px;
