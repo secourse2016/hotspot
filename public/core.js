@@ -17,5 +17,9 @@ App.config(function($routeProvider) {
         .when('/flights', {
             templateUrl : '/partials/flights.html',
             controller  : 'flightsCtrl'
+        })
+        .when('/confirmation', {
+            templateUrl : '/partials/confirmation.html'
+            // controller  : 'flightsCtrl'
         });
 });
