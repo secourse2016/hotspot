@@ -5,10 +5,17 @@ Confirmation View:
 Incoming flights
 Outgoing flights
 Check that editing information still has the values for incoming and outgoing flights
+WEELLLSS!
+
 
 Payment View:
 Better spacing
 Angular date
+
+Flights View:
+ع==>---<===3 table style
+flight class choices
+incoming flight date picker
 
 Disable Edit after sending tickets
 Fix success messages closing or add a Modal
@@ -17,7 +24,7 @@ Passport field characters only
 
 Button to move Back
 Pass data from flights to confirmation
-flight class choices
 fix payment view angular content
 make views left aligned
 add carousel
+progress bar
