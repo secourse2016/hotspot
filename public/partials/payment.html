@@ -55,10 +55,10 @@
 </div>
 
     <!-- Credit Card Type -->
-<div class="form-group" ng-model="user.ccType">
+<div class="form-group">
 <span class="asterisk_input">  </span>
    <label>Credit Card Type</label>
-   <select name="card-type" class="ccjs-hidden-card-type">
+   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType">
     <option value="amex" class="ccjs-amex">American Express</option>
     <option value="discover" class="ccjs-discover">Discover</option>
     <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
@@ -73,7 +73,7 @@
 <div class="form-group">
 <span class="asterisk_input">  </span>
   <label>Credit Card Number</label>
-  <input type="text" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="ccNumber" required ng-minlength="16" ng-maxlength="16">
+  <input type="text" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="user.ccNumber" required ng-minlength="16" ng-maxlength="16">
   <p ng-show="userForm.cnumber.$pristine" class="help-block"> Credit Card Number is required</p>
   <p ng-show="userForm.cnumber.$error.minlength" class="help-block"> A credit card number must consist of 16 numbers</p>
   <p ng-show="userForm.cnumber.$error.maxlength" class="help-block"> A credit card number must consist of 16 numbers</p>
@@ -103,7 +103,7 @@
 
  <!-- Country Selection-->
      <p><span class="asterisk_input">  </span>
-Country <select>
+Country <select ng-model="user.country">
   <option value="AF">Afghanistan</option>
   <option value="AX">Åland Islands</option>
   <option value="AL">Albania</option>
