@@ -1,3 +1,6 @@
+<form name="flightform" ng-submit= 'GoToPayment(flightDetails)' novalidate>
+
+
 <div class="row">
   <div class="jumbotron banner">
     <div class="container">
@@ -10,13 +13,14 @@
 
             <div class="row">
               <div class="radio trip-option">
-                <label><input type="radio" ng-model= "trip" ng-checked = "true" value ="one" >One Way Trip</label>
-                <label><input type="radio" ng-model= "trip" value ="round">Round Trip</label>
+                <label><input type="radio" ng-model= "flightDetails.trip" ng-checked = "true"  value ="one" >One Way Trip</label>
+                <label><input type="radio" ng-model= "flightDetails.trip" value ="round">Round Trip</label>
               </div>
             </div>
 
             <div class="panel-body">
                 Flights from {{flight.origin}} to {{flight.destination}}
+
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -32,7 +36,7 @@
                   </thead>
                     <tr ng-repeat="f in flights">
                         <td>
-                          <input type="radio" name="outFlight" ng-model="outFlight" value="{{f}}">
+                          <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
                         </td>
                         <td>
                             {{f.flightNumber}}
@@ -62,7 +66,7 @@
             <div class="col-xs-12" style="height:50px"></div>
 
 
-          <div style="width:30%;margin:auto auto" ng-show="trip == 'round'">
+          <div style="width:30%;margin:auto auto" ng-show="flightDetails.trip == 'round'">
 
 
             Flights from {{flight.destionation}} to {{flight.origin}}
@@ -72,7 +76,7 @@
                      class="form-control"
                      placeholder="Incoming flight date"
                      uib-datepicker-popup
-                     ng-model="dt"
+                     ng-model="flightDetails.date"
                      is-open="popup2.opened"
                      close-text="Close" />
               <span class="input-group-btn">
@@ -88,7 +92,7 @@
 
           <div class="panel-body">
 
-              <table class="table table-bordered table-hover" ng-show="trip=='round'">
+              <table class="table table-bordered table-hover" ng-show="flightDetails.trip=='round'">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -103,7 +107,7 @@
                 </thead>
                   <tr ng-repeat="f in flights">
                       <td>
-                        <input type="radio" name="inFlight" ng-model="inFlight" value="{{f}}">
+                        <input type="radio" class="form-control" name="inFlight" ng-model="flightDetails.inFlight" ng-value="f">
                       </td>
                       <td>
                           {{f.flightNumber}}
@@ -130,7 +134,9 @@
               </table>
           </div>
 
-            <button type="button" class="btn btn-primary" id='btnSearch' ng-click='GoToPayment(outFlight, inFlight, trip)' ng-disabled="">Continue</button>
+
+
+            <button type="submit" class="btn btn-primary" id='btnSearch'>Continue</button>
 
           </div>
         </div>
@@ -138,3 +144,4 @@
     </div>
   </div>
 </div>
+</form>

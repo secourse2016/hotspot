@@ -14,8 +14,8 @@ Angular date
 
 Flights View:
 ع==>---<===3 table style
-flight class choices
-incoming flight date picker
+<====3 flight class choices
+ع==>---<===3 incoming flight date picker
 
 Disable Edit after sending tickets
 Fix success messages closing or add a Modal
@@ -28,3 +28,4 @@ fix payment view angular content
 make views left aligned
 add carousel
 progress bar
+Modal instead of alert in send tickets
