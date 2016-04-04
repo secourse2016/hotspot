@@ -10,17 +10,32 @@
 
             <div class="row">
               <div class="radio trip-option">
-                <label><input type="radio" ng-model= "trip.type" ng-checked = "true" value ="one" >One Way Trip</label>
-                <label><input type="radio" ng-model= "trip.type" value ="round">Round Trip</label>
+                <label><input type="radio" ng-model= "trip" ng-checked = "true" value ="one" >One Way Trip</label>
+                <label><input type="radio" ng-model= "trip" value ="round">Round Trip</label>
               </div>
             </div>
 
             <div class="panel-body">
                 Flights from {{flight.origin}} to {{flight.destination}}
-                <table>
-                    <tr  ng-repeat="f in flights">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Flight Number</th>
+                      <th>Aircraft</th>
+                      <th>Capacity</th>
+                      <th>Date</th>
+                      <th>Duration</th>
+                      <th>Available Seats</th>
+                      <th>Price Range</th>
+                    </tr>
+                  </thead>
+                    <tr ng-repeat="f in flights">
                         <td>
-                            {{f.number | json}}
+                          <input type="radio" name="outFlight" ng-model="outFlight" value="{{f}}">
+                        </td>
+                        <td>
+                            {{f.flightNumber}}
                         </td>
                         <td>
                            {{f.aircraft}}
@@ -38,17 +53,84 @@
                           {{f.availableSeats}}
                         </td>
                         <td>
-                          {{f.seatmap[0].cost | currency}}
+                          {{f.seatmap[0].cost | currency}} - {{f.seatmap[0].cost * 1.1 | currency}}
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div class="panel-body" ng-show = "trip.type == 'round'">
-               Flights from {{flight.destination}} to {{flight.origin}}
-            </div>
-            <br/>
-            <button type="button" class="btn btn-primary" id='btnSearch' ng-click='GoToPayment()'>Continue</button>
+            <div class="col-xs-12" style="height:50px"></div>
+
+
+          <div style="width:30%;margin:auto auto" ng-show="trip == 'round'">
+
+
+            Flights from {{flight.destionation}} to {{flight.origin}}
+
+            <p class="input-group" >
+              <input type="text"
+                     class="form-control"
+                     placeholder="Incoming flight date"
+                     uib-datepicker-popup
+                     ng-model="dt"
+                     is-open="popup2.opened"
+                     close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="open2()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+               </button>
+              </span>
+            </p>
+          </div>
+
+
+          <div class="panel-body">
+
+              <table class="table table-bordered table-hover" ng-show="trip=='round'">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Flight Number</th>
+                    <th>Aircraft</th>
+                    <th>Capacity</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Available Seats</th>
+                    <th>Price Range</th>
+                  </tr>
+                </thead>
+                  <tr ng-repeat="f in flights">
+                      <td>
+                        <input type="radio" name="inFlight" ng-model="inFlight" value="{{f}}">
+                      </td>
+                      <td>
+                          {{f.flightNumber}}
+                      </td>
+                      <td>
+                         {{f.aircraft}}
+                      </td>
+                      <td>
+                        {{f.capacity}}
+                      </td>
+                      <td>
+                        {{f.date | date : 'EEEE, MMMM d, y'}}
+                      </td>
+                      <td>
+                        {{f.duration}}
+                      </td>
+                      <td>
+                        {{f.availableSeats}}
+                      </td>
+                      <td>
+                        {{f.seatmap[0].cost | currency}} - {{f.seatmap[0].cost * 1.1 | currency}}
+                      </td>
+                  </tr>
+              </table>
+          </div>
+
+            <button type="button" class="btn btn-primary" id='btnSearch' ng-click='GoToPayment(outFlight, inFlight, trip)' ng-disabled="">Continue</button>
 
           </div>
         </div>
