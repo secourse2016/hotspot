@@ -1,0 +1,69 @@
+.jumbotron{
+  text-align: center;
+  background: rgba(170, 170, 170, 0);
+  width: 1200px;
+  margin:0 auto;
+  margin-top: 70px;
+  border-radius: 10px;
+}
+.navbar{
+  background-image: url('/images/gradient.png');
+  background-color: transparent ;
+  height: 70px;
+  border-color: transparent;
+}
+
+body{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+.main-banner{
+  width : 75%;
+  background: rgba(170, 170, 170, 0.7);
+}
+
+.asterisk_input:before {
+content:"*";
+color: #800000;
+font-size: large;
+padding: 0 5px 0 0; }
+
+.help-block{
+   color: #800000;
+}
+
+
+.confirm{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+   color: black;
+   border-color: black;
+   border-radius: 5px;
+   width: 100%;
+   height: 40px;
+   margin: auto auto;
+}
+
+.confirm-text{
+  margin: auto auto;
+  text-align: left;
+  /*padding-right:80%*/
+}
+
+
+
+
+.ng-invalid.ng-dirty { border-color: red; } .ng-valid.ng-dirty { border-color: green; }
+/*.jumbotron2{
+  opacity: 1;
+   text-align: center;
+   background: rgba(170, 170, 170, 0.4);
+   border-radius: 10px;
+   width: 30%;
+ }*/
