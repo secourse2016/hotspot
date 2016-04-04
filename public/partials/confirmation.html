@@ -6,7 +6,7 @@
   <div class="col-md-6">
     <div class="jumbotron main-banner">
         <h2>Please review your information:</h2>
-        <div class="col-xs-12" style="height:30px;"></div>
+        <div class="col-xs-12" style="height:20px;"></div>
         <div class="row">
 
           <div class="col-md-1">
@@ -15,50 +15,131 @@
 
           <div class="col-md-10">
 
-
-        <input name="originAirports"
-        id="originAirports"
-        type="text"
-        placeholder="Flying From"
-        ng-model="selectedOrigin"
-        uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
-        class="form-control",
-        typeahead-on-select="SetOriginAirport($item.iata)">
-
-        <input name="destinationAirports"
-        id="destinationAirports"
-        type="text"
-        placeholder="Flying To"
-        ng-model="selectedDestination"
-        uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
-        class="form-control",
-        typeahead-on-select="SetDestinationAirport($item.iata)">
-
-      <div class="col-xs-12" style="height:30px;"></div>
-
         <!-- form -->
         <div class="form-group">
           <label for="fname">First Name:</label>
-          <input type="text" class="form-control" id="fname">
+          <div class="row confirm">
+              <h3 class="confirm-text">Nagatyyyy{{user.fname}}</h3>
+          </div>
         </div>
+
 
         <div class="form-group">
           <label for="lname">Last Name:</label>
-          <input type="text" class="form-control" id="lname">
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.lname}}</h3>
+          </div>
         </div>
 
 
-
-        <form role="form">
-          <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
-          </div>
-        </form>
-
         <div class="form-group">
           <label for="psprt">Passport Number:</label>
-          <input type="text" class="form-control" id="psprt">
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passport}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Issue Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportIssueDate}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportExpiryDate}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Type:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccType}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccNumber}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccExpiryDate}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Name on Credit Card:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccName}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Email:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.email}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Country:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.country}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Address 1:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add1}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="psprt">Address 2:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add2}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">State:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.state}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">City:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.city}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Contact Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.contactNumber}}</h3>
+          </div>
         </div>
 
 
@@ -67,57 +148,25 @@
           <textarea class="form-control" rows="5" id="passport"></textarea>
         </div> -->
 
-        <p class="input-group">
-          <input type="text"
-                 class="form-control"
-                 placeholder="Issue Date"
-                 uib-datepicker-popup="{{format}}"
-                 ng-model="dt"
-                 is-open="popup1.opened"
-                 ng-required="true"
-                 close-text="Close"
-                 alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button"
-                    class="btn btn-default"
-                    ng-click="open1()">
-                    <i class="glyphicon glyphicon-calendar"></i>
-           </button>
-          </span>
-        </p>
 
-        <p class="input-group">
-          <input type="text"
-                 class="form-control"
-                 placeholder="Expiry Date"
-                 uib-datepicker-popup="{{format}}"
-                 ng-model="dt"
-                 is-open="popup1.opened"
-                 ng-required="true"
-                 close-text="Close"
-                 alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button"
-                    class="btn btn-default"
-                    ng-click="open1()">
-                    <i class="glyphicon glyphicon-calendar"></i>
-           </button>
-          </span>
-        </p>
 
-        <input type="checkbox" class="checkbox-row" ng-model="checked"  />
+          <div class="col-xs-12" style="height:10px;"></div>
 
-        <button class="btn btn-success" ng-disabled="!checked"> </button>
+        <div class="row">
+          <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Edit Information</button>
+        </div>
 
-      <!-- checkbox confirming the above flights, confirm button is grey if not checked -->
-      <!-- form -->
-      <!-- confirm buffton -->
-      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+        <div class="col-xs-12" style="height:30px;"></div>
 
-      <!-- <button type="button" class="btn btn-primary" id='btnSearch' ng-show="trip.type == 'one'" ng-click='SearchFlights()'>Send Tickets!</button> -->
+        <label> <input type="checkbox" ng-model="checked"> All of my information is correct.</label><br/>
+        <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
+        <div class="col-xs-12" style="height:25px;"></div>
+        <button ng-model="button" class="btn btn-primary" id='btnSearch' ng-disabled="!checked" ng-click='SearchFlights()'>Send Tickets!</button>
+        <!-- <button type="button" class="btn btn-primary" id='btnSearch' disabled ng-click='SearchFlights()'>Send Tickets!</button> -->
 
     </div>
       </div>
     </div>
   </div>
+    <div class="col-xs-12" style="height:50px;"></div>
 </div>
