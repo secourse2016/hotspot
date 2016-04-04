@@ -43,7 +43,7 @@
         <div class="form-group">
           <label for="psprt">Passport Issue Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.passportIssueDate}}</h3>
+              <h3 class="confirm-text">{{user.passportIssueDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
         <div class="form-group">
           <label for="psprt">Passport Expiry Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.passportExpiryDate}}</h3>
+              <h3 class="confirm-text">{{user.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="form-group">
           <label for="psprt">Credit Card Expiry Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.ccExpiryDate}}</h3>
+              <h3 class="confirm-text">{{user.ccExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 
@@ -135,12 +135,12 @@
         </div>
 
 
-        <div class="form-group">
+        <!-- <div class="well"> -->
           <label for="psprt">Contact Number:</label>
-          <div class="row confirm">
-              <h3 class="confirm-text">{{user.contactNumber}}</h3>
+          <div class="row well" style="text-align:left">
+              <h3 class="">{{flight}} TEST {{user.contactNumber}}</h3>
           </div>
-        </div>
+        <!-- </div> -->
 
 
         <!-- <div class="form-group">
@@ -168,7 +168,6 @@
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Success!</strong> Thank you for your purchase. Your ticket will be e-mailed to you shortly.
         </div>
-
         <div class="col-xs-12" style="height:15px;"></div>
         <button ng-model="button" ng-show="user.button == 'true'" class="btn btn-primary" id='btnFinish' ng-click='GoToMain()'>Back to Home</button>
 

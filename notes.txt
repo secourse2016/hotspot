@@ -4,12 +4,28 @@ FONTS
 Confirmation View:
 Incoming flights
 Outgoing flights
-Credit Card type
 Check that editing information still has the values for incoming and outgoing flights
+WEELLLSS!
+
 
 Payment View:
 Better spacing
 Angular date
 
+Flights View:
+ع==>---<===3 table style
+<====3 flight class choices
+ع==>---<===3 incoming flight date picker
 
+Disable Edit after sending tickets
+Fix success messages closing or add a Modal
+No characters in payment
+Passport field characters only
 
+Button to move Back
+Pass data from flights to confirmation
+fix payment view angular content
+make views left aligned
+add carousel
+progress bar
+Modal instead of alert in send tickets

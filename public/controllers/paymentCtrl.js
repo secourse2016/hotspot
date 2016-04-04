@@ -1,3 +1,4 @@
+
 App.controller('paymentCtrl', function($scope, PaymentSrv, $location) {
 
   $scope.payment = {
@@ -17,6 +18,7 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location) {
   // function to submit the form after all validation has occurred
   $scope.submitForm = function(isValid, info) {
     // check to make sure the form is completely valid
+
     // if (isValid) {
         // PaymentSrv.setCreditCardNumber(info.ccNumber);
         PaymentSrv.setUser(info);
@@ -24,5 +26,7 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location) {
     // }
 
   };
+
+
 
 });
