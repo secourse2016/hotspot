@@ -14,7 +14,7 @@ Payment View:
 
 Flights View:
 ع==>---<===3 table style
-flight class choices
+<====3 flight class choices
 ع==>---<===3 incoming flight date picker
 
 ع==>---<===3 Disable Edit after sending tickets
@@ -28,3 +28,4 @@ Pass data from flights to confirmation
 make views left aligned
 add carousel
 progress bar
+Modal instead of alert in send tickets
