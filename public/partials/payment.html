@@ -40,20 +40,63 @@
 
 </div>
 <!-- Passport Issue Date -->
-<div>
+<!-- <div>
 <span class="asterisk_input">  </span>
 <label> Passport Issue Date </label>
   <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportIssueDate" required >
-</div>
+</div> -->
+
+<span class="asterisk_input">  </span>
+<label> Passport Issue Date </label>
+<p class="input-group">
+  <input type="text"
+         required
+         class="form-control"
+         placeholder="Passport Issue Date"
+         uib-datepicker-popup="{{format}}"
+         ng-model="user.passportIssueDate"
+         is-open="popup1.opened"
+         close-text="Close"
+         alt-input-formats="altInputFormats" />
+  <span class="input-group-btn">
+    <button type="button"
+            class="btn btn-default"
+            ng-click="open1()">
+            <i class="glyphicon glyphicon-calendar"></i>
+   </button>
+  </span>
+</p>
+
 <!-- Passport Expiry Date -->
 
 <div class="col-xs-12" style="height:20px;"></div>
 
-<div>
+<!-- <div>
 <span class="asterisk_input">  </span>
 <label> Passport Expiry Date </label>
   <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportExpiryDate" required >
-</div>
+</div> -->
+
+<span class="asterisk_input">  </span>
+<label> Passport Expiry Date </label>
+<p class="input-group">
+  <input type="text"
+         required
+         class="form-control"
+         placeholder="Passport Expiry Date"
+         uib-datepicker-popup="{{format}}"
+         ng-model="user.passportExpiryDate"
+         is-open="popup2.opened"
+         close-text="Close"
+         alt-input-formats="altInputFormats" />
+  <span class="input-group-btn">
+    <button type="button"
+            class="btn btn-default"
+            ng-click="open2()">
+            <i class="glyphicon glyphicon-calendar"></i>
+   </button>
+  </span>
+</p>
 
 <div class="col-xs-12" style="height:20px;"></div>
 
@@ -83,9 +126,30 @@
 </div>
 
 <!-- Credit Card Expiry Date -->
-<span class="asterisk_input">  </span>
+<!-- <span class="asterisk_input">  </span>
 <label> Credt Card Expiry Date </label>
-  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.ccExpiryDate" required >
+  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.ccExpiryDate" required > -->
+
+  <span class="asterisk_input">  </span>
+  <label> Credit Card Expiry Date </label>
+  <p class="input-group">
+    <input type="text"
+           required
+           class="form-control"
+           placeholder="Passport Expiry Date"
+           uib-datepicker-popup="{{format}}"
+           ng-model="user.ccExpiryDate"
+           is-open="popup3.opened"
+           close-text="Close"
+           alt-input-formats="altInputFormats" />
+    <span class="input-group-btn">
+      <button type="button"
+              class="btn btn-default"
+              ng-click="open3()">
+              <i class="glyphicon glyphicon-calendar"></i>
+     </button>
+    </span>
+  </p>
 
 <div class="col-xs-12" style="height:20px;"></div>
 
@@ -387,6 +451,8 @@ Country <select ng-model="user.country" required>
   <input type="text" name="state" class="form-control" placeholder="Please enter your State here" ng-model="user.state" required >
   <p ng-show="userForm.state.$pristine" class="help-block"> State is required!</p>
 
+  <div class="col-xs-12" style="height:15px;"></div>
+
   <!-- City -->
   <div class="form-group">
   <span class="asterisk_input">  </span>
@@ -394,7 +460,7 @@ Country <select ng-model="user.country" required>
   <input type="text" name="city" class="form-control" placeholder="Please enter here the City where you live" ng-model="user.city" required >
   <p ng-show="userForm.city.$pristine" class="help-block"> City is required!</p>
 
-
+<div class="col-xs-12" style="height:15px;"></div>
 
 <!-- Contact Number -->
   <div class="form-group">

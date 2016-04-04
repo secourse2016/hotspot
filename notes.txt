@@ -10,12 +10,12 @@ WEELLLSS!
 
 Payment View:
 ع==>---<===3 Better spacing
-Angular date
+ع==>---<===3 Angular date
 
 Flights View:
 ع==>---<===3 table style
 flight class choices
-incoming flight date picker
+ع==>---<===3 incoming flight date picker
 
 ع==>---<===3 Disable Edit after sending tickets
 ع==>---<===3 Fix success messages closing or add a Modal
@@ -24,7 +24,7 @@ incoming flight date picker
 
 Button to move Back
 Pass data from flights to confirmation
-fix payment view angular content
+ع==>---<===3 fix payment view angular content
 make views left aligned
 add carousel
 progress bar
