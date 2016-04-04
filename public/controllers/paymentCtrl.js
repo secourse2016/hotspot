@@ -1,4 +1,4 @@
-App.controller('paymentCtrl', function($scope) {
+App.controller('paymentCtrl', function($scope, $location) {
 
   // function to submit the form after all validation has occurred
   $scope.submitForm = function(isValid) {
@@ -7,7 +7,9 @@ App.controller('paymentCtrl', function($scope) {
     if (isValid) {
       alert('our form is amazing');
     }
-
+    $location.url('/confirmation');
   };
+
+
 
 });

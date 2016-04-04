@@ -7,12 +7,26 @@
             <div class="panel-heading">
               <div class="clearfix"></div>
             </div>
+
+            <div class="row">
+              <div class="radio trip-option">
+                <label><input type="radio" ng-model= "trip.type" ng-checked = "true" value ="one" >One Way Trip</label>
+                <label><input type="radio" ng-model= "trip.type" value ="round">Round Trip</label>
+              </div>
+            </div>
+
             <div class="panel-body">
-              {{flight.origin}} - {{flight.destination}}
+                Flights from {{flight.origin}} to {{flight.destination}}
               <br/>
               <span></span>
             </div>
+
+            <div class="panel-body" ng-show = "trip.type == 'round'">
+               Flights from {{flight.destination}} to {{flight.origin}}
+            </div>
             <br/>
+            <button type="button" class="btn btn-primary" id='btnSearch' ng-click='GoToPayment()'>Continue</button>
+
           </div>
         </div>
       </div>

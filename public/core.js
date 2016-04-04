@@ -1,5 +1,5 @@
 /* Create Angular App Instance */
-App = angular.module('Swiss', ['ui.bootstrap', 'ngRoute']);
+App = angular.module('Swiss', ['ui.bootstrap', 'ngRoute' ,'ngAnimate']);
 
 /**
  * Angular Routes

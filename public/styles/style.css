@@ -25,10 +25,15 @@ body{
   background: rgba(170, 170, 170, 0.7);
 }
 
-.trip-option{
+.asterisk_input:before {
+content:"*";
+color: #800000;
+font-size: large;
+padding: 0 5px 0 0; }
 
+.help-block{
+   color: #800000;
 }
-
 
 .ng-invalid.ng-dirty { border-color: red; } .ng-valid.ng-dirty { border-color: green; }
 /*.jumbotron2{

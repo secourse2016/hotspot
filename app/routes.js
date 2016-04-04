@@ -9,6 +9,12 @@ module.exports = function(app,mongo) {
       res.json( codes );
     });
 
+    /*GET ALL FLIGHTS (DUMMY) */
+    app.get('/api/data/flights', function(req, res) {
+      var flights =  require('../flights.json');
+      res.json( codes );
+    });
+
     /* RENDER MAIN PAGE */
     app.get('/', function (req, res) {
       res.sendFile(__dirname + '/public/index.html');

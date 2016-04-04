@@ -44,24 +44,22 @@
 
           </div>
           <div class="col-md-4">
-            <div class="jumbotron main-banner">
+            <div class="jumbotron main-banner" ng-submit="submitFrom(main-banner.$valid)" novalidate>
                 <h2>Book a Flight</h2>
-                <div class="row">
-                  <div class="radio trip-option">
-                    <label><input type="radio" ng-model= "trip.type" value ="one" >One Way Trip</label>
-                    <label><input type="radio" ng-model= "trip.type" value ="round">Round Trip</label>
-                  </div>
-                </div>
+              
                 <div class="row">
                   <div class="col-md-1">
 
                   </div>
                   <div class="col-md-10">
 
+                    <div name = "airports" id = "airports" required>
+
 
                 <input name="originAirports"
                 id="originAirports"
                 type="text"
+                required
                 placeholder="Flying From"
                 ng-model="selectedOrigin"
                 uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
@@ -74,11 +72,14 @@
                 <input name="destinationAirports"
                 id="destinationAirports"
                 type="text"
+                required
                 placeholder="Flying To"
                 ng-model="selectedDestination"
                 uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
                 class="form-control",
                 typeahead-on-select="SetDestinationAirport($item.iata)">
+
+                </div>
 
                 <div class="col-xs-12" style="height:25px;"></div>
 
@@ -89,7 +90,6 @@
                              uib-datepicker-popup="{{format}}"
                              ng-model="dt"
                              is-open="popup1.opened"
-                             ng-required="true"
                              close-text="Close"
                              alt-input-formats="altInputFormats" />
                       <span class="input-group-btn">
@@ -111,7 +111,6 @@
                              uib-datepicker-popup
                              ng-model="dt"
                              is-open="popup2.opened"
-                             ng-required="true"
                              close-text="Close" />
                       <span class="input-group-btn">
                         <button type="button"
@@ -123,8 +122,10 @@
                     </p>
 
 
-
-              <button type="button" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
+<p>
+  main-banner is {{airports.$valid}}
+</p>
+              <button type="submit" class="btn btn-primary" id='btnSearch'  ng-click='SearchFlights(trip.type)'>Search Flights</button>
             </div>
 
               </div>
