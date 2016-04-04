@@ -43,7 +43,7 @@
         <div class="form-group">
           <label for="psprt">Passport Issue Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.passportIssueDate}}</h3>
+              <h3 class="confirm-text">{{user.passportIssueDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
         <div class="form-group">
           <label for="psprt">Passport Expiry Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.passportExpiryDate}}</h3>
+              <h3 class="confirm-text">{{user.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="form-group">
           <label for="psprt">Credit Card Expiry Date:</label>
           <div class="row confirm">
-              <h3 class="confirm-text">{{user.ccExpiryDate | date}}</h3>
+              <h3 class="confirm-text">{{user.ccExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
           </div>
         </div>
 

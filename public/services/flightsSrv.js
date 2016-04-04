@@ -6,9 +6,11 @@ App.factory('FlightsSrv', function ($http) {
          getAirportCodes : function() {
            return $http.get('/api/data/codes');
          },
-         getFlights : function() {
-           return $http.get('/api/data/flights');
-         },
+        //  getFlights : function(cb) {
+        //       $http.jsonp('/api/data/flights').success(function(data){
+        //       cb(data);
+        //    });
+        //  },
          setSelectedOriginAirport: function(value) {
            this.selectedOriginAirport = value;
          },

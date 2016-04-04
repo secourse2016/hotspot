@@ -20,16 +20,16 @@
                 <table>
                     <tr  ng-repeat="f in flights">
                         <td>
-                            numberss = {{f.number}}
+                            {{f.number | json}}
                         </td>
                         <td>
-                          aircrafts = {{f.aircraft}}
+                           {{f.aircraft}}
                         </td>
                         <td>
                           {{f.capacity}}
                         </td>
                         <td>
-                          {{f.date | date}}
+                          {{f.date | date : 'EEEE, MMMM d, y'}}
                         </td>
                         <td>
                           {{f.duration}}
@@ -42,8 +42,6 @@
                         </td>
                     </tr>
                 </table>
-              <br/>
-              <span></span>
             </div>
 
             <div class="panel-body" ng-show = "trip.type == 'round'">

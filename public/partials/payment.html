@@ -28,8 +28,7 @@
   <label>Last Name</label>
   <input type="text" name="lname" class="form-control" placeholder="Please enter your Last Name here" ng-model="user.lname" required >
  <p ng-show="userForm.lname.$pristine" class="help-block"> Last Name is required</p>
-</div
->
+</div>
    <!-- Passport Info -->
      <div class="form-group">
 <span class="asterisk_input">  </span>
@@ -57,7 +56,7 @@
 <div class="form-group">
 <span class="asterisk_input">  </span>
    <label>Credit Card Type</label>
-   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType">
+   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType" required>
     <option value="amex" class="ccjs-amex">American Express</option>
     <option value="discover" class="ccjs-discover">Discover</option>
     <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
@@ -104,7 +103,7 @@
  <!-- Country Selection-->
      <p><span class="asterisk_input">  </span>
 
-Country <select ng-model="user.country">
+Country <select ng-model="user.country" required>
   <option value="AF">Afghanistan</option>
   <option value="AX">Åland Islands</option>
   <option value="AL">Albania</option>

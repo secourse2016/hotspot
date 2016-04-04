@@ -1,5 +1,5 @@
 /* Create Angular App Instance */
-App = angular.module('Swiss', ['ui.bootstrap', 'ngRoute']); //'ngAnimate'
+App = angular.module('Swiss', ['ui.bootstrap', 'ngRoute', 'ngAnimate']); 
 
 /**
  * Angular Routes
@@ -16,7 +16,7 @@ App.config(function($routeProvider) {
             templateUrl : '/partials/flights.html',
             controller  : 'flightsCtrl'
         })
-        
+
         .when('/confirmation', {
             templateUrl : '/partials/confirmation.html',
             controller  : 'confirmationCtrl'

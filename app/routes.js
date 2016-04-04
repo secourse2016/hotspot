@@ -1,6 +1,7 @@
 /**
  * App routes:
  */
+   var flights =  require('../flights.json');
 module.exports = function(app,mongo) {
 
     /* GET ALL STATES ENDPOINT */
@@ -11,7 +12,7 @@ module.exports = function(app,mongo) {
 
     /*GET ALL FLIGHTS (DUMMY) */
     app.get('/api/data/flights', function(req, res) {
-      var flights =  require('../flights.json');
+
       res.json( flights );
     });
 
