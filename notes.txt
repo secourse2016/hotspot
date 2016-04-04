@@ -9,7 +9,7 @@ WEELLLSS!
 
 
 Payment View:
-Better spacing
+ع==>---<===3 Better spacing
 Angular date
 
 Flights View:
@@ -17,10 +17,10 @@ Flights View:
 flight class choices
 incoming flight date picker
 
-Disable Edit after sending tickets
-Fix success messages closing or add a Modal
-No characters in payment
-Passport field characters only
+ع==>---<===3 Disable Edit after sending tickets
+ع==>---<===3 Fix success messages closing or add a Modal
+ع==>---<===3 characters in payment
+ع==>---<===3 Passport field characters only
 
 Button to move Back
 Pass data from flights to confirmation
