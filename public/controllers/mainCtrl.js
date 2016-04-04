@@ -1,7 +1,7 @@
 /**
  * Main Controller
  */
-App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
+App.controller('mainCtr l', function($scope, FlightsSrv, $location) {
 
   /*----------- Angular Bootstrap Datepicker -----------*/
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -47,8 +47,19 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   };
 
   /* Find All Available Flights  */
+
+
   $scope.SearchFlights = function() {
-    $location.url('/flights');
+        $location.url('/flights');
+  };
+
+  $scope.submitForm = function(isValid) {
+
+    // check to make sure the form is completely valid
+    if (isValid) {
+      alert('our form is amazing');
+    }
+
   };
 
   /* Get Airports on page render  */

@@ -1,0 +1,195 @@
+<div class="row ">
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <div class="jumbotron main-banner">
+
+
+        <div class="page-header"><h1>Confirm your Details</h1></div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="row">
+
+          <div class="col-md-1">
+
+          </div>
+
+          <div class="col-md-10">
+
+        <!-- form -->
+        <div class="form-group">
+          <label for="fname">Outgoing Flight:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{outgoingFlight}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fname">Return Flight:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{returnFlight}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fname">First Name:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.fname}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="lname">Last Name:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.lname}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passport}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Issue Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportIssueDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Type:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccType}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccNumber}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Name on Credit Card:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccName}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Email:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.email}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Country:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.country}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Address 1:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add1}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="psprt">Address 2:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add2}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">State:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.state}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">City:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.city}}</h3>
+          </div>
+        </div>
+
+
+        <!-- <div class="well"> -->
+          <label for="psprt">Contact Number:</label>
+          <div class="row well" style="text-align:left">
+              <h3 class="">{{flight}} TEST {{user.contactNumber}}</h3>
+          </div>
+        <!-- </div> -->
+
+
+        <!-- <div class="form-group">
+          <label for="passport">Passport Number:</label>
+          <textarea class="form-control" rows="5" id="passport"></textarea>
+        </div> -->
+
+
+
+          <div class="col-xs-12" style="height:10px;"></div>
+
+        <div class="row">
+          <button type="button" class="btn btn-primary" id='btnSearch' ng-disabled="user.button == 'true'" ng-click='EditInfo()'>Edit Information</button>
+        </div>
+
+        <div class="col-xs-12" style="height:30px;"></div>
+
+        <label> <input type="checkbox" ng-model="checked"> All of my information is correct.</label><br/>
+        <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
+        <div class="col-xs-12" style="height:25px;"></div>
+        <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'" >Send Tickets!</button>
+        <!-- <button type="button" class="btn btn-primary" id='btnSearch' disabled ng-click='SearchFlights()'>Send Tickets!</button> -->
+
+        <div class="alert alert-success fade in" ng-show="user.button == 'true'">
+          <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+          <strong>Success!</strong> Thank you for your purchase. Your ticket will be e-mailed to you shortly.
+        </div>
+        <div class="col-xs-12" style="height:15px;"></div>
+        <button ng-model="button" ng-show="user.button == 'true'" class="btn btn-primary" id='btnFinish' ng-click='GoToMain()'>Back to Home</button>
+
+    </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-xs-12" style="height:50px;"></div>
+</div>

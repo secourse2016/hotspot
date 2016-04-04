@@ -1,0 +1,488 @@
+<!-- index.html -->
+
+<!-- apply angular app and controller to our body -->
+<div class="jumbotron main-banner">
+<div class="container">
+
+
+<div class="col-sm-8 col-sm-offset-2">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header"><h1>Billing Information</h1></div>
+
+    <!-- FORM -->
+    <!-- pass in the variable if our form is valid or invalid -->
+    <form name="userForm" ng-submit="submitForm(userForm.$valid, user)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+     <!-- First Name -->
+    <div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>First Name</label>
+  <input type="text" name="fname" class="form-control" placeholder="Please enter your First Name here" ng-model="user.fname" required >
+ <p ng-show="userForm.fname.$pristine" class="help-block"> First Name is required</p>
+
+</div>
+   <!-- Last Name -->
+  <div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Last Name</label>
+  <input type="text" name="lname" class="form-control" placeholder="Please enter your Last Name here" ng-model="user.lname" required >
+ <p ng-show="userForm.lname.$pristine" class="help-block"> Last Name is required</p>
+</div>
+   <!-- Passport Info -->
+     <div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Passport 3 Letter Country Code</label>
+  <input type="text" pattern='[A-Za-z\\s]*' name="pass" class="form-control" placeholder="Please enter your Passport info here" ng-model="user.passport" required ng-maxlength="3" ng-minlength="3">
+ <p ng-show="userForm.pass.$pristine" class="help-block"> Your Passport info is required</p>
+   <p ng-show="userForm.pass.$error.maxlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
+      <p ng-show="userForm.pass.$error.minlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
+
+</div>
+<!-- Passport Issue Date -->
+<!-- <div>
+<span class="asterisk_input">  </span>
+<label> Passport Issue Date </label>
+  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportIssueDate" required >
+</div> -->
+
+<span class="asterisk_input">  </span>
+<label> Passport Issue Date </label>
+<p class="input-group">
+  <input type="text"
+         required
+         class="form-control"
+         placeholder="Passport Issue Date"
+         uib-datepicker-popup="{{format}}"
+         ng-model="user.passportIssueDate"
+         is-open="popup1.opened"
+         close-text="Close"
+         alt-input-formats="altInputFormats" />
+  <span class="input-group-btn">
+    <button type="button"
+            class="btn btn-default"
+            ng-click="open1()">
+            <i class="glyphicon glyphicon-calendar"></i>
+   </button>
+  </span>
+</p>
+
+<!-- Passport Expiry Date -->
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+<!-- <div>
+<span class="asterisk_input">  </span>
+<label> Passport Expiry Date </label>
+  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportExpiryDate" required >
+</div> -->
+
+<span class="asterisk_input">  </span>
+<label> Passport Expiry Date </label>
+<p class="input-group">
+  <input type="text"
+         required
+         class="form-control"
+         placeholder="Passport Expiry Date"
+         uib-datepicker-popup="{{format}}"
+         ng-model="user.passportExpiryDate"
+         is-open="popup2.opened"
+         close-text="Close"
+         alt-input-formats="altInputFormats" />
+  <span class="input-group-btn">
+    <button type="button"
+            class="btn btn-default"
+            ng-click="open2()">
+            <i class="glyphicon glyphicon-calendar"></i>
+   </button>
+  </span>
+</p>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+    <!-- Credit Card Type -->
+<div class="form-group">
+<span class="asterisk_input">  </span>
+   <label>Credit Card Type</label>
+   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType" required>
+    <option value="amex" class="ccjs-amex">American Express</option>
+    <option value="discover" class="ccjs-discover">Discover</option>
+    <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
+    <option value="visa" class="ccjs-visa">Visa</option>
+    <option value="diners-club" class="ccjs-diners-club">Diners Club</option>
+    <option value="maestro" class="maestro">Maestro</option>
+    <option value="unionpay" class="unionpay">UnionPay</option>
+    <option value="visa-electron" class="visa-electron">Visa Electron</option>
+  </select>
+</div>
+        <!-- Card Number -->
+<div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Credit Card Number</label>
+  <input type="number" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="user.ccNumber" required ng-minlength="16" ng-maxlength="16">
+  <p ng-show="userForm.cnumber.$pristine" class="help-block"> Credit Card Number is required</p>
+  <p ng-show="userForm.cnumber.$error.minlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+  <p ng-show="userForm.cnumber.$error.maxlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+</div>
+
+<!-- Credit Card Expiry Date -->
+<!-- <span class="asterisk_input">  </span>
+<label> Credt Card Expiry Date </label>
+  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.ccExpiryDate" required > -->
+
+  <span class="asterisk_input">  </span>
+  <label> Credit Card Expiry Date </label>
+  <p class="input-group">
+    <input type="text"
+           required
+           class="form-control"
+           placeholder="Passport Expiry Date"
+           uib-datepicker-popup="{{format}}"
+           ng-model="user.ccExpiryDate"
+           is-open="popup3.opened"
+           close-text="Close"
+           alt-input-formats="altInputFormats" />
+    <span class="input-group-btn">
+      <button type="button"
+              class="btn btn-default"
+              ng-click="open3()">
+              <i class="glyphicon glyphicon-calendar"></i>
+     </button>
+    </span>
+  </p>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+<!-- Name On Card -->
+<div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Name On Card</label>
+  <input type="text" name="cname" class="form-control" placeholder="Please enter the name on your card here" ng-model="user.ccName" required >
+ <p ng-show="userForm.cname.$pristine" class="help-block"> Name On Card is required</p>
+</div>
+
+<!-- EMAIL -->
+<div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Email</label>
+
+  <input type="email" name="email" class="form-control" placeholder="example@example.com" ng-model="user.email" required>
+  <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block"> Please enter a valid email.</p>
+</div>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+ <!-- Country Selection-->
+     <p><span class="asterisk_input">  </span>
+
+Country <select ng-model="user.country" required>
+  <option value="AF">Afghanistan</option>
+  <option value="AX">Åland Islands</option>
+  <option value="AL">Albania</option>
+  <option value="DZ">Algeria</option>
+  <option value="AS">American Samoa</option>
+  <option value="AD">Andorra</option>
+  <option value="AO">Angola</option>
+  <option value="AI">Anguilla</option>
+  <option value="AQ">Antarctica</option>
+  <option value="AG">Antigua and Barbuda</option>
+  <option value="AR">Argentina</option>
+  <option value="AM">Armenia</option>
+  <option value="AW">Aruba</option>
+  <option value="AU">Australia</option>
+  <option value="AT">Austria</option>
+  <option value="AZ">Azerbaijan</option>
+  <option value="BS">Bahamas</option>
+  <option value="BH">Bahrain</option>
+  <option value="BD">Bangladesh</option>
+  <option value="BB">Barbados</option>
+  <option value="BY">Belarus</option>
+  <option value="BE">Belgium</option>
+  <option value="BZ">Belize</option>
+  <option value="BJ">Benin</option>
+  <option value="BM">Bermuda</option>
+  <option value="BT">Bhutan</option>
+  <option value="BO">Bolivia, Plurinational State of</option>
+  <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+  <option value="BA">Bosnia and Herzegovina</option>
+  <option value="BW">Botswana</option>
+  <option value="BV">Bouvet Island</option>
+  <option value="BR">Brazil</option>
+  <option value="IO">British Indian Ocean Territory</option>
+  <option value="BN">Brunei Darussalam</option>
+  <option value="BG">Bulgaria</option>
+  <option value="BF">Burkina Faso</option>
+  <option value="BI">Burundi</option>
+  <option value="KH">Cambodia</option>
+  <option value="CM">Cameroon</option>1111111111111111
+  <option value="CA">Canada</option>
+  <option value="CV">Cape Verde</option>
+  <option value="KY">Cayman Islands</option>
+  <option value="CF">Central African Republic</option>
+  <option value="TD">Chad</option>
+  <option value="CL">Chile</option>
+  <option value="CN">China</option>
+  <option value="CX">Christmas Island</option>
+  <option value="CC">Cocos (Keeling) Islands</option>
+  <option value="CO">Colombia</option>
+  <option value="KM">Comoros</option>
+  <option value="CG">Congo</option>
+  <option value="CD">Congo, the Democratic Republic of the</option>
+  <option value="CK">Cook Islands</option>
+  <option value="CR">Costa Rica</option>
+  <option value="CI">Côte d'Ivoire</option>
+  <option value="HR">Croatia</option>
+  <option value="CU">Cuba</option>
+  <option value="CW">Curaçao</option>
+  <option value="CY">Cyprus</option>
+  <option value="CZ">Czech Republic</option>
+  <option value="DK">Denmark</option>
+  <option value="DJ">Djibouti</option>
+  <option value="DM">Dominica</option>
+  <option value="DO">Dominican Republic</option>
+  <option value="EC">Ecuador</option>
+  <option value="EG">Egypt</option>
+  <option value="SV">El Salvador</option>
+  <option value="GQ">Equatorial Guinea</option>
+  <option value="ER">Eritrea</option>
+  <option value="EE">Estonia</option>
+  <option value="ET">Ethiopia</option>
+  <option value="FK">Falkland Islands (Malvinas)</option>
+  <option value="FO">Faroe Islands</option>
+  <option value="FJ">Fiji</option>
+  <option value="FI">Finland</option>
+  <option value="FR">France</option>
+  <option value="GF">French Guiana</option>
+  <option value="PF">French Polynesia</option>
+  <option value="TF">French Southern Territories</option>
+  <option value="GA">Gabon</option>
+  <option value="GM">Gambia</option>
+  <option value="GE">Georgia</option>
+  <option value="DE">Germany</option>
+  <option value="GH">Ghana</option>
+  <option value="GI">Gibraltar</option>
+  <option value="GR">Greece</option>
+  <option value="GL">Greenland</option>
+  <option value="GD">Grenada</option>
+  <option value="GP">Guadeloupe</option>
+  <option value="GU">Guam</option>
+  <option value="GT">Guatemala</option>
+  <option value="GG">Guernsey</option>
+  <option value="GN">Guinea</option>
+  <option value="GW">Guinea-Bissau</option>
+  <option value="GY">Guyana</option>
+  <option value="HT">Haiti</option>
+  <option value="HM">Heard Island and McDonald Islands</option>
+  <option value="VA">Holy See (Vatican City State)</option>
+  <option value="HN">Honduras</option>
+  <option value="HK">Hong Kong</option>
+  <option value="HU">Hungary</option>
+  <option value="IS">Iceland</option>
+  <option value="IN">India</option>
+  <option value="ID">Indonesia</option>
+  <option value="IR">Iran, Islamic Republic of</option>
+  <option value="IQ">Iraq</option>
+  <option value="IE">Ireland</option>
+  <option value="IM">Isle of Man</option>
+  <option value="IL">Israel</option>
+  <option value="IT">Italy</option>
+  <option value="JM">Jamaica</option>
+  <option value="JP">Japan</option>
+  <option value="JE">Jersey</option>
+  <option value="JO">Jordan</option>
+  <option value="KZ">Kazakhstan</option>
+  <option value="KE">Kenya</option>
+  <option value="KI">Kiribati</option>
+  <option value="KP">Korea, Democratic People's Republic of</option>
+  <option value="KR">Korea, Republic of</option>
+  <option value="KW">Kuwait</option>
+  <option value="KG">Kyrgyzstan</option>
+  <option value="LA">Lao People's Democratic Republic</option>
+  <option value="LV">Latvia</option>
+  <option value="LB">Lebanon</option>
+  <option value="LS">Lesotho</option>
+  <option value="LR">Liberia</option>
+  <option value="LY">Libya</option>
+  <option value="LI">Liechtenstein</option>
+  <option value="LT">Lithuania</option>
+  <option value="LU">Luxembourg</option>
+  <option value="MO">Macao</option>
+  <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+  <option value="MG">Madagascar</option>
+  <option value="MW">Malawi</option>
+  <option value="MY">Malaysia</option>
+  <option value="MV">Maldives</option>
+  <option value="ML">Mali</option>
+  <option value="MT">Malta</option>
+  <option value="MH">Marshall Islands</option>
+  <option value="MQ">Martinique</option>
+  <option value="MR">Mauritania</option>
+  <option value="MU">Mauritius</option>
+  <option value="YT">Mayotte</option>
+  <option value="MX">Mexico</option>
+  <option value="FM">Micronesia, Federated States of</option>
+  <option value="MD">Moldova, Republic of</option>
+  <option value="MC">Monaco</option>
+  <option value="MN">Mongolia</option>
+  <option value="ME">Montenegro</option>
+  <option value="MS">Montserrat</option>
+  <option value="MA">Morocco</option>
+  <option value="MZ">Mozambique</option>
+  <option value="MM">Myanmar</option>
+  <option value="NA">Namibia</option>
+  <option value="NR">Nauru</option>
+  <option value="NP">Nepal</option>
+  <option value="NL">Netherlands</option>
+  <option value="NC">New Caledonia</option>
+  <option value="NZ">New Zealand</option>
+  <option value="NI">Nicaragua</option>
+  <option value="NE">Niger</option>
+  <option value="NG">Nigeria</option>
+  <option value="NU">Niue</option>
+  <option value="NF">Norfolk Island</option>
+  <option value="MP">Northern Mariana Islands</option>
+  <option value="NO">Norway</option>
+  <option value="OM">Oman</option>
+  <option value="PK">Pakistan</option>
+  <option value="PW">Palau</option>
+  <option value="PS">Palestinian Territory, Occupied</option>
+  <option value="PA">Panama</option>
+  <option value="PG">Papua New Guinea</option>
+  <option value="PY">Paraguay</option>
+  <option value="PE">Peru</option>
+  <option value="PH">Philippines</option>
+  <option value="PN">Pitcairn</option>
+  <option value="PL">Poland</option>
+  <option value="PT">Portugal</option>
+  <option value="PR">Puerto Rico</option>
+  <option value="QA">Qatar</option>
+  <option value="RE">Réunion</option>
+  <option value="RO">Romania</option>
+  <option value="RU">Russian Federation</option>
+  <option value="RW">Rwanda</option>
+  <option value="BL">Saint Barthélemy</option>
+  <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+  <option value="KN">Saint Kitts and Nevis</option>
+  <option value="LC">Saint Lucia</option>
+  <option value="MF">Saint Martin (French part)</option>
+  <option value="PM">Saint Pierre and Miquelon</option>
+  <option value="VC">Saint Vincent and the Grenadines</option>
+  <option value="WS">Samoa</option>
+  <option value="SM">San Marino</option>
+  <option value="ST">Sao Tome and Principe</option>
+  <option value="SA">Saudi Arabia</option>
+  <option value="SN">Senegal</option>
+  <option value="RS">Serbia</option>
+  <option value="SC">Seychelles</option>
+  <option value="SL">Sierra Leone</option>
+  <option value="SG">Singapore</option>
+  <option value="SX">Sint Maarten (Dutch part)</option>
+  <option value="SK">Slovakia</option>
+  <option value="SI">Slovenia</option>
+  <option value="SB">Solomon Islands</option>
+  <option value="SO">Somalia</option>
+  <option value="ZA">South Africa</option>
+  <option value="GS">South Georgia and the South Sandwich Islands</option>
+  <option value="SS">South Sudan</option>
+  <option value="ES">Spain</option>
+  <option value="LK">Sri Lanka</option>
+  <option value="SD">Sudan</option>
+  <option value="SR">Suriname</option>
+  <option value="SJ">Svalbard and Jan Mayen</option>
+  <option value="SZ">Swaziland</option>
+  <option value="SE">Sweden</option>
+  <option value="CH">Switzerland</option>
+  <option value="SY">Syrian Arab Republic</option>
+  <option value="TW">Taiwan, Province of China</option>
+  <option value="TJ">Tajikistan</option>
+  <option value="TZ">Tanzania, United Republic of</option>
+  <option value="TH">Thailand</option>
+  <option value="TL">Timor-Leste</option>
+  <option value="TG">Togo</option>
+  <option value="TK">Tokelau</option>
+  <option value="TO">Tonga</option>
+  <option value="TT">Trinidad and Tobago</option>
+  <option value="TN">Tunisia</option>
+  <option value="TR">Turkey</option>
+  <option value="TM">Turkmenistan</option>
+  <option value="TC">Turks and Caicos Islands</option>
+  <option value="TV">Tuvalu</option>
+  <option value="UG">Uganda</option>
+  <option value="UA">Ukraine</option>
+  <option value="AE">United Arab Emirates</option>
+  <option value="GB">United Kingdom</option>
+  <option value="US">United States</option>
+  <option value="UM">United States Minor Outlying Islands</option>
+  <option value="UY">Uruguay</option>
+  <option value="UZ">Uzbekistan</option>
+  <option value="VU">Vanuatu</option>
+  <option value="VE">Venezuela, Bolivarian Republic of</option>
+  <option value="VN">Viet Nam</option>
+  <option value="VG">Virgin Islands, British</option>
+  <option value="VI">Virgin Islands, U.S.</option>
+  <option value="WF">Wallis and Futuna</option>
+  <option value="EH">Western Sahara</option>
+  <option value="YE">Yemen</option>
+  <option value="ZM">Zambia</option>
+  <option value="ZW">Zimbabwe</option>
+</select></p>
+
+
+<!-- Address 1 -->
+<div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Address 1</label>
+  <input type="text" name="add1" class="form-control" placeholder="Please enter your address here" ng-model="user.add1" required ng-minlength="1">
+  <p ng-show="userForm.add1.$pristine" class="help-block"> Address 1 is required</p>
+      <p ng-show="userForm.add1.$error.minlength" class="help-block">Address 1 is required </p>
+
+
+<!-- Address 2 -->
+  <div class="form-group">
+  <label>Address 2</label>
+  <input type="text" name="add2" class="form-control" placeholder="Please enter an alternative address here" ng-model="user.add2" >
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+<!-- State -->
+  <div class="form-group">
+  <span class="asterisk_input">  </span>
+  <label>State</label>
+  <input type="text" name="state" class="form-control" placeholder="Please enter your State here" ng-model="user.state" required >
+  <p ng-show="userForm.state.$pristine" class="help-block"> State is required!</p>
+
+  <div class="col-xs-12" style="height:15px;"></div>
+
+  <!-- City -->
+  <div class="form-group">
+  <span class="asterisk_input">  </span>
+  <label>City</label>
+  <input type="text" name="city" class="form-control" placeholder="Please enter here the City where you live" ng-model="user.city" required >
+  <p ng-show="userForm.city.$pristine" class="help-block"> City is required!</p>
+
+<div class="col-xs-12" style="height:15px;"></div>
+
+<!-- Contact Number -->
+  <div class="form-group">
+  <span class="asterisk_input">  </span>
+  <label>Contact Number</label>
+
+  <input type="number" name="contact" class="form-control" placeholder="Please enter your Contact Number here" ng-model="user.contactNumber" required >
+  <p ng-show="userForm.contact.$pristine" class="help-block"> Contact is required!</p>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" class="btn btn-primary" >Proceed To Confirm Your Payment</button>
+<!-- ng-disabled="userForm.$invalid" -->
+    </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- col-sm-8 -->
+</div>
+<div class="col-xs-12" style="height:50px;"></div>
+</div><!-- /container -->

@@ -1,12 +1,19 @@
 /**
  * App routes:
  */
+   var flights =  require('../flights.json');
 module.exports = function(app,mongo) {
 
     /* GET ALL STATES ENDPOINT */
     app.get('/api/data/codes', function(req, res) {
       var codes =  require('../airports.json');
       res.json( codes );
+    });
+
+    /*GET ALL FLIGHTS (DUMMY) */
+    app.get('/api/data/flights', function(req, res) {
+
+      res.json( flights );
     });
 
     /* RENDER MAIN PAGE */
