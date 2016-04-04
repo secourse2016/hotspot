@@ -29,7 +29,6 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
 
   $scope.GoToPayment = function(flightInfo) {
     // check to make sure the form is completely valid
-    console.log(flightInfo + " 5ara");
     // if (isValid) {
         // PaymentSrv.setCreditCardNumber(info.ccNumber);
         FlightsSrv.setFlightInfo(flightInfo);

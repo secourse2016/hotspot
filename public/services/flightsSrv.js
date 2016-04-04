@@ -7,8 +7,7 @@ App.factory('FlightsSrv', function ($http) {
            return $http.get('/api/data/codes');
          },
          setFlightInfo : function(flightInfo) {
-           console.log("flgihts");
-           console.log(flightInfo);
+           
               this.flightInfo = flightInfo;
          },
          setSelectedOriginAirport: function(value) {
