@@ -1,0 +1,15 @@
+FONTS
+
+
+Confirmation View:
+Incoming flights
+Outgoing flights
+Credit Card type
+Check that editing information still has the values for incoming and outgoing flights
+
+Payment View:
+Better spacing
+Angular date
+
+
+

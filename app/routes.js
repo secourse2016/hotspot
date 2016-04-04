@@ -12,7 +12,7 @@ module.exports = function(app,mongo) {
     /*GET ALL FLIGHTS (DUMMY) */
     app.get('/api/data/flights', function(req, res) {
       var flights =  require('../flights.json');
-      res.json( codes );
+      res.json( flights );
     });
 
     /* RENDER MAIN PAGE */

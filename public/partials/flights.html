@@ -17,6 +17,31 @@
 
             <div class="panel-body">
                 Flights from {{flight.origin}} to {{flight.destination}}
+                <table>
+                    <tr  ng-repeat="f in flights">
+                        <td>
+                            numberss = {{f.number}}
+                        </td>
+                        <td>
+                          aircrafts = {{f.aircraft}}
+                        </td>
+                        <td>
+                          {{f.capacity}}
+                        </td>
+                        <td>
+                          {{f.date | date}}
+                        </td>
+                        <td>
+                          {{f.duration}}
+                        </td>
+                        <td>
+                          {{f.availableSeats}}
+                        </td>
+                        <td>
+                          {{f.seatmap[0].cost | currency}}
+                        </td>
+                    </tr>
+                </table>
               <br/>
               <span></span>
             </div>
