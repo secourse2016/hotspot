@@ -5,7 +5,9 @@
 
   <div class="col-md-6">
     <div class="jumbotron main-banner">
-        <h2>Please review your information:</h2>
+
+
+        <div class="page-header"><h1>Confirm your Details</h1></div>
         <div class="col-xs-12" style="height:20px;"></div>
         <div class="row">
 
@@ -16,6 +18,20 @@
           <div class="col-md-10">
 
         <!-- form -->
+        <div class="form-group">
+          <label for="fname">Outgoing Flight:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{outgoingFlight}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fname">Return Flight:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{returnFlight}}</h3>
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="fname">First Name:</label>
           <div class="row confirm">
@@ -153,7 +169,7 @@
           <div class="col-xs-12" style="height:10px;"></div>
 
         <div class="row">
-          <button type="button" class="btn btn-primary" id='btnSearch' ng-click='EditInfo()'>Edit Information</button>
+          <button type="button" class="btn btn-primary" id='btnSearch' ng-disabled="user.button == 'true'" ng-click='EditInfo()'>Edit Information</button>
         </div>
 
         <div class="col-xs-12" style="height:30px;"></div>
@@ -161,11 +177,11 @@
         <label> <input type="checkbox" ng-model="checked"> All of my information is correct.</label><br/>
         <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
         <div class="col-xs-12" style="height:25px;"></div>
-        <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'" class="btn btn-primary" id='btnSend' ng-disabled="!checked" >Send Tickets!</button>
+        <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'" >Send Tickets!</button>
         <!-- <button type="button" class="btn btn-primary" id='btnSearch' disabled ng-click='SearchFlights()'>Send Tickets!</button> -->
 
         <div class="alert alert-success fade in" ng-show="user.button == 'true'">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
           <strong>Success!</strong> Thank you for your purchase. Your ticket will be e-mailed to you shortly.
         </div>
         <div class="col-xs-12" style="height:15px;"></div>
