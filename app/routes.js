@@ -1,7 +1,7 @@
 /**
  * App routes:
  */
-   var flights =  require('../flights.json');
+
    var jwt     = require('jsonwebtoken');
    var express = require('express');
    var path    = require('path');
@@ -16,7 +16,7 @@
 
     /*GET ALL FLIGHTS (DUMMY) */
     app.get('/api/data/flights', function(req, res) {
-
+      var flights =  require('../flights.json');
       res.json( flights );
     });
 
@@ -49,5 +49,83 @@
       }
 
     });
+
+    /**
+ * ROUND-TRIP SEARCH REST ENDPOINT
+ * @param origin - Flight Origin Location - Airport Code
+ * @param destination - Flight Destination Location - Airport Code
+ * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param class - economy or business only
+ * @returns {Array}
+ */
+app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+    // retrieve params from req.params.{{origin | departingDate | ...}}
+    // return this exact format
+    return //call a function that searches in the database and returns the flights
+    {
+      // outgoingFlights:
+      //   [{
+      //       "flightNumber"      : "SE2804",
+      //       "aircraftType"      : "Boeing",
+      //       "aircraftModel"     : "747",
+      //       "departureDateTime" : 1460478300000,
+      //       "arrivalDateTime"   : 1460478300000,
+      //       "origin"            : "JFK",
+      //       "destination"       : "CAI",
+      //       "cost"              : "750",
+      //       "currency"          : "USD",
+      //       "class"             : "economy",
+      //       "Airline"           : "United"
+      //   },
+      //   {
+      //               // more flights
+      //   }],
+      // returnFlights:
+      //   [{
+      //       "flightNumber"      : "SE2805",
+      //       "aircraftType"      : "Boeing",
+      //       "aircraftModel"     : "747",
+      //       "departureDateTime" : 1460478300000,
+      //       "arrivalDateTime"   : 1460478300000,
+      //       "origin"            : "CAI",
+      //       "destination"       : "JFK",
+      //       "cost"              : "845",
+      //       "currency"          : "USD",
+      //       "class"             : "economy",
+      //       "Airline"           : "United"
+      //   }]
+    };
+});
+
+/**
+ * ONE-WAY SEARCH REST ENDPOINT
+ * @param origin - Flight Origin Location - Airport Code
+ * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param class - economy or business only
+ * @returns {Array}
+ */
+app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+    // retrieve params from req.params.{{origin | departingDate | ...}}
+    // return this exact format
+
+    return  //call a function that searches in the database and returns the flights
+    {
+      // outgoingFlights:
+      //   [{
+      //       "flightNumber"      : "SE2804",
+      //       "aircraftType"      : "Airbus",
+      //       "aircraftModel"     : "A320",
+      //       "departureDateTime" : 1460478300000,
+      //       "arrivalDateTime"   : 1460478300000,
+      //       "origin"            : "JFK",
+      //       "destination"       : "CAI",
+      //       "cost"              : "1567",
+      //       "currency"          : "USD",
+      //       "class"             : "economy",
+      //       "Airline"           : "United"
+      //   }]
+    };
+});
 
 };
