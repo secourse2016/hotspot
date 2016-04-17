@@ -53,6 +53,10 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
         $location.url('/flights');
   };
 
+  $scope.SearchBookings = function() {
+        // $location.url('/flights');
+  };
+
 
 
   /* Get Airports on page render  */
