@@ -1,13 +1,13 @@
 <div class="row ">
 
-  <div class="col-md-3">
+  <div class="col-md-1">
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-10">
     <div class="jumbotron main-banner">
 
 
-        <div class="page-header"><h1>Confirm your Details</h1></div>
+        <div class="page-header"><h1>Confirm Details</h1></div>
         <div class="col-xs-12" style="height:20px;"></div>
         <div class="row">
 
@@ -18,18 +18,94 @@
           <div class="col-md-10">
 
         <!-- form -->
-        <div class="form-group">
+        <div class="panel-body">
           <label for="fname">Outgoing Flight:</label>
-          <div class="row confirm">
-              <h3 class="confirm-text">{{outgoingFlight}}</h3>
-          </div>
+
+          <table style="background-color: white " class="table table-bordered">
+            <thead style="background-color: #FF8080">
+              <tr>
+
+                <th>Flight Number</th>
+                <th>Aircraft</th>
+                <th>Capacity</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Available Seats</th>
+                <th>Price Range</th>
+              </tr>
+            </thead>
+              <tr>
+
+                  <td>
+                      {{flight.outFlight.flightNumber}}
+                  </td>
+                  <td>
+                     {{flight.outFlight.aircraft}}
+                  </td>
+                  <td>
+                    {{flight.outFlight.capacity}}
+                  </td>
+                  <td>
+                    {{flight.outFlight.date | date : 'EEEE, MMMM d, y'}}
+                  </td>
+                  <td>
+                    {{flight.outFlight.duration}}
+                  </td>
+                  <td>
+                    {{flight.outFlight.availableSeats}}
+                  </td>
+                  <td>
+                    {{flight.outFlight.seatmap[0].cost | currency}} - {{flight.outFlight.seatmap[0].cost * 1.1 | currency}}
+                  </td>
+              </tr>
+          </table>
+
         </div>
 
-        <div class="form-group">
+
+
+
+        <div ng-show="flight.trip == 'round'">
           <label for="fname">Return Flight:</label>
-          <div class="row confirm">
-              <h3 class="confirm-text">{{returnFlight}}</h3>
-          </div>
+
+          <table style="background-color: white " class="table table-bordered">
+            <thead style="background-color: #FF8080">
+              <tr>
+
+                <th>Flight Number</th>
+                <th>Aircraft</th>
+                <th>Capacity</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Available Seats</th>
+                <th>Price Range</th>
+              </tr>
+            </thead>
+              <tr>
+                  <td>
+                      {{flight.inFlight.flightNumber}}
+                  </td>
+                  <td>
+                     {{flight.inFlight.aircraft}}
+                  </td>
+                  <td>
+                    {{flight.inFlight.capacity}}
+                  </td>
+                  <td>
+                    {{flight.inFlight.date | date : 'EEEE, MMMM d, y'}}
+                  </td>
+                  <td>
+                    {{flight.inFlight.duration}}
+                  </td>
+                  <td>
+                    {{flight.inFlight.availableSeats}}
+                  </td>
+                  <td>
+                    {{flight.inFlight.seatmap[0].cost | currency}} - {{flight.inFlight.seatmap[0].cost * 1.1 | currency}}
+                  </td>
+              </tr>
+          </table>
+
         </div>
 
         <div class="form-group">
@@ -154,7 +230,7 @@
         <!-- <div class="well"> -->
           <label for="psprt">Contact Number:</label>
           <div class="row well" style="text-align:left">
-              <h3 class="">{{flight}} TEST {{user.contactNumber}}</h3>
+              <h3 class="">{{user.contactNumber}}</h3>
           </div>
         <!-- </div> -->
 
