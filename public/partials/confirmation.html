@@ -253,7 +253,7 @@
         <label> <input type="checkbox" ng-model="checked"> All of my information is correct.</label><br/>
         <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
         <div class="col-xs-12" style="height:25px;"></div>
-        <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'" >Send Tickets!</button>
+        <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'; SubmitBooking()" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'" >Send Tickets!</button>
         <!-- <button type="button" class="btn btn-primary" id='btnSearch' disabled ng-click='SearchFlights()'>Send Tickets!</button> -->
 
         <div class="alert alert-success fade in" ng-show="user.button == 'true'">
