@@ -156,6 +156,7 @@ module.exports = function(app, mongo) {
         returningData: returningDate
       });
 
+
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -204,11 +205,17 @@ module.exports = function(app, mongo) {
     return //call a function that searches in the database and returns the flights
     {
 
+      << << << < HEAD
       db.flights.find({
         origin: origin,
         destination: destination,
         departingDate: departingDate
-      });
+      }); === === =
+      db.flights.find({
+        origin: origin,
+        destination: destination,
+        departingDate: departingDate
+      }); >>> >>> > 97e c3f204b853d1633d4e3ee705e5f29ba96441b
 
       // outgoingFlights:
       //   [{

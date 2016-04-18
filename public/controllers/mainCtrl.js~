@@ -46,31 +46,18 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
     FlightsSrv.setSelectedDestinationAirport(destAirport);
   };
 
-   $scope.SetOutgoingDate = function(outgoingDate) {
-    FlightsSrv.setSelectedOutgoingDate(outgoingDate);
-  };
-
   /* Find All Available Flights  */
 
 
   $scope.SearchFlights = function() {
-        $scope.SetOutgoingDate($scope.outDate);
         $location.url('/flights');
   };
 
-  $scope.SelectedClass = function(ticketClass){
-    FlightsSrv.setSelectedClass(ticketClass);
-    //console.log(ticketClass);
+  $scope.SearchBookings = function() {
+        // $location.url('/flights');
   };
-  
-  $scope.submitForm = function(isValid) {
 
-    // check to make sure the form is completely valid
-    if (isValid) {
-      alert('our form is amazing');
-    }
 
-  };
 
   /* Get Airports on page render  */
   AirportCodes();
