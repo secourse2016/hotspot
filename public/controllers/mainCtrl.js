@@ -46,11 +46,27 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
     FlightsSrv.setSelectedDestinationAirport(destAirport);
   };
 
+   $scope.SetOutgoingDate = function(outgoingDate) {
+    FlightsSrv.setSelectedOutgoingDate(outgoingDate);
+  };
+  $scope.SetIncomingDate = function(IncomingDate) {
+    FlightsSrv.setSelectedIncomingDate(IncomingDate);
+  };
+   $scope.SetRoundTrip= function(roundTrip) {
+    FlightsSrv.setSelectedRoundTrip(roundTrip);
+  };
+
   /* Find All Available Flights  */
-
-
   $scope.SearchFlights = function() {
+        $scope.SetOutgoingDate($scope.outDate);
+        $scope.SetIncomingDate($scope.inDate);
+        $scope.SetRoundTrip($scope.roundTrip);
         $location.url('/flights');
+  };
+
+  $scope.SelectedClass = function(ticketClass){
+    FlightsSrv.setSelectedClass(ticketClass);
+    //console.log(ticketClass);
   };
 
   $scope.submitForm = function(isValid) {
