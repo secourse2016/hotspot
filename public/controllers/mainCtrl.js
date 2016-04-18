@@ -54,9 +54,6 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   };
 
   /* Find All Available Flights  */
-$scope.FuncToCall=function() {
-  $scope.SetIncomingDate($scope.flightDetails.indate);
-};
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
         $scope.SetIncomingDate($scope.inDate);
