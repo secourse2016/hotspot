@@ -54,11 +54,12 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   };
 
   /* Find All Available Flights  */
-
-
+$scope.FuncToCall=function() {
+  $scope.SetIngoingDate($scope.flightDetails.indate);
+};
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
-        $scope.SetIngoingDate($scope.flightDetails.indate);
+        //$scope.SetIngoingDate($scope.flightDetails.indate);
         $location.url('/flights');
   };
 
