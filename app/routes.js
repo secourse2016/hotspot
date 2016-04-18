@@ -13,6 +13,8 @@ module.exports = function(app,mongo) {
 
     app.post('/api/user', function(req, res) {
       console.log(req.body);
+      insertBooking(user, flight);
+      //BOOKING REF ID!
     });
 
     /* GET ALL STATES ENDPOINT */
