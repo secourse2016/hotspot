@@ -12,6 +12,17 @@ module.exports = function(app,mongo) {
    var path    = require('path');
 
 
+   app.all('*', function(req, res, next) {
+     res.header('Access-Control-Allow-Origin', '*');
+     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+     next();
+   });
+
+    app.post('/api/user', function(req, res) {
+      console.log(req.body);
+      require('../db').insertBooking(req.body.user, req.body.flight);
+      //BOOKING REF ID!
+    });
 
     /* GET ALL STATES ENDPOINT */
     app.get('/api/data/codes', function(req, res) {
@@ -33,8 +44,8 @@ module.exports = function(app,mongo) {
      */
 
     app.get('/test/db',function(req, res){
-      mongo.db().collection('flights').find().toArray(function(err, arr){
-        console.log(arr.length);
+      mongo.db().collection('bookings').find().toArray(function(err, arr){
+        console.log(arr[0]);
       });
     });
     app.get('/seed/flights', function (req, res) {
@@ -57,6 +68,7 @@ module.exports = function(app,mongo) {
       }
 
     });
+
 
 
 
@@ -105,29 +117,29 @@ module.exports = function(app,mongo) {
     });
 
     /* Middlewear For Secure API Endpoints */
-    // app.use(function(req, res, next) {
-    //
-    //   // check header or url parameters or post parameters for token
-    //   var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
-    //
-    //   console.log("{{{{ TOKEN }}}} => ", token);
-    //
-    //   var jwtSecret = process.env.JWTSECRET;
-    //
-    //   // Get JWT contents:
-    //   try
-    //   {
-    //     var payload = jwt.verify(token, jwtSecret);
-    //     req.payload = payload;
-    //     next();
-    //   }
-    //   catch (err)
-    //   {
-    //     // console.error('[ERROR]: JWT Error reason:', err);
-    //     // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
-    //   }
-    //
-    // });
+    app.use(function(req, res, next) {
+
+      // check header or url parameters or post parameters for token
+      var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
+
+      console.log("{{{{ TOKEN }}}} => ", token);
+
+      var jwtSecret = process.env.JWTSECRET;
+
+      // Get JWT contents:
+      try
+      {
+        var payload = jwt.verify(token, jwtSecret);
+        req.payload = payload;
+        next();
+      }
+      catch (err)
+      {
+        // console.error('[ERROR]: JWT Error reason:', err);
+        // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
+      }
+
+    });
 
     /**
  * ROUND-TRIP SEARCH REST ENDPOINT
