@@ -46,10 +46,15 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
     FlightsSrv.setSelectedDestinationAirport(destAirport);
   };
 
+   $scope.SetOutgoingDate = function(outgoingDate) {
+    FlightsSrv.setSelectedOutgoingDate(outgoingDate);
+  };
+
   /* Find All Available Flights  */
 
 
   $scope.SearchFlights = function() {
+        $scope.SetOutgoingDate($scope.outDate);
         $location.url('/flights');
   };
 
