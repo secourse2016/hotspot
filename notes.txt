@@ -1,0 +1,42 @@
+FONTS
+
+
+Confirmation View:
+Incoming flights
+Outgoing flights
+Check that editing information still has the values for incoming and outgoing flights
+WEELLLSS!
+
+
+Payment View:
+ع==>---<===3 Better spacing
+ع==>---<===3 Angular date
+
+Flights View:
+ع==>---<===3 table style
+<====3 flight class choices
+ع==>---<===3 incoming flight date picker
+
+ع==>---<===3 Disable Edit after sending tickets
+ع==>---<===3 Fix success messages closing or add a Modal
+ع==>---<===3 characters in payment
+ع==>---<===3 Passport field characters only
+
+Button to move Back
+Pass data from flights to confirmation
+ع==>---<===3 fix payment view angular content
+make views left aligned
+add carousel
+progress bar
+Modal instead of alert in send tickets
+
+#################################################################################################################
+FONTS
+WEELLLSS!
+flight class choices
+post confirmed details to bookings collection database
+booking reference search in landing page
+make views left aligned
+add carousel
+progress bar
+Modal instead of alert in send tickets

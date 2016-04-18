@@ -47,9 +47,17 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   };
 
   /* Find All Available Flights  */
+
+
   $scope.SearchFlights = function() {
-    $location.url('/flights');
+        $location.url('/flights');
   };
+
+  $scope.SearchBookings = function() {
+        // $location.url('/flights');
+  };
+
+
 
   /* Get Airports on page render  */
   AirportCodes();
