@@ -1,5 +1,5 @@
 var express = require('express');
-var app     = express();
+app     = require('./app/app.js');
 // var mongo 	= require('./db.js');
 
 

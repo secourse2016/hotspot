@@ -33,7 +33,9 @@ module.exports = function(app,mongo) {
      */
 
     app.get('/test/db',function(req, res){
-      res.json(mongo.db().collection('flights').find().toArray());
+      mongo.db().collection('flights').find().toArray(function(err, arr){
+        console.log(arr.length);
+      });
     });
     app.get('/seed/flights', function (req, res) {
 
@@ -89,7 +91,7 @@ module.exports = function(app,mongo) {
     app.get('/delete/flights',function(req,res){
 
 
-    mongo.db().collection('flights').remove().exec(function(err){
+    mongo.db().collection('flights').drop(function(err){
           if(err)
       {
         console.log('Error :' + err);
@@ -103,29 +105,29 @@ module.exports = function(app,mongo) {
     });
 
     /* Middlewear For Secure API Endpoints */
-    app.use(function(req, res, next) {
-
-      // check header or url parameters or post parameters for token
-      var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
-
-      console.log("{{{{ TOKEN }}}} => ", token);
-
-      var jwtSecret = process.env.JWTSECRET;
-
-      // Get JWT contents:
-      try
-      {
-        var payload = jwt.verify(token, jwtSecret);
-        req.payload = payload;
-        next();
-      }
-      catch (err)
-      {
-        // console.error('[ERROR]: JWT Error reason:', err);
-        // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
-      }
-
-    });
+    // app.use(function(req, res, next) {
+    //
+    //   // check header or url parameters or post parameters for token
+    //   var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
+    //
+    //   console.log("{{{{ TOKEN }}}} => ", token);
+    //
+    //   var jwtSecret = process.env.JWTSECRET;
+    //
+    //   // Get JWT contents:
+    //   try
+    //   {
+    //     var payload = jwt.verify(token, jwtSecret);
+    //     req.payload = payload;
+    //     next();
+    //   }
+    //   catch (err)
+    //   {
+    //     // console.error('[ERROR]: JWT Error reason:', err);
+    //     // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
+    //   }
+    //
+    // });
 
     /**
  * ROUND-TRIP SEARCH REST ENDPOINT
