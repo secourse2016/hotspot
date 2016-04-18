@@ -75,7 +75,7 @@
         });
       }
     },
-    roundTripSearch: function(req, res, cb) {
+    roundTripSearch: function(req, cb) {
 
 
       db.collection('flights').find({
