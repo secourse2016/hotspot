@@ -4,8 +4,8 @@
 
 module.exports = function(app,mongo) {
 
-   var routes =  require('./flights.json');
-   var mongo = require('./db');
+   var routes =  require('../flights.json');
+   var mongo = require('../db');
    var moment  = require('moment');
    var jwt     = require('jsonwebtoken');
    var express = require('express');
@@ -21,8 +21,7 @@ module.exports = function(app,mongo) {
 
     /*GET ALL FLIGHTS (DUMMY) */
     app.get('/api/data/flights', function(req, res) {
-      var flights =  require('../flights.json');
-      res.json( flights );
+      res.json( routes );
     });
 
     /* RENDER MAIN PAGE */
@@ -32,6 +31,10 @@ module.exports = function(app,mongo) {
 /**
      * Seed Flights Collection:
      */
+
+    app.get('/test/db',function(req, res){
+      res.json(mongo.db().collection('flights').find().toArray());
+    });
     app.get('/seed/flights', function (req, res) {
 
       // Data will be loaded from a  enerated JSON data into an array
@@ -118,8 +121,8 @@ module.exports = function(app,mongo) {
       }
       catch (err)
       {
-        console.error('[ERROR]: JWT Error reason:', err);
-        res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
+        // console.error('[ERROR]: JWT Error reason:', err);
+        // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
       }
 
     });
