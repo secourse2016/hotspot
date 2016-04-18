@@ -16,6 +16,8 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
     //user ready to go into database
     var user = PaymentSrv.getUser();
     var flight = FlightsSrv.getFlightInfo();
+    user.bookingID = {{objectId()}};
+    console.log(user.bookingID);
       return $http.post('/api/user', {user, flight});
     //return booking reference id to display @ confirmation page
   };
