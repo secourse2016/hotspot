@@ -49,12 +49,16 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
    $scope.SetOutgoingDate = function(outgoingDate) {
     FlightsSrv.setSelectedOutgoingDate(outgoingDate);
   };
+  $scope.SetIngoingDate = function(IngoingDate) {
+    FlightsSrv.setSelectedIngoingDate(IngoingDate);
+  };
 
   /* Find All Available Flights  */
 
 
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
+        $scope.SetIngoingDate($scope.flightDetails.indate);
         $location.url('/flights');
   };
 
