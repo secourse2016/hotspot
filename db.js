@@ -75,8 +75,27 @@
         });
       }
     },
-    roundTripSearch: function(req, cb) {
+    roundTripSearch: function(req, res, cb) {
 
+      db.collection('flights').find({
+        origin: req.params.origin,
+        destination: req.params.destination,
+        departingDateTime: req.params.departingDate,
+        returningDateTime: req.params.returningDate,
+        class: req.params.class
+      }).toArray(function(err, result) {
+        if (err) {
+          console.log('error : ' + err);
+
+        } else {
+          cb(res, result);
+        }
+
+      });
+
+    },
+    
+     oneWaySearch: function(req, res, cb) {
 
       db.collection('flights').find({
         origin: req.params.origin,
@@ -97,6 +116,9 @@
     }
 
   };
+    
+    
 
+  };
 
 })();
