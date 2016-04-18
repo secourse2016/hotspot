@@ -46,8 +46,10 @@ App.factory('FlightsSrv', function ($http) {
          },
          setSelectedOutgoingDate: function(value) {
             this.SelectedOutgoingDate = value;
-         }
+         },
          ///////////////////////////////////////////////////////////////////
-
+         getSelectedClass: function(){
+          return this.selectedClass;
+         }
      };
  });
