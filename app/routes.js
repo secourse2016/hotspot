@@ -12,11 +12,11 @@ module.exports = function(app, mongo) {
     var path = require('path');
 
 
-    app.all('*', function(req, res, next) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-      next();
-    });
+   app.all('*', function(req, res, next) {
+     res.header('Access-Control-Allow-Origin', '*');
+     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+     next();
+   });
 
     app.post('/api/user', function(req, res) {
       console.log(req.body);
@@ -43,8 +43,9 @@ module.exports = function(app, mongo) {
      * Seed Flights Collection:
      */
 
-    app.get('/test/db', function(req, res) {
-      mongo.db().collection('bookings').find().toArray(function(err, arr) {
+
+    app.get('/test/db',function(req, res){
+      mongo.db().collection('bookings').find().toArray(function(err, arr){
         console.log(arr[0]);
       });
     });
@@ -123,11 +124,15 @@ module.exports = function(app, mongo) {
       var jwtSecret = process.env.JWTSECRET;
 
       // Get JWT contents:
-      try {
+
+      try
+      {
         var payload = jwt.verify(token, jwtSecret);
         req.payload = payload;
         next();
-      } catch (err) {
+      }
+      catch (err)
+      {
         // console.error('[ERROR]: JWT Error reason:', err);
         // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
       }
