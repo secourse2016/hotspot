@@ -46,10 +46,13 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
   /* Retrieve Selected Airports Codes */
   $scope.flight = {
     origin      : FlightsSrv.getSelectedOriginAirport(),
-    destination : FlightsSrv.getSelectedDestinationAirport(),
-    outgoingDate : FlightsSrv.getSelectedOutgoingDate()
-   };
-
+    destination : FlightsSrv.getSelectedDestinationAirport()
+    incomingDate:$scope.inDate,
+    outgoingDate:$scope.outDate
+    //,
+    //roundTrip:$scope.flightDetails.indate
+  };
+    
   // $http.get("api/data/flights").then(function(data){
   //   $scope.flights = angular.fromJson(data);
   // });
