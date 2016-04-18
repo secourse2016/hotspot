@@ -16,7 +16,25 @@
         },
         close: function() {
             db.close();
+        },
+        
+        roundTripSearch: function(req,res,cb) {
+            
+            
+         db.collection('flights').find({origin: req.params.origin, destination:req.params.destination,departingDateTime:req.paramsdepartingDate,returningDateTime:req.params.returningDate,class:req.params.class}).toArray(function (err, result) {
+      if (err) {
+        console.log('error : '+ err);
+     
+        } else
+        {
+            cb(res,result);
         }
+      
+         
+        });
+      
+    }
+    
     };
 
 })();

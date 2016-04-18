@@ -141,8 +141,12 @@ module.exports = function(app,mongo) {
 app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
-    return //call a function that searches in the database and returns the flights
-    {
+      mongo.db().roundTripSearch(req,res,function(res,data){
+        
+        console.log(data);
+    });
+   // return //call a function that searches in the database and returns the flights
+   // {
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -174,7 +178,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
       //       "class"             : "economy",
       //       "Airline"           : "United"
       //   }]
-    };
+   // };
 });
 
 /**
@@ -187,9 +191,13 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
+      mongo.db().roundTripSearch(req,res,function(res,data){
+        
+        console.log(data);
+    });
 
-    return  //call a function that searches in the database and returns the flights
-    {
+  //  return  call a function that searches in the database and returns the flights
+   // {
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -204,7 +212,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
       //       "class"             : "economy",
       //       "Airline"           : "United"
       //   }]
-    };
+   // };
 });
 
 };
