@@ -42,7 +42,27 @@
 <!-- PROMOTIONAL OFFERS -->
 
 <!-- MAIN BANNER -->
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+      <div class="jumbotron main-banner" ng-submit="submitFrom(main-banner.$valid)" novalidate>
+        <h2>Search Ticket by Booking Reference</h2>
+        <div class="container">
 
+
+        <div class="col-md-2">
+        </div>
+          <div class="col-md-8">
+          <input type="text" name="bookingref" class="form-control" style="display:inline-block;" placeholder="Booking Reference" >
+          <div class="col-xs-12" style="height:15px;"></div>
+          <button type="submit" class="btn btn-primary"  ng-click='checkBookingRef()'>Search</button>
+        </div>
+
+      </div>
+      </div>
+  </div>
+</div>
 <!-- <div class="container"> -->
 
 <div class="row ">
