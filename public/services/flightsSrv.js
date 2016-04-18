@@ -1,13 +1,14 @@
 /**
  * Flights Service
  */
+
 App.factory('FlightsSrv', function ($http) {
      return {
          getAirportCodes : function() {
            return $http.get('/api/data/codes');
          },
          setFlightInfo : function(flightInfo) {
-           
+
               this.flightInfo = flightInfo;
          },
          setSelectedOriginAirport: function(value) {

@@ -1,6 +1,4 @@
 <form name="flightform" ng-submit= 'GoToPayment(flightDetails)' novalidate>
-
-
 <div class="row">
   <div class="jumbotron banner">
     <div class="container">
@@ -10,17 +8,14 @@
             <div class="panel-heading">
               <div class="clearfix"></div>
             </div>
-
             <div class="row">
               <div class="radio trip-option">
                 <label><input type="radio" ng-model= "flightDetails.trip" ng-checked = "true"  value ="one" >One Way Trip</label>
                 <label><input type="radio" ng-model= "flightDetails.trip" value ="round">Round Trip</label>
               </div>
             </div>
-
             <div class="panel-body">
                 Flights from {{flight.origin}} to {{flight.destination}}
-
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -62,36 +57,18 @@
                     </tr>
                 </table>
             </div>
-
             <div class="col-xs-12" style="height:50px"></div>
-
-
           <div style="width:30%;margin:auto auto" ng-show="flightDetails.trip == 'round'">
+
 
 
             Flights from {{flight.destination}} to {{flight.origin}}
 
-            <p class="input-group" >
-              <input type="text"
-                     class="form-control"
-                     placeholder="Incoming flight date"
-                     uib-datepicker-popup
-                     ng-model="flightDetails.date"
-                     is-open="popup2.opened"
-                     close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button"
-                        class="btn btn-default"
-                        ng-click="open2()">
-                        <i class="glyphicon glyphicon-calendar"></i>
-               </button>
-              </span>
-            </p>
-          </div>
+
+
 
 
           <div class="panel-body">
-
               <table class="table table-bordered table-hover" ng-show="flightDetails.trip=='round'">
                 <thead>
                   <tr>
@@ -133,11 +110,7 @@
                   </tr>
               </table>
           </div>
-
-
-
             <button type="submit" class="btn btn-primary" id='btnSearch'>Continue</button>
-
           </div>
         </div>
       </div>
