@@ -48,7 +48,8 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
     origin      : FlightsSrv.getSelectedOriginAirport(),
     destination : FlightsSrv.getSelectedDestinationAirport(),
     outgoingDate : FlightsSrv.getSelectedOutgoingDate(),
-    incomingDate : FlightsSrv.getSelectedIncomingDate()
+    incomingDate : FlightsSrv.getSelectedIncomingDate(),
+    roundTrip: FlightsSrv.getSelectedRoundTrip()
    };
 
   // $http.get("api/data/flights").then(function(data){

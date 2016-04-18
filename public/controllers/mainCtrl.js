@@ -52,11 +52,15 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   $scope.SetIncomingDate = function(IncomingDate) {
     FlightsSrv.setSelectedIncomingDate(IncomingDate);
   };
+   $scope.SetRoundTrip= function(roundTrip) {
+    FlightsSrv.setSelectedRoundTrip(roundTrip);
+  };
 
   /* Find All Available Flights  */
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
         $scope.SetIncomingDate($scope.inDate);
+        $scope.SetRoundTrip($scope.roundTrip);
         $location.url('/flights');
   };
 

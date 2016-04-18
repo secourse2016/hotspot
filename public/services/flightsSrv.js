@@ -46,8 +46,13 @@ App.factory('FlightsSrv', function ($http) {
          },
          setSelectedOutgoingDate: function(value) {
             this.SelectedOutgoingDate = value;
-         }
+         },
          ///////////////////////////////////////////////////////////////////
-
+         getSelectedRoundTrip: function() {
+           return this.SelectedRoundTrip;
+         },
+         setSelectedRoundTrip: function(value) {
+            this.SelectedRoundTrip = value;
+         }
      };
  });
