@@ -89,6 +89,23 @@
 
                 <div class="col-xs-12" style="height:25px;"></div>
 
+                    <p class="input-group">
+                      <input type="text"
+                             class="form-control"
+                             placeholder="Ingoing flight date"
+                             uib-datepicker-popup="{{format}}"
+                             ng-model="inDate"
+                             is-open="popup2.opened"
+                             close-text="Close"
+                             alt-input-formats="altInputFormats" />
+                      <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open2()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+                    </p>
 
                     <p class="input-group">
                       <input type="text"
@@ -110,11 +127,11 @@
 
                 <div class="col-xs-12" style="height:8px;"></div>
 
-                <p>Ticket Class</p>
-                <div>
-                <input type="checkbox" name="Business" ng-model="BusinessClass" ng-checked="SelectedClass(BusinessClass)"> Business
-                <input type="checkbox" name="Economy" ng-model="EconomyClass" ng-checked="SelectedClass(EconomyClass)"> Economy
-                <br>
+               <p>Ticket Class</p>
+                <div class="radio trip-option">
+                <label><input type="radio" ng-model= "ticketClass" ng-checked = "SelectedClass(ticketClass)" value="1" >Business</label>
+                <label><input type="radio" ng-model= "ticketClass" ng-checked= "SelectedClass(ticketClass)" value="2">Economy</label>
+              </div>
                 <br>
                 </div>
 
