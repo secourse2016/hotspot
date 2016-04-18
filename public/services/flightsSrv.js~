@@ -1,15 +1,13 @@
-
 /**
  * Flights Service
  */
-
 App.factory('FlightsSrv', function ($http) {
      return {
          getAirportCodes : function() {
            return $http.get('/api/data/codes');
          },
          setFlightInfo : function(flightInfo) {
-
+           
               this.flightInfo = flightInfo;
          },
          setSelectedOriginAirport: function(value) {
@@ -26,9 +24,6 @@ App.factory('FlightsSrv', function ($http) {
          },
          getFlightInfo : function(){
            return this.flightInfo;
-         },
-         setSelectedClass: function(value){
-            this.selectedClass=value;
          }
      };
  });
