@@ -106,10 +106,30 @@
                        </button>
                       </span>
                     </p>
-                    
+
+                    <input type="checkbox" ng-model="roundTrip" name="roundtrip" id="checkboxRound" >Round Trip</input>
+
                     <div class="col-xs-12" style="height:25px;"></div>
-                    <input type="checkbox" name="roundtrip" id="checkboxRound" ng-click='viewRetDateBox()'>Round Trip</input>
-                    
+
+                    <p ng-show="roundTrip" class="input-group" >
+                      <input type="text"
+                             class="form-control"
+                             placeholder="Incoming flight date"
+                             uib-datepicker-popup
+                             ng-model="flightDetails.date"
+                             is-open="popup2.opened"
+                             close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open2()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+                    </p>
+                  </div>
+
+
                     <div class="col-xs-12" style="height:8px;"></div>
 
 
