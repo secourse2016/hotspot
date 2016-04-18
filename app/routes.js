@@ -11,7 +11,9 @@ module.exports = function(app,mongo) {
    var express = require('express');
    var path    = require('path');
 
-
+    app.post('/api/user', function(req, res) {
+      console.log(req.body);
+    });
 
     /* GET ALL STATES ENDPOINT */
     app.get('/api/data/codes', function(req, res) {

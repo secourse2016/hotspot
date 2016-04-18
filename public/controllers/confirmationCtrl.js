@@ -1,6 +1,5 @@
 
-App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, FlightsSrv) {
-  var http = require('http')
+App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, FlightsSrv, $http) {
 
   $scope.user = PaymentSrv.getUser();
   $scope.flight = FlightsSrv.getFlightInfo();
@@ -13,11 +12,10 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
     $location.url('/payment');
   };
 
-  $scope.SubmitBooking() = function() {
+  $scope.SubmitBooking = function() {
     //user ready to go into database
     var user = PaymentSrv.getUser();
-
-    return $http.post('/api/secure/blogs', {user});
+      return $http.post('/api/user', {user});
     //insert user into bookings collection
     //return booking reference id to display @ confirmation page
   };
