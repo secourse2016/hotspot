@@ -47,7 +47,8 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
   $scope.flight = {
     origin      : FlightsSrv.getSelectedOriginAirport(),
     destination : FlightsSrv.getSelectedDestinationAirport(),
-    outgoingDate : FlightsSrv.getSelectedOutgoingDate()
+    outgoingDate : FlightsSrv.getSelectedOutgoingDate(),
+    ingoingDate : FlightsSrv.getSelectedIngoingDate()
    };
 
   // $http.get("api/data/flights").then(function(data){

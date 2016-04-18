@@ -17,6 +17,9 @@ App.factory('FlightsSrv', function ($http) {
          getSelectedOriginAirport: function() {
            return this.selectedOriginAirport;
          },
+          getSelectedIngoingDate: function() {
+           return this.SelectedIngoingDate;
+         },
          setSelectedDestinationAirport: function(value) {
            this.selectedDestinationAirport = value;
          },
@@ -34,6 +37,9 @@ App.factory('FlightsSrv', function ($http) {
          },
          setSelectedOutgoingDate: function(value) {
            return this.SelectedOutgoingDate = value;
+         },
+         setSelectedIngoingDate: function(value) {
+           return this.SelectedIngoingDate = value;
          }
      };
  });
