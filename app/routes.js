@@ -143,6 +143,9 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
     // return this exact format
     return //call a function that searches in the database and returns the flights
     {
+
+      db.flights.find( { origin: origin, destination: destination, departingDate: departingDate, returningData: returningDate } );
+
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -190,6 +193,9 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
 
     return  //call a function that searches in the database and returns the flights
     {
+
+      db.flights.find( { origin: origin, destination: destination, departingDate: departingDate } );
+
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
