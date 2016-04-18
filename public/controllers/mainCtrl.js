@@ -49,17 +49,17 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
    $scope.SetOutgoingDate = function(outgoingDate) {
     FlightsSrv.setSelectedOutgoingDate(outgoingDate);
   };
-  $scope.SetIngoingDate = function(IngoingDate) {
-    FlightsSrv.setSelectedIngoingDate(IngoingDate);
+  $scope.SetIncomingDate = function(IncomingDate) {
+    FlightsSrv.setSelectedIncomingDate(IncomingDate);
   };
 
   /* Find All Available Flights  */
 $scope.FuncToCall=function() {
-  $scope.SetIngoingDate($scope.flightDetails.indate);
+  $scope.SetIncomingDate($scope.flightDetails.indate);
 };
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
-        //$scope.SetIngoingDate($scope.flightDetails.indate);
+        $scope.SetIncomingDate($scope.inDate);
         $location.url('/flights');
   };
 
@@ -67,7 +67,7 @@ $scope.FuncToCall=function() {
     FlightsSrv.setSelectedClass(ticketClass);
     //console.log(ticketClass);
   };
-  
+
   $scope.submitForm = function(isValid) {
 
     // check to make sure the form is completely valid
