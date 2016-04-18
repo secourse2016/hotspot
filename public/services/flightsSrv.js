@@ -8,7 +8,7 @@ App.factory('FlightsSrv', function ($http) {
            return $http.get('/api/data/codes');
          },
          setFlightInfo : function(flightInfo) {
-           
+
               this.flightInfo = flightInfo;
          },
          setSelectedOriginAirport: function(value) {
@@ -27,7 +27,7 @@ App.factory('FlightsSrv', function ($http) {
            return this.flightInfo;
          },
          setSelectedClass: function(value){
-            this.setSelectedClass=value;
+            this.selectedClass=value;
          }
      };
  });
