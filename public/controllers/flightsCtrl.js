@@ -49,11 +49,8 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
     destination : FlightsSrv.getSelectedDestinationAirport(),
     outgoingDate : FlightsSrv.getSelectedOutgoingDate(),
     incomingDate : FlightsSrv.getSelectedIncomingDate(),
-<<<<<<< HEAD
-    ticketClass : FlightsSrv.getSelectedClass()
-=======
+    ticketClass : FlightsSrv.getSelectedClass(),
     roundTrip: FlightsSrv.getSelectedRoundTrip()
->>>>>>> 6c0b285f79c81bc770cfdb1465545792cf46b744
    };
 
   // $http.get("api/data/flights").then(function(data){
@@ -61,7 +58,7 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
   // });
     // $scope.outGoingflights = FlightsSrv.getOutGoingFlightsFromDB($scope.flight);
     // $scope.inComingflights = FlightsSrv.getIncomingFlightsFromDB($scope.flight);
-;
+
   // $scope.flights = angular.fromJson(flightsAll);
   // $scope.flights =
 
