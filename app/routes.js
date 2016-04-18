@@ -1,11 +1,10 @@
 /**
  * App routes:
  */
-   var flights =  require('../flights.json');
-  var mongo = require('../db');
+   var flights =  require('./flights.json');
+   var mongo = require('./db');
    var moment  = require('moment');
    var fs = require('fs');
- //  var db = mongo.db();
     var routes = [
       {'origin': 'Mumbai', 'destination': 'Delhi', 'duration': '2 hours', 'capacity': 100, 'aircraft': 'Airbus a318', 'flightNumber': 'SE2804'},
       {'origin': 'Cairo', 'destination': 'Jeddah', 'duration': '2 hours', 'capacity': 100, 'aircraft': 'Airbus a318', 'flightNumber': 'SE2804'},
@@ -66,6 +65,7 @@ module.exports = function(app,mongo) {
 
       // loop until May 31 2016 starting today April-15-2016
       for (var i = 1; i <= 46; i++) {
+
      var doc = 
         {
           "flightNumber"  :   flight.flightNumber,
@@ -78,7 +78,7 @@ module.exports = function(app,mongo) {
           "seatmap"       :   []
         };
 
-       mongo.db().collection('flights').insert(doc, function(err, data){
+        mongo.db().collection('flights').insert(doc, function(err, data){
           if (err) console.log('error');
           else console.log('insert successful');
         });
