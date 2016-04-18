@@ -64,23 +64,10 @@
 
             Flights from {{flight.destination}} to {{flight.origin}}
 
-            <p class="input-group" >
-              <input type="text"
-class="form-control"
-placeholder="Incoming flight date"
-uib-datepicker-popup
-ng-model="flightDetails.date"
-is-open="popup2.opened"
-close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button"
-class="btn btn-default"
-ng-click="open2()">
-                        <i class="glyphicon glyphicon-calendar"></i>
-               </button>
-              </span>
-            </p>
-          </div>
+
+
+
+
           <div class="panel-body">
               <table class="table table-bordered table-hover" ng-show="flightDetails.trip=='round'">
                 <thead>
