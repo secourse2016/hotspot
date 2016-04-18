@@ -53,14 +53,11 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
         $location.url('/flights');
   };
 
-  $scope.submitForm = function(isValid) {
-
-    // check to make sure the form is completely valid
-    if (isValid) {
-      alert('our form is amazing');
-    }
-
+  $scope.SearchBookings = function() {
+        // $location.url('/flights');
   };
+
+
 
   /* Get Airports on page render  */
   AirportCodes();

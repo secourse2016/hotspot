@@ -136,7 +136,7 @@
     <input type="text"
            required
            class="form-control"
-           placeholder="Passport Expiry Date"
+           placeholder="Credit Card Expiry Date"
            uib-datepicker-popup="{{format}}"
            ng-model="user.ccExpiryDate"
            is-open="popup3.opened"
@@ -473,8 +473,8 @@ Country <select ng-model="user.country" required>
 <div class="col-xs-12" style="height:20px;"></div>
 
         <!-- SUBMIT BUTTON -->
-        <button type="submit" class="btn btn-primary" >Proceed To Confirm Your Payment</button>
-<!-- ng-disabled="userForm.$invalid" -->
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Proceed To Confirm Your Payment</button>
+
     </form>
     </div>
 </div>

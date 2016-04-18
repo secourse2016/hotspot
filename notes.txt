@@ -29,3 +29,12 @@ make views left aligned
 add carousel
 progress bar
 Modal instead of alert in send tickets
+
+#################################################################################################################
+FONTS
+WEELLLSS!
+flight class choices
+make views left aligned
+add carousel
+progress bar
+Modal instead of alert in send tickets
