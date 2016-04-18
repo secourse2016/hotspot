@@ -1,4 +1,3 @@
-
 /**
  * Flights Service
  */
@@ -25,9 +24,6 @@ App.factory('FlightsSrv', function ($http) {
          },
          getFlightInfo : function(){
            return this.flightInfo;
-         },
-         setSelectedClass: function(value){
-            this.setSelectedClass=value;
          }
      };
  });
