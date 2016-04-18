@@ -2,151 +2,160 @@
  * App routes:
  */
 
-module.exports = function(app,mongo) {
+module.exports = function(app, mongo) {
 
-   var routes =  require('../flights.json');
-   var mongo = require('../db');
-   var moment  = require('moment');
-   var jwt     = require('jsonwebtoken');
-   var express = require('express');
-   var path    = require('path');
+  var routes = require('../flights.json');
+  var mongo = require('../db');
+  var moment = require('moment');
+  var jwt = require('jsonwebtoken');
+  var express = require('express');
+  var path = require('path');
 
 
+  app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+    next();
+  });
 
-    /* GET ALL STATES ENDPOINT */
-    app.get('/api/data/codes', function(req, res) {
-      var codes =  require('../airports.json');
-      res.json( codes );
+  app.post('/api/user', function(req, res) {
+    console.log(req.body);
+    require('../db').insertBooking(req.body.user, req.body.flight);
+    //BOOKING REF ID!
+  });
+
+  /* GET ALL STATES ENDPOINT */
+  app.get('/api/data/codes', function(req, res) {
+    var codes = require('../airports.json');
+    res.json(codes);
+  });
+
+  /*GET ALL FLIGHTS (DUMMY) */
+  app.get('/api/data/flights', function(req, res) {
+    res.json(routes);
+  });
+
+  /* RENDER MAIN PAGE */
+  app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+  });
+  /**
+   * Seed Flights Collection:
+   */
+
+  app.get('/test/db', function(req, res) {
+    mongo.db().collection('bookings').find().toArray(function(err, arr) {
+      console.log(arr[0]);
     });
+  });
+  app.get('/seed/flights', function(req, res) {
 
-    /*GET ALL FLIGHTS (DUMMY) */
-    app.get('/api/data/flights', function(req, res) {
-      res.json( routes );
-    });
+    // Data will be loaded from a  enerated JSON data into an array
 
-    /* RENDER MAIN PAGE */
-    app.get('/', function (req, res) {
-      res.sendFile(__dirname + '/public/index.html');
-    });
-/**
-     * Seed Flights Collection:
-     */
+    // for now data will be temporarily read from an array.
 
-    app.get('/test/db',function(req, res){
-      mongo.db().collection('flights').find().toArray(function(err, arr){
-        console.log(arr.length);
+
+    // insert outgoing flights
+    for (var i = 0; i < routes.length; i++) {
+      var route = routes[i];
+      seedFlights(route, route.origin, route.destination);
+    }
+
+    // insert returning flights
+    for (var i = 0; i < routes.length; i++) {
+      var route = routes[i];
+      seedFlights(route, route.destination, route.origin);
+    }
+
+  });
+
+
+
+
+  function seedFlights(flight, _origin, _destination) {
+
+    // loop until May 31 2016 starting today April-15-2016
+    for (var i = 1; i <= 46; i++) {
+
+      var doc = {
+        "flightNumber": flight.flightNumber,
+        "aircraft": flight.aircraft,
+        "capacity": flight.capacity,
+        "date": moment().add(i, 'days').calendar(),
+        "duration": flight.duration,
+        "origin": _origin,
+        "destination": _destination,
+        "seatmap": []
+      };
+
+      mongo.db().collection('flights').insert(doc, function(err, data) {
+        if (err) console.log('error');
+        else console.log('insert successful');
       });
-    });
-    app.get('/seed/flights', function (req, res) {
-
-      // Data will be loaded from a  enerated JSON data into an array
-
-      // for now data will be temporarily read from an array.
-
-
-      // insert outgoing flights
-      for (var i = 0; i < routes.length; i++) {
-        var route = routes[i];
-        seedFlights(route, route.origin, route.destination);
-      }
-
-      // insert returning flights
-      for (var i = 0; i < routes.length; i++) {
-        var route = routes[i];
-        seedFlights(route, route.destination, route.origin);
-      }
-
-    });
-
-
-
-    function seedFlights(flight, _origin, _destination) {
-
-      // loop until May 31 2016 starting today April-15-2016
-      for (var i = 1; i <= 46; i++) {
-
-     var doc =
-        {
-          "flightNumber"  :   flight.flightNumber,
-          "aircraft"      :   flight.aircraft,
-          "capacity"      :   flight.capacity,
-          "date"          :   moment().add(i, 'days').calendar(),
-          "duration"      :   flight.duration,
-          "origin"        :   _origin,
-          "destination"   :   _destination,
-          "seatmap"       :   []
-        };
-
-        mongo.db().collection('flights').insert(doc, function(err, data){
-          if (err) console.log('error');
-          else console.log('insert successful');
-        });
-
-      }
 
     }
 
-    /* Delete Flights Collection **/
+  }
 
-    app.get('/delete/flights',function(req,res){
+  /* Delete Flights Collection **/
+
+  app.get('/delete/flights', function(req, res) {
 
 
-    mongo.db().collection('flights').drop(function(err){
-          if(err)
-      {
+    mongo.db().collection('flights').drop(function(err) {
+      if (err) {
         console.log('Error :' + err);
-                                    }
-        else
-     {
+      } else {
 
         console.log('Deletion Successful');
-                                             }
- });
+      }
     });
+  });
 
-    /* Middlewear For Secure API Endpoints */
-    // app.use(function(req, res, next) {
-    //
-    //   // check header or url parameters or post parameters for token
-    //   var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
-    //
-    //   console.log("{{{{ TOKEN }}}} => ", token);
-    //
-    //   var jwtSecret = process.env.JWTSECRET;
-    //
-    //   // Get JWT contents:
-    //   try
-    //   {
-    //     var payload = jwt.verify(token, jwtSecret);
-    //     req.payload = payload;
-    //     next();
-    //   }
-    //   catch (err)
-    //   {
-    //     // console.error('[ERROR]: JWT Error reason:', err);
-    //     // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
-    //   }
-    //
-    // });
+  /* Middlewear For Secure API Endpoints */
+  app.use(function(req, res, next) {
 
-    /**
- * ROUND-TRIP SEARCH REST ENDPOINT
- * @param origin - Flight Origin Location - Airport Code
- * @param destination - Flight Destination Location - Airport Code
- * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
- * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
- * @param class - economy or business only
- * @returns {Array}
- */
-app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
+
+    console.log("{{{{ TOKEN }}}} => ", token);
+
+    var jwtSecret = process.env.JWTSECRET;
+
+    // Get JWT contents:
+    try {
+      var payload = jwt.verify(token, jwtSecret);
+      req.payload = payload;
+      next();
+    } catch (err) {
+      // console.error('[ERROR]: JWT Error reason:', err);
+      // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
+    }
+
+  });
+
+  /**
+   * ROUND-TRIP SEARCH REST ENDPOINT
+   * @param origin - Flight Origin Location - Airport Code
+   * @param destination - Flight Destination Location - Airport Code
+   * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+   * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+   * @param class - economy or business only
+   * @returns {Array}
+   */
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
-      mongo.db().roundTripSearch(req,res,function(res,data){
-        
-        console.log(data);
-    });
-   // return //call a function that searches in the database and returns the flights
-   // {
+    return //call a function that searches in the database and returns the flights
+    {
+
+      db.flights.find({
+        origin: origin,
+        destination: destination,
+        departingDate: departingDate,
+        returningData: returningDate
+      });
+
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -178,26 +187,29 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
       //       "class"             : "economy",
       //       "Airline"           : "United"
       //   }]
-   // };
-});
+    };
+  });
 
-/**
- * ONE-WAY SEARCH REST ENDPOINT
- * @param origin - Flight Origin Location - Airport Code
- * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
- * @param class - economy or business only
- * @returns {Array}
- */
-app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+  /**
+   * ONE-WAY SEARCH REST ENDPOINT
+   * @param origin - Flight Origin Location - Airport Code
+   * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+   * @param class - economy or business only
+   * @returns {Array}
+   */
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
-      mongo.db().roundTripSearch(req,res,function(res,data){
-        
-        console.log(data);
-    });
 
-  //  return  call a function that searches in the database and returns the flights
-   // {
+    return //call a function that searches in the database and returns the flights
+    {
+
+      db.flights.find({
+        origin: origin,
+        destination: destination,
+        departingDate: departingDate
+      });
+
       // outgoingFlights:
       //   [{
       //       "flightNumber"      : "SE2804",
@@ -212,7 +224,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:class', functi
       //       "class"             : "economy",
       //       "Airline"           : "United"
       //   }]
-   // };
-});
+    };
+  });
 
 };
