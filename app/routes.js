@@ -13,7 +13,7 @@ module.exports = function(app,mongo) {
 
     app.post('/api/user', function(req, res) {
       console.log(req.body);
-      insertBooking(user, flight);
+      require('../db').insertBooking(req.body.user, req.body.flight);
       //BOOKING REF ID!
     });
 
@@ -37,8 +37,8 @@ module.exports = function(app,mongo) {
      */
 
     app.get('/test/db',function(req, res){
-      mongo.db().collection('flights').find().toArray(function(err, arr){
-        console.log(arr.length);
+      mongo.db().collection('bookings').find().toArray(function(err, arr){
+        console.log(arr[0]);
       });
     });
     app.get('/seed/flights', function (req, res) {
@@ -62,66 +62,7 @@ module.exports = function(app,mongo) {
 
     });
 
-    function insertBooking(user, flight){
-      var outBooking =
-         {
-           "firstName"              :   user.fname,
-           "lastName"               :   user.lname,
-           "passport"               :   user.passport,
-           "passportIssueDate"      :   user.passportIssueDate,
-           "passportExpiryDate"     :   user.passportExpiryDate,
-           "creditCardType"         :   user.ccType,
-           "creditCardNumber"       :   user.ccNumber,
-           "creditCardExpiryDate"   :   user.ccExpiryDate,
-           "nameOnCreditCard"       :   user.ccName,
-           "email"                  :   user.email,
-           "country"                :   user.country,
-           "address1"               :   user.add1,
-           "address2"               :   user.add2,
-           "state"                  :   user.state,
-           "city"                   :   user.city,
-           "contactNumber"          :   user.contactNumber,
-           "flightNumber"           :   flight.outFlight.flightNumber
-          //  out_booking_id
-         };
 
-      var inBooking;
-      if(flight.trip == 'round'){
-        inBooking =
-           {
-             "firstName"              :   user.fname,
-             "lastName"               :   user.lname,
-             "passport"               :   user.passport,
-             "passportIssueDate"      :   user.passportIssueDate,
-             "passportExpiryDate"     :   user.passportExpiryDate,
-             "creditCardType"         :   user.ccType,
-             "creditCardNumber"       :   user.ccNumber,
-             "creditCardExpiryDate"   :   user.ccExpiryDate,
-             "nameOnCreditCard"       :   user.ccName,
-             "email"                  :   user.email,
-             "country"                :   user.country,
-             "address1"               :   user.add1,
-             "address2"               :   user.add2,
-             "state"                  :   user.state,
-             "city"                   :   user.city,
-             "contactNumber"          :   user.contactNumber,
-             "flightNumber"           :   flight.inFlight.flightNumber
-             //  in_booking_id
-           };
-      }
-
-      mongo.db().collection('bookings').insert(outBooking, function(err, data){
-        if (err) console.log('error');
-        else console.log('insert BOOKING successful');
-      });
-
-      if(flight.trip == 'round'){
-        mongo.db().collection('bookings').insert(inBooking, function(err, data){
-          if (err) console.log('error');
-          else console.log('insert BOOKING successful');
-        });
-      }
-    }
 
 
     function seedFlights(flight, _origin, _destination) {
