@@ -1,14 +1,10 @@
 .jumbotron{
-  font-family: 'Cabin', sans-serif;
   text-align: center;
   background: rgba(170, 170, 170, 0);
   width: 1200px;
   margin:0 auto;
   margin-top: 70px;
   border-radius: 10px;
-}
-.coolfont{
-  font-family: 'Cabin', sans-serif;
 }
 .navbar{
   background-image: url('/images/gradient.png');
