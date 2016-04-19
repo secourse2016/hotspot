@@ -55,12 +55,16 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
    $scope.SetRoundTrip= function(roundTrip) {
     FlightsSrv.setSelectedRoundTrip(roundTrip);
   };
+  $scope.SetOtherAirlines= function(otherAirlines) {
+   FlightsSrv.setSelectedAirlines(otherAirlines);
+ };
 
   /* Find All Available Flights  */
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
         $scope.SetIncomingDate($scope.inDate);
         $scope.SetRoundTrip($scope.roundTrip);
+        $scope.SetOtherAirlines($scope.otherAirlines);
         $location.url('/flights');
   };
 
@@ -69,14 +73,6 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
     //console.log(ticketClass);
   };
 
-  $scope.submitForm = function(isValid) {
-
-    // check to make sure the form is completely valid
-    if (isValid) {
-      alert('our form is amazing');
-    }
-
-  };
 
   /* Get Airports on page render  */
   AirportCodes();

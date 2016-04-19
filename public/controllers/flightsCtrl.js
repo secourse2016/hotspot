@@ -1,7 +1,7 @@
 /**
  * Flights Controller
  */
-App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $filter) {
+App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location, $filter) {
 
   /*----------- Angular Bootstrap Datepicker -----------*/
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -38,30 +38,39 @@ App.controller('flightsCtrl', function($http, $scope, FlightsSrv, $location, $fi
   };
 
   $scope.flightDetails = {
-    trip : 'one',
-    ouflight : {},
+    roundTrip: FlightsSrv.getSelectedRoundTrip(),
+    otherAirlines: FlightsSrv.getSelectedAirlines(),
+    outflight : {},
     inflight : {}
   };
 
+
   /* Retrieve Selected Airports Codes */
-  $scope.flight = {
+  $scope.outGoingflight = {
     origin      : FlightsSrv.getSelectedOriginAirport(),
     destination : FlightsSrv.getSelectedDestinationAirport(),
-    outgoingDate : FlightsSrv.getSelectedOutgoingDate(),
-    incomingDate : FlightsSrv.getSelectedIncomingDate(),
-    ticketClass : FlightsSrv.getSelectedClass(),
-    roundTrip: FlightsSrv.getSelectedRoundTrip()
+    date : FlightsSrv.getSelectedOutgoingDate(),
+    class : FlightsSrv.getSelectedClass(),
+    otherAirlines: FlightsSrv.getSelectedAirlines()
    };
 
-  // $http.get("api/data/flights").then(function(data){
-  //   $scope.flights = angular.fromJson(data);
-  // });
-    // $scope.outGoingflights = FlightsSrv.getOutGoingFlightsFromDB($scope.flight);
-    // $scope.inComingflights = FlightsSrv.getIncomingFlightsFromDB($scope.flight);
+   $scope.inComingflight = {
+     origin      : FlightsSrv.getSelectedOriginAirport(),
+     destination : FlightsSrv.getSelectedDestinationAirport(),
+     date : FlightsSrv.getSelectedIncomingDate(),
+     class : FlightsSrv.getSelectedClass(),
+     roundTrip: FlightsSrv.getSelectedRoundTrip(),
+    };
 
-  // $scope.flights = angular.fromJson(flightsAll);
-  // $scope.flights =
 
+function getFlightsFromAPI(outflight, inflight){
+  $scope.flightDetails.outflight = API.getSecure(outflight);
+  if($scope.flightDetails.roundTrip == "Round trip"){
+    $scope.flightDetails.inflight = API.getSecure(inflight);
+  }
+}
+
+getFlightsFromAPI($scope.outGoingflight, $scope.inComingflight);
 
 
 });

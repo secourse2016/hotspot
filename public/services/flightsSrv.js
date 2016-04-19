@@ -38,7 +38,14 @@ App.factory('FlightsSrv', function ($http) {
          },
          ///////////////////////////////////////////////////////////////////
          setSelectedClass: function(value){
-            this.selectedClass=value;
+           if(value == 1)
+            this.selectedClass="Business";
+            else {
+              this.selectedClass="Economy";
+            }
+         },
+         getSelectedClass: function(){
+          return this.selectedClass;
          },
          ///////////////////////////////////////////////////////////////////
          getSelectedOutgoingDate: function() {
@@ -48,14 +55,22 @@ App.factory('FlightsSrv', function ($http) {
             this.SelectedOutgoingDate = value;
          },
          ///////////////////////////////////////////////////////////////////
-         getSelectedClass: function(){
-          return this.selectedClass;
-        },
          getSelectedRoundTrip: function() {
            return this.SelectedRoundTrip;
          },
          setSelectedRoundTrip: function(value) {
-            this.SelectedRoundTrip = value;
+           if(value)
+            this.SelectedRoundTrip = "Round trip";
+          else {
+            this.SelectedRoundTrip = "One-way trip"
+          }
+         },
+         ///////////////////////////////////////////////////////////////////
+         setSelectedAirlines: function(value){
+           this.SelectedAirlines = value;
+         },
+         getSelectedAirlines: function(){
+           return this.SelectedAirlines ;
          }
      };
  });
