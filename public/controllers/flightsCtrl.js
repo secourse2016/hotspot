@@ -49,7 +49,7 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
   $scope.outGoingflight = {
     origin      : FlightsSrv.getSelectedOriginAirport(),
     destination : FlightsSrv.getSelectedDestinationAirport(),
-    date : FlightsSrv.getSelectedOutgoingDate(),
+    date : moment(FlightsSrv.getSelectedOutgoingDate()).toDate().getTime(),
     class : FlightsSrv.getSelectedClass(),
     otherAirlines: FlightsSrv.getSelectedAirlines()
    };
@@ -57,37 +57,38 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
    $scope.inComingflight = {
      origin      : FlightsSrv.getSelectedDestinationAirport(),
      destination : FlightsSrv.getSelectedOriginAirport(),
-     date : FlightsSrv.getSelectedIncomingDate(),
+     date : moment(FlightsSrv.getSelectedIncomingDate()).toDate().getTime(),
      class : FlightsSrv.getSelectedClass(),
      roundTrip: FlightsSrv.getSelectedRoundTrip(),
     };
-
+$scope.outgoingFlightsArray = [];
+$scope.incomingFlightsArray = [];
 
 function getFlightsFromAPI(outflight, inflight){
   if($scope.flightDetails.tripType == "Round trip"){
     console.log($scope.flightDetails.tripType);
     if(FlightsSrv.getSelectedAirlines()){
       API.getRoundSecureFromAirlines(outflight, inflight, function(res){
-        $scope.outgoingFlightsArray.concat(res);
+        $scope.outgoingFlightsArray.push(res.outgoingFlights);
       });
     }
     else{
       API.getRoundSecure(outflight, inflight, function(outGoingFlight, inComingFlight){
         console.log("getRoundSecure flightCtrl",outGoingFlight);
-      $scope.incomingFlightsArray = inComingFlight;
-      $scope.outgoingFlightsArray = outGoingFlight;
+      $scope.incomingFlightsArray.push(res.returnFlights);
+      $scope.outgoingFlightsArray.push(res.outgoingFlight);
     });
   }
 }
 else{
   if(FlightsSrv.getSelectedAirlines()){
     API.getOneSecureFromAirlines(outflight,function(res){
-      $scope.outgoingFlightsArray = res;
+      $scope.outgoingFlightsArray.push(res.outgoingFlights);
     });
   }
   else{
     API.getOneSecure(outflight, function(res){
-      $scope.outgoingFlightsArray = res;
+      $scope.outgoingFlightsArray.push(res.outgoingFlights);
       });
   }
 
