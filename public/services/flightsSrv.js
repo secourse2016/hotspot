@@ -39,9 +39,9 @@ App.factory('FlightsSrv', function ($http) {
          ///////////////////////////////////////////////////////////////////
          setSelectedClass: function(value){
            if(value == 1)
-            this.selectedClass="Business";
+            this.selectedClass="business";
             else {
-              this.selectedClass="Economy";
+              this.selectedClass="economy";
             }
          },
          getSelectedClass: function(){
