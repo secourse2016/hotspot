@@ -136,6 +136,25 @@
 
     }
 
+    bookingRefSearch: function(bookingRef, cb) {
+
+
+      db.collection('bookings').find({
+       "bookingRef": bookingRef,
+     }).toArray(function(err, result) {
+       if (err) {
+         console.log('error : ' + err);
+
+       } else {
+         // console.log("DB find Result =>", result);
+         // return result;
+         cb(result);
+       }
+
+     });
+
+   }
+
 
 
 

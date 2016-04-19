@@ -40,6 +40,8 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
   $scope.flightDetails = {
     tripType: FlightsSrv.getSelectedRoundTrip(),
     otherAirlines: FlightsSrv.getSelectedAirlines(),
+    outFlight: {},
+    inFlight: {}
   };
 
 

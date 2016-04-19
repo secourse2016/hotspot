@@ -68,6 +68,10 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
         $location.url('/flights');
   };
 
+  $scope.checkBookingRef = function(refID) {
+
+  };
+
   $scope.SelectedClass = function(ticketClass){
     FlightsSrv.setSelectedClass($scope.ticketClass);
     //console.log(ticketClass);
