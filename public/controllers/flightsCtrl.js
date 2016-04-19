@@ -61,35 +61,34 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
      class : FlightsSrv.getSelectedClass(),
      roundTrip: FlightsSrv.getSelectedRoundTrip(),
     };
-$scope.outgoingFlightsArray = [];
-$scope.incomingFlightsArray = [];
 
 function getFlightsFromAPI(outflight, inflight){
   if($scope.flightDetails.tripType == "Round trip"){
     console.log($scope.flightDetails.tripType);
     if(FlightsSrv.getSelectedAirlines()){
       API.getRoundSecureFromAirlines(res, function(res){
-        $scope.incomingFlightsArray.push(res.returnFlights);
-        $scope.outgoingFlightsArray.push(res.outgoingFlights);
+        $scope.incomingFlightsArray.push(res.returnFlights[0]);
+        $scope.outgoingFlightsArray.push(res.outgoingFlights[0]);
       });
     }
     else{
       API.getRoundSecure(outflight, inflight, function(res){
         console.log("getRoundSecure flightCtrl",res);
-      $scope.incomingFlightsArray.push(res.returnFlights);
-      $scope.outgoingFlightsArray.push(res.outgoingFlight);
+      $scope.incomingFlightsArray.push(res.returnFlights[0]);
+      $scope.outgoingFlightsArray.push(res.outgoingFlights[0]);
     });
   }
 }
 else{
   if(FlightsSrv.getSelectedAirlines()){
     API.getOneSecureFromAirlines(outflight,function(res){
-      $scope.outgoingFlightsArray.push(res.outgoingFlights);
+      $scope.outgoingFlightsArray.push(res.outgoingFlights[0]);
     });
   }
   else{
     API.getOneSecure(outflight, function(res){
-      $scope.outgoingFlightsArray.push(res.outgoingFlights);
+      console.log(res.outgoingFlights);
+      $scope.outgoingFlightsArray.push(res.outgoingFlights[0]);
       });
   }
 
@@ -97,5 +96,7 @@ else{
 }
 getFlightsFromAPI($scope.outGoingflight, $scope.inComingflight);
 
+$scope.outgoingFlightsArray = [];
+$scope.incomingFlightsArray = [];
 
 });

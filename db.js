@@ -140,13 +140,14 @@
       else{
         flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
       }
-
-      db.collection('flights').find({
+      var findFlight = {
         "origin": flight.origin,
         "destination": flight.destination,
         "departingDateTime":  flight.departingDateTime,
         "class": flight.class
-      }).toArray(function(err, result) {
+      };
+      console.log("findFlight in db", findFlight)
+      db.collection('flights').find(findFlight).toArray(function(err, result) {
         if (err) {
           console.log('error : ' + err);
           cb (err,{err});
