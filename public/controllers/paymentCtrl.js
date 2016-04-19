@@ -1,5 +1,5 @@
 
-App.controller('paymentCtrl', function($scope, PaymentSrv, $location) {
+App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv) {
 
   $scope.payment = {
     // ccNumber : PaymentSrv.getCreditCardNumber(),
@@ -52,6 +52,15 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location) {
 
     // if (isValid) {
         // PaymentSrv.setCreditCardNumber(info.ccNumber);
+        info.flightType = FlightsSrv.getSelectedRoundTrip();
+
+        info.bookingRefOut = ""+ info.country + info. contactNumber + info.ccNumber + 1;
+        if (info.flightType == "Round trip"){
+          info.bookingRefIn = ""+ info.country + info. contactNumber + info.ccNumber + 2;
+        }
+        else{
+          info.bookingRefIn = "(No incoming flight selected)";
+        }
         PaymentSrv.setUser(info);
         $location.url('/confirmation');
     // }
