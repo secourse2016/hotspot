@@ -76,24 +76,41 @@
         });
       }
     },
-    roundTripSearch: function(req, res, cb) {
+    roundTripSearch: function(flight, cb) {
 
+      // returningDateTime: req.params.returningDate,
 
       db.collection('flights').find({
-        origin: req.params.origin,
-        destination: req.params.destination,
-        departingDateTime: req.params.departingDate,
-        returningDateTime: req.params.returningDate,
-        class: req.params.class
-      }).toArray(function(err, result) {
+        origin: flight.origin,
+        destination: flight.destination,
+        departingDateTime: 1464991200000,//flight.departingDate,
+        class: flight.class
+      }).toArray(function(err, outGoingFlights) {
         if (err) {
           console.log('error : ' + err);
 
         } else {
-          cb(res, result);
+          db.collection('flights').find({
+            origin: flight.destination,
+            destination: flight.origin,
+            departingDateTime: 1464991200000, //flight.arrivalDateTime,
+            class: flight.class
+          }).toArray(function(err, inComingFlights) {
+            if (err) {
+              console.log('error : ' + err);
+
+            } else {
+              cb(outGoingFlights, inComingFlights);
+            }
+
+          });
+
         }
 
       });
+
+
+
 
     },
 

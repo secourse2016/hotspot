@@ -13,8 +13,8 @@ module.exports = function(app, mongo) {
 
 
    app.all('*', function(req, res, next) {
-     res.header('Access-Control-Allow-Origin', '*');
-     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+     req.header('Access-Control-Allow-Origin', '*');
+     req.header('Access-Control-Allow-Headers', 'X-Requested-With');
      next();
    });
 
@@ -181,13 +181,16 @@ module.exports = function(app, mongo) {
 app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
-    return //call a function that searches in the database and returns the flights
-    {
-      console.log(req.params.origin)
-
-
-
-    };
+    var flight = {
+      "origin" : req.params.origin,
+      "destination" : req.params.destination,
+      "departingDateTime" : req.params.departingDate,
+      "arrivalDateTime" : req.params.returningDate,
+      "class" : req.params.class
+    }
+    mongo.roundTripSearch(flight, function(outGoingFlights, inComingFlights){
+      res.json([outGoingFlights, inComingFlights]);
+    });
 });
 
 /**
