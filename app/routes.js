@@ -93,8 +93,7 @@ module.exports = function(app, mongo) {
   function seedFlights(flight, _origin, _destination) {
 
     // loop until May 31 2016 starting today April-15-2016
-    for (var i = 1; i <= 46; i++) {
-
+    for (var i = 7; i <= 46; i++) {
       var doc = {
         "flightNumber": flight.flightNumber,
         "aircraftType": flight.aircraftType,
@@ -203,6 +202,7 @@ module.exports = function(app, mongo) {
      res.json(flights);
    });
 
+ });
   app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
@@ -232,6 +232,5 @@ module.exports = function(app, mongo) {
 
 
 
-  });
 
 };

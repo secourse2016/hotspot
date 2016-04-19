@@ -80,10 +80,23 @@
 
       // returningDateTime: req.params.returningDate,
 
+      if(isNaN(parseInt(flight.departingDateTime))){
+        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+      }
+      else{
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+      }
+      if(isNaN(parseInt(flight.arrivalDateTime))){
+        flight.arrivalDateTime = moment(flight.arrivalDateTime).toDate().getTime();
+      }
+      else{
+        flight.arrivalDateTime = moment(parseInt(flight.arrivalDateTime)).toDate().getTime();
+      }
+
       db.collection('flights').find({
         origin: flight.origin,
         destination: flight.destination,
-        departingDateTime: moment(flight.departingDateTime).toDate().getTime(),
+        departingDateTime: flight.departingDateTime,
         class: flight.class
       }).toArray(function(err, outGoingFlights) {
         if (err) {
@@ -93,7 +106,7 @@
           db.collection('flights').find({
             origin: flight.destination,
             destination: flight.origin,
-            departingDateTime: moment(flight.arrivalDateTime).toDate().getTime(),
+            departingDateTime: flight.arrivalDateTime,
             class: flight.class
           }).toArray(function(err, inComingFlights) {
             if (err) {
@@ -119,17 +132,26 @@
       // console.log( moment(flight.departingDateTime).toDate());
       // console.log( moment(flight.departingDateTime).toDate().getTime());
       // console.log( moment(flight.departingDateTime).toDate().getTime() === 1462831200000);
+      // console.log("time in db ",moment(parseInt(flight.departingDateTime).toDate().getTime());
+
+      if(isNaN(parseInt(flight.departingDateTime))){
+        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+      }
+      else{
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+      }
+
       db.collection('flights').find({
         "origin": flight.origin,
         "destination": flight.destination,
-        "departingDateTime":  moment(flight.departingDateTime).toDate().getTime(),
+        "departingDateTime":  flight.departingDateTime,
         "class": flight.class
       }).toArray(function(err, result) {
         if (err) {
           console.log('error : ' + err);
           cb (err,{err});
         } else {
-          // console.log("DB find Result =>", result);
+          console.log("DB find Result =>", result);
           // return result;
           cb(err,result);
         }
@@ -162,8 +184,8 @@
 
 
   };
-
-console.log(moment(1462658400000).toDate().getTime());
+console.log( moment(1462744800000).format('YYYY-MM-DD') );
+// console.log(moment(1462658400000).toDate().getTime());
 
 
 })();

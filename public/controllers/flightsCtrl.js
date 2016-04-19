@@ -68,13 +68,14 @@ function getFlightsFromAPI(outflight, inflight){
   if($scope.flightDetails.tripType == "Round trip"){
     console.log($scope.flightDetails.tripType);
     if(FlightsSrv.getSelectedAirlines()){
-      API.getRoundSecureFromAirlines(outflight, inflight, function(res){
+      API.getRoundSecureFromAirlines(res, function(res){
+        $scope.incomingFlightsArray.push(res.returnFlights);
         $scope.outgoingFlightsArray.push(res.outgoingFlights);
       });
     }
     else{
-      API.getRoundSecure(outflight, inflight, function(outGoingFlight, inComingFlight){
-        console.log("getRoundSecure flightCtrl",outGoingFlight);
+      API.getRoundSecure(outflight, inflight, function(res){
+        console.log("getRoundSecure flightCtrl",res);
       $scope.incomingFlightsArray.push(res.returnFlights);
       $scope.outgoingFlightsArray.push(res.outgoingFlight);
     });
