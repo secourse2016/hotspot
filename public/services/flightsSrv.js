@@ -71,6 +71,19 @@ App.factory('FlightsSrv', function ($http) {
          },
          getSelectedAirlines: function(){
            return this.SelectedAirlines ;
+         },
+         ////////////////////////////////////////////////////////////////////
+         searchBookings: function(value, cb) {
+           var URL = '/api/bookings/search/' + value;
+           var req = {
+             method: 'GET',
+             url: URL,
+           };
+
+           $http(req).success(function(res) {
+             console.log("booking search results = ", res);
+             cb(res);
+           });
          }
      };
  });
