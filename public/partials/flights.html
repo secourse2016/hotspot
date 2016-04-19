@@ -10,8 +10,8 @@
               </div>
 
               <div class="panel-body">
-                Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}} {{outGoingflight. incomingDate | date : 'EEEE, MMMM d, y'}} in {{outGoingflight.outgoingDate | date : 'EEEE, MMMM d, y'}} Trip type {{outGoingflight.class}}
-
+                <h2>Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}}, on {{outGoingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{outGoingflight.class}}</h2>
+                <div class="col-xs-12" style="height:20px"></div>
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -23,6 +23,7 @@
                       <th>Capacity</th>
                       <th>Departure Date</th>
                       <th>Duration</th>
+                      <th>Class</th>
                       <th>Cost</th>
                     </tr>
                   </thead>
@@ -52,6 +53,9 @@
                       {{f.duration}}
                     </td>
                     <td>
+                      {{f.class}}
+                    </td>
+                    <td>
                       {{f.cost | currency}}
                     </td>
                   </tr>
@@ -61,10 +65,11 @@
 
 
               <div style="width:30%;margin:auto auto" ng-show="flightDetails.tripType== 'Round trip'">
-                Flights from {{inComingflight.origin}} to {{inComingflight.destination}}
+
               </div>
 
               <div class="panel-body">
+                <h2>Flights from {{inComingflight.origin}} to {{inComingflight.destination}}, on {{inComingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{inComingflight.class}}</h2>
                 <table class="table table-bordered table-hover" ng-show="flightDetails.tripType =='Round trip'">
                   <thead>
                     <tr>
@@ -110,6 +115,7 @@
                   </tr>
                 </table>
               </div>
+
             </div>
           </div>
           <button type="submit" class="btn btn-primary" id='btnSearch'>Continue</button>

@@ -19,7 +19,7 @@ module.exports = function(app, mongo) {
    });
 
     app.post('/api/user', function(req, res) {
-      console.log(req.body);
+      // console.log(req.body);
       require('../db').insertBooking(req.body.user, req.body.flight);
       //BOOKING REF ID!
     });
@@ -44,11 +44,18 @@ module.exports = function(app, mongo) {
      */
 
 
-    app.get('/test/db',function(req, res){
+    app.get('/test/flights',function(req, res){
       mongo.db().collection('flights').find().toArray(function(err, arr){
         console.log(arr[0]);
       });
     });
+
+    app.get('/test/bookings',function(req, res){
+      mongo.db().collection('bookings').find().toArray(function(err, arr){
+        console.log(arr[0]);
+      });
+    });
+
     app.get('/seed/flights', function(req, res) {
 
       // Data will be loaded from a  enerated JSON data into an array
@@ -115,6 +122,20 @@ module.exports = function(app, mongo) {
         } else {
 
           console.log('Deletion Successful');
+        }
+      });
+
+    });
+
+    app.get('/delete/bookings', function(req, res) {
+
+
+      mongo.db().collection('bookings').drop(function(err) {
+        if (err) {
+          console.log('Error :' + err);
+        } else {
+
+          console.log('Bookings Deletion Successful');
         }
       });
 

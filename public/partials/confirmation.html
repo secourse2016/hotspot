@@ -25,38 +25,44 @@
                         <table style="background-color: white " class="table table-bordered">
                             <thead style="background-color: #FF8080">
                                 <tr>
-
-                                    <th>Flight Number</th>
-                                    <th>Aircraft</th>
-                                    <th>Capacity</th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                    <th>Available Seats</th>
-                                    <th>Price Range</th>
+                                  <th>Airline</th>
+                                  <th>Flight Number</th>
+                                  <th>Aircraft Type</th>
+                                  <th>Aircraft Model</th>
+                                  <th>Capacity</th>
+                                  <th>Departure Date</th>
+                                  <th>Duration</th>
+                                  <th>Class</th>
+                                  <th>Cost</th>
                                 </tr>
                             </thead>
                             <tr>
-
                                 <td>
-                                    {{flight.outFlight.flightNumber}}
+                                  {{flight.outFlight.Airline}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.aircraft}}
+                                  {{flight.outFlight.flightNumber}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.capacity}}
+                                  {{flight.outFlight.aircraftType}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.date | date : 'EEEE, MMMM d, y'}}
+                                  {{flight.outFlight.aircraftModel}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.duration}}
+                                  {{flight.outFlight.capacity}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.availableSeats}}
+                                  {{flight.outFlight.departingDateTime | date : 'EEEE, MMMM d, y'}}
                                 </td>
                                 <td>
-                                    {{flight.outFlight.seatmap[0].cost | currency}} - {{flight.outFlight.seatmap[0].cost * 1.1 | currency}}
+                                  {{flight.outFlight.duration}}
+                                </td>
+                                <td>
+                                  {{flight.outFlight.class}}
+                                </td>
+                                <td>
+                                  {{flight.outFlight.cost | currency}}
                                 </td>
                             </tr>
                         </table>
@@ -71,39 +77,49 @@
 
                         <table style="background-color: white " class="table table-bordered">
                             <thead style="background-color: #FF8080">
-                                <tr>
-
-                                    <th>Flight Number</th>
-                                    <th>Aircraft</th>
-                                    <th>Capacity</th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                    <th>Available Seats</th>
-                                    <th>Price Range</th>
-                                </tr>
+                              <tr>
+                                <th>Airline</th>
+                                <th>Flight Number</th>
+                                <th>Aircraft Type</th>
+                                <th>Aircraft Model</th>
+                                <th>Capacity</th>
+                                <th>Departure Date</th>
+                                <th>Duration</th>
+                                <th>Class</th>
+                                <th>Cost</th>
+                              </tr>
                             </thead>
                             <tr>
-                                <td>
-                                    {{flight.inFlight.flightNumber}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.aircraft}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.capacity}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.date | date : 'EEEE, MMMM d, y'}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.duration}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.availableSeats}}
-                                </td>
-                                <td>
-                                    {{flight.inFlight.seatmap[0].cost | currency}} - {{flight.inFlight.seatmap[0].cost * 1.1 | currency}}
-                                </td>
+                              <td>
+                                <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
+                              </td>
+                              <td>
+                                {{flight.inFlight.Airline}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.flightNumber}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.aircraftType}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.aircraftModel}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.capacity}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.departingDateTime | date : 'EEEE, MMMM d, y'}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.duration}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.class}}
+                              </td>
+                              <td>
+                                {{flight.inFlight.cost | currency}}
+                              </td>
                             </tr>
                         </table>
 
@@ -115,7 +131,6 @@
                             <h3 class="confirm-text">{{user.fname}}</h3>
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label for="lname">Last Name:</label>
@@ -261,7 +276,10 @@
 
                     <div class="alert alert-success fade in" ng-show="user.button == 'true'">
                         <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                        <strong>Success!</strong> Thank you for your purchase. Your ticket will be e-mailed to you shortly.
+                        <strong>Success!</strong> Thank you for your purchase.
+                        Your Outingoing Flight Booking Reference is <h2 style="color:red;">{{user.bookingRefOut}}</h2>
+                        Your Incoming Flight Booking Reference is <h2 style="color:red;">{{user.bookingRefIn}}</h2>
+                        and your ticket will be e-mailed to you shortly.
                     </div>
                     <div class="col-xs-12" style="height:15px;"></div>
                     <button ng-model="button" ng-show="user.button == 'true'" class="btn btn-primary" id='btnFinish' ng-click='GoToMain()'>Back to Home</button>
