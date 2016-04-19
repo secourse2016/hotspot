@@ -10,7 +10,7 @@
               </div>
 
               <div class="panel-body">
-                Flights from {{flight.origin}} to {{flight.destination}} {{flight. incomingDate }} in {{flight.outgoingDate}}
+                Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}} {{outGoingflight. incomingDate | date : 'EEEE, MMMM d, y'}} in {{outGoingflight.outgoingDate | date : 'EEEE, MMMM d, y'}} Trip type {{outGoingflight.class}}
 
                 <table class="table table-bordered table-hover">
                   <thead>

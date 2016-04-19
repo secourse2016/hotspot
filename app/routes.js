@@ -103,7 +103,7 @@ module.exports = function(app,mongo) {
     app.get('/delete/flights',function(req,res){
 
 
-    mongo.db().collection('flights').drop(function(err){
+        mongo.db().collection('flights').drop(function(err){
           if(err)
       {
         console.log('Error :' + err);
@@ -113,7 +113,7 @@ module.exports = function(app,mongo) {
 
         console.log('Deletion Successful');
                                              }
- });
+                });
     });
 
     /* Middlewear For Secure API Endpoints */
@@ -121,11 +121,12 @@ module.exports = function(app,mongo) {
 
       // check header or url parameters or post parameters for token
       var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
-
+      var flight = req.headers['flights'];
+      // console.log("flight =>",flight);
       console.log("{{{{ TOKEN }}}} => ", token);
 
       var jwtSecret = process.env.JWTSECRET;
-
+      // console.log(jwtSecret);
       // Get JWT contents:
       try
       {
@@ -135,7 +136,7 @@ module.exports = function(app,mongo) {
       }
       catch (err)
       {
-        // console.error('[ERROR]: JWT Error reason:', err);
+        console.error( err);
         // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
       }
 
@@ -155,7 +156,7 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
     // return this exact format
     return //call a function that searches in the database and returns the flights
     {
-
+      console.log(req.params.origin)
       db.flights.find( { origin: origin, destination: destination, departingDate: departingDate, returningData: returningDate } );
 
       // outgoingFlights:
@@ -202,10 +203,16 @@ app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/
 app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
-
+    var flight = {
+      "origin" : req.params.origin,
+      "destination" : req.params.destination,
+      "departureDateTime" : req.params.departingDate,
+      "class" : req.params.class
+    }
     return  //call a function that searches in the database and returns the flights
     {
 
+      mongo.oneWaySearch(flight);
       db.flights.find( { origin: origin, destination: destination, departingDate: departingDate } );
 
       // outgoingFlights:
