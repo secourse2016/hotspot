@@ -45,7 +45,7 @@ module.exports = function(app, mongo) {
 
 
     app.get('/test/db',function(req, res){
-      mongo.db().collection('bookings').find().toArray(function(err, arr){
+      mongo.db().collection('flights').find().toArray(function(err, arr){
         console.log(arr[0]);
       });
     });
@@ -90,6 +90,8 @@ module.exports = function(app, mongo) {
           "duration": flight.duration,
           "origin": _origin,
           "destination": _destination,
+          "Airline": flight.Airline,
+          "currency": flight.currency,
           "seatmap": []
         };
 

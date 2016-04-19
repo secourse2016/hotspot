@@ -38,7 +38,7 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
   };
 
   $scope.flightDetails = {
-    roundTrip: FlightsSrv.getSelectedRoundTrip(),
+    tripType: FlightsSrv.getSelectedRoundTrip(),
     otherAirlines: FlightsSrv.getSelectedAirlines(),
   };
 
@@ -53,8 +53,8 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
    };
 
    $scope.inComingflight = {
-     origin      : FlightsSrv.getSelectedOriginAirport(),
-     destination : FlightsSrv.getSelectedDestinationAirport(),
+     origin      : FlightsSrv.getSelectedDestinationAirport(),
+     destination : FlightsSrv.getSelectedOriginAirport(),
      date : FlightsSrv.getSelectedIncomingDate(),
      class : FlightsSrv.getSelectedClass(),
      roundTrip: FlightsSrv.getSelectedRoundTrip(),
@@ -63,11 +63,13 @@ App.controller('flightsCtrl', function(API, $http, $scope, FlightsSrv, $location
 
 function getFlightsFromAPI(outflight, inflight){
   API.getSecure(outflight, function(res){
-    $scope.flightDetails.outflight = res;
-    console.log($scope.flightDetails.outflight);
-  });
+    $scope.outgoingFlightsArray = res;
+    });
   if($scope.flightDetails.roundTrip == "Round trip"){
-    $scope.flightDetails.inflight = API.getSecure(inflight);
+    API.getSecure(inflight, function(res){
+      console.log("RESult in RoUND TRIp", res);
+      $scope.incomingFlightsArray = res;
+    });
   }
 }
 
