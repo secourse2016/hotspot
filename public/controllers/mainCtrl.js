@@ -69,7 +69,10 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   };
 
   $scope.checkBookingRef = function(refID) {
-
+    console.log(refID);
+    FlightsSrv.searchBookings(refID , function(res){
+      alert(res);
+    });
   };
 
   $scope.SelectedClass = function(ticketClass){
