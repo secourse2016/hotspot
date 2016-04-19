@@ -1,0 +1,120 @@
+<form name="flightform" ng-submit='GoToPayment(flightDetails)' novalidate>
+  <div class="row">
+    <div class="jumbotron banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="panel-body">
+                Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}} {{outGoingflight. incomingDate | date : 'EEEE, MMMM d, y'}} in {{outGoingflight.outgoingDate | date : 'EEEE, MMMM d, y'}} Trip type {{outGoingflight.class}}
+
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Airline</th>
+                      <th>Flight Number</th>
+                      <th>Aircraft Type</th>
+                      <th>Aircraft Model</th>
+                      <th>Capacity</th>
+                      <th>Departure Date</th>
+                      <th>Duration</th>
+                      <th>Cost</th>
+                    </tr>
+                  </thead>
+                  <tr ng-repeat="f in outgoingFlightsArray">
+                    <td>
+                      <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
+                    </td>
+                    <td>
+                      {{f.Airline}}
+                    </td>
+                    <td>
+                      {{f.flightNumber}}
+                    </td>
+                    <td>
+                      {{f.aircraftType}}
+                    </td>
+                    <td>
+                      {{f.aircraftModel}}
+                    </td>
+                    <td>
+                      {{f.capacity}}
+                    </td>
+                    <td>
+                      {{f.departingDateTime | date : 'EEEE, MMMM d, y'}}
+                    </td>
+                    <td>
+                      {{f.duration}}
+                    </td>
+                    <td>
+                      {{f.cost | currency}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-xs-12" style="height:50px"></div>
+
+
+              <div style="width:30%;margin:auto auto" ng-show="flightDetails.tripType== 'Round trip'">
+                Flights from {{inComingflight.origin}} to {{inComingflight.destination}}
+              </div>
+
+              <div class="panel-body">
+                <table class="table table-bordered table-hover" ng-show="flightDetails.tripType =='Round trip'">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Airline</th>
+                      <th>Flight Number</th>
+                      <th>Aircraft Type</th>
+                      <th>Aircraft Model</th>
+                      <th>Capacity</th>
+                      <th>Departure Date</th>
+                      <th>Duration</th>
+                      <th>Cost</th>
+                    </tr>
+                  </thead>
+                  <tr ng-repeat="f in incomingFlightsArray">
+                    <td>
+                      <input type="radio" class="form-control" name="inFlight" ng-model="flightDetails.inFlight" ng-value="f">
+                    </td>
+                    <td>
+                      {{f.Airline}}
+                    </td>
+                    <td>
+                      {{f.flightNumber}}
+                    </td>
+                    <td>
+                      {{f.aircraftType}}
+                    </td>
+                    <td>
+                      {{f.aircraftModel}}
+                    </td>
+                    <td>
+                      {{f.capacity}}
+                    </td>
+                    <td>
+                      {{f.departingDateTime | date : 'EEEE, MMMM d, y'}}
+                    </td>
+                    <td>
+                      {{f.duration}}
+                    </td>
+                    <td>
+                      {{f.cost | currency}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id='btnSearch'>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
