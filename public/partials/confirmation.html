@@ -71,8 +71,7 @@
 
 
 
-
-                    <div ng-show="flightDetails.tripType =='Round trip'">
+                    <div ng-show="flight.tripType =='Round trip'">
                         <label for="fname">Return Flight:</label>
 
                         <table style="background-color: white " class="table table-bordered">
@@ -90,9 +89,6 @@
                               </tr>
                             </thead>
                             <tr>
-                              <td>
-                                <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
-                              </td>
                               <td>
                                 {{flight.inFlight.Airline}}
                               </td>

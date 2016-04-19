@@ -24,6 +24,12 @@ module.exports = function(app, mongo) {
     //BOOKING REF ID!
   });
 
+  app.get('/api/bookings/search/:ID', function(req, res){
+    require('../db').searchBooking(req.params.ID, function(booking){
+      res.json(booking);
+    });
+  });
+
   /* GET ALL STATES ENDPOINT */
   app.get('/api/data/codes', function(req, res) {
     var codes = require('../airports.json');
