@@ -1,6 +1,6 @@
 App.factory('API', function($http) {
 	return {
-		getSecure : function(payload) {
+		getSecure : function(payload, cb) {
 			var URL = '/api/flights/search/'+payload.origin+"/"+payload.destination+"/"+payload.date+"/"+payload.class;
 			var req = { method: 'GET', url: URL,
  headers: {
@@ -8,7 +8,9 @@ App.factory('API', function($http) {
  }
 }
 
-$http(req).then(function(){}, function(){});
+$http(req).success(function(res){
+	cb(res);
+});
 		},
 		postSecure : function() {
 			return $http.post('/api/secure/blogs', {
