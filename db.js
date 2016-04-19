@@ -36,8 +36,8 @@
         "state": user.state,
         "city": user.city,
         "contactNumber": user.contactNumber,
-        "flightNumber": flight.outFlight.flightNumber
-          //  out_booking_id
+        "flightNumber": flight.outFlight.flightNumber,
+        "bookingRef": user.bookingRefOut
       };
 
       var inBooking;
@@ -59,20 +59,20 @@
           "state": user.state,
           "city": user.city,
           "contactNumber": user.contactNumber,
-          "flightNumber": flight.inFlight.flightNumber
-            //  in_booking_id
+          "flightNumber": flight.inFlight.flightNumber,
+          "bookingRef": user.bookingRefIn
         };
       }
 
       db.collection('bookings').insert(outBooking, function(err, data) {
         if (err) console.log('error');
-        else console.log('insert BOOKING successful');
+        else console.log('insert OUTGOING-BOOKING successful');
       });
 
       if (flight.trip == 'round') {
         db.collection('bookings').insert(inBooking, function(err, data) {
           if (err) console.log('error');
-          else console.log('insert BOOKING successful');
+          else console.log('insert INCOMING-BOOKING successful');
         });
       }
     },
@@ -135,6 +135,25 @@
       });
 
     }
+
+  //   bookingRefSearch: function(bookingRef, cb) {
+   //
+   //
+  //     db.collection('bookings').find({
+  //      "bookingRef": bookingRef,
+  //    }).toArray(function(err, result) {
+  //      if (err) {
+  //        console.log('error : ' + err);
+   //
+  //      } else {
+  //        // console.log("DB find Result =>", result);
+  //        // return result;
+  //        cb(result);
+  //      }
+   //
+  //    });
+   //
+  //  }
 
 
 
