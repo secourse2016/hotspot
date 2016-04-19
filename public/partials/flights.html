@@ -10,7 +10,7 @@
               </div>
 
               <div class="panel-body">
-                Flights from {{flight.origin}} to {{flight.destination}} {{flight. incomingDate }} in {{flight.outgoingDate}}
+                Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}} {{outGoingflight. incomingDate | date : 'EEEE, MMMM d, y'}} in {{outGoingflight.outgoingDate | date : 'EEEE, MMMM d, y'}} Trip type {{outGoingflight.class}}
 
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -25,7 +25,8 @@
                       <th>Price Range</th>
                     </tr>
                   </thead>
-                  <tr ng-repeat="f in flights">
+                  <h5>{{flightDetails.outFlight}} HERE</h5>
+                  <tr ng-repeat="f in outFlight">
                     <td>
                       <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
                     </td>

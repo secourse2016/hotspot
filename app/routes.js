@@ -63,10 +63,10 @@ module.exports = function(app, mongo) {
       }
 
       // insert returning flights
-      for (var i = 0; i < routes.length; i++) {
-        var route = routes[i];
-        seedFlights(route, route.destination, route.origin);
-      }
+      // for (var i = 0; i < routes.length; i++) {
+      //   var route = routes[i];
+      //   seedFlights(route, route.destination, route.origin);
+      // }
 
     });
 
@@ -80,9 +80,13 @@ module.exports = function(app, mongo) {
 
         var doc = {
           "flightNumber": flight.flightNumber,
-          "aircraft": flight.aircraft,
+          "aircraftType": flight.aircraftType,
+          "aircraftModel": flight.aircraftModel,
+          "cost": flight.cost,
+          "class": flight.class,
           "capacity": flight.capacity,
-          "date": moment().add(i, 'days').calendar(),
+          "departingDateTime": moment(moment().add(i, 'days').calendar()).toDate().getTime(),
+          "arrivalDateTime":  moment(moment().add(i+1, 'days').calendar()).toDate().getTime(),
           "duration": flight.duration,
           "origin": _origin,
           "destination": _destination,
@@ -95,7 +99,7 @@ module.exports = function(app, mongo) {
         });
 
       }
-
+      console.log('finished seeding');
     }
 
     /* Delete Flights Collection **/
@@ -111,6 +115,7 @@ module.exports = function(app, mongo) {
           console.log('Deletion Successful');
         }
       });
+
     });
 
     /* Middlewear For Secure API Endpoints */
@@ -118,11 +123,12 @@ module.exports = function(app, mongo) {
 
       // check header or url parameters or post parameters for token
       var token = req.body.wt || req.query.wt || req.headers['x-access-token'];
-
-      console.log("{{{{ TOKEN }}}} => ", token);
+      var flight = req.headers['flights'];
+      // console.log("flight =>",flight);
+      // console.log("{{{{ TOKEN }}}} => ", token);
 
       var jwtSecret = process.env.JWTSECRET;
-
+      // console.log(jwtSecret);
       // Get JWT contents:
 
       try
@@ -133,89 +139,58 @@ module.exports = function(app, mongo) {
       }
       catch (err)
       {
-        // console.error('[ERROR]: JWT Error reason:', err);
+        // console.error( err);
         // res.status(403).sendFile(path.join(__dirname, '../public', '403.html'));
       }
 
     });
 
     /**
-     * ROUND-TRIP SEARCH REST ENDPOINT
-     * @param origin - Flight Origin Location - Airport Code
-     * @param destination - Flight Destination Location - Airport Code
-     * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-     * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-     * @param class - economy or business only
-     * @returns {Array}
-     */
-    app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
-      // retrieve params from req.params.{{origin | departingDate | ...}}
-      // return this exact format
-      return //call a function that searches in the database and returns the flights
-      {
 
-        db.flights.find({
-          origin: origin,
-          destination: destination,
-          departingDate: departingDate,
-          returningData: returningDate
-        });
+ * ROUND-TRIP SEARCH REST ENDPOINT
+ * @param origin - Flight Origin Location - Airport Code
+ * @param destination - Flight Destination Location - Airport Code
+ * @param departingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param returningDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param class - economy or business only
+ * @returns {Array}
+ */
+app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+    // retrieve params from req.params.{{origin | departingDate | ...}}
+    // return this exact format
+    return //call a function that searches in the database and returns the flights
+    {
+      console.log(req.params.origin)
 
 
-        // outgoingFlights:
-        //   [{
-        //       "flightNumber"      : "SE2804",
-        //       "aircraftType"      : "Boeing",
-        //       "aircraftModel"     : "747",
-        //       "departureDateTime" : 1460478300000,
-        //       "arrivalDateTime"   : 1460478300000,
-        //       "origin"            : "JFK",
-        //       "destination"       : "CAI",
-        //       "cost"              : "750",
-        //       "currency"          : "USD",
-        //       "class"             : "economy",
-        //       "Airline"           : "United"
-        //   },
-        //   {
-        //               // more flights
-        //   }],
-        // returnFlights:
-        //   [{
-        //       "flightNumber"      : "SE2805",
-        //       "aircraftType"      : "Boeing",
-        //       "aircraftModel"     : "747",
-        //       "departureDateTime" : 1460478300000,
-        //       "arrivalDateTime"   : 1460478300000,
-        //       "origin"            : "CAI",
-        //       "destination"       : "JFK",
-        //       "cost"              : "845",
-        //       "currency"          : "USD",
-        //       "class"             : "economy",
-        //       "Airline"           : "United"
-        //   }]
-      };
-    });
 
-    /**
-     * ONE-WAY SEARCH REST ENDPOINT
-     * @param origin - Flight Origin Location - Airport Code
-     * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
-     * @param class - economy or business only
-     * @returns {Array}
-     */
-    app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
-      // retrieve params from req.params.{{origin | departingDate | ...}}
-      // return this exact format
+    };
+});
 
-      return //call a function that searches in the database and returns the flights
-      {
+/**
+ * ONE-WAY SEARCH REST ENDPOINT
+ * @param origin - Flight Origin Location - Airport Code
+ * @param DepartingDate - JavaScript Date.GetTime() numerical value corresponding to format `YYYY-MM-DD`
+ * @param class - economy or business only
+ * @returns {Array}
+ */
+app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+    // retrieve params from req.params.{{origin | departingDate | ...}}
+    // return this exact format
+    var flight = {
+      "origin" : req.params.origin,
+      "destination" : req.params.destination,
+      "departingDateTime" : req.params.departingDate,
+      "class" : req.params.class
+    }
+    // console.log("before querying the db");
+      mongo.oneWaySearch(flight, function(result){
+        res.json(result);
+      });
+      // db.flights.find( { origin: origin, destination: destination, departingDate: departingDate } );
 
 
-        db.flights.find({
-          origin: origin,
-          destination: destination,
-          departingDate: departingDate
-        });
-      };
-    });
-}
+
+});
+
+};

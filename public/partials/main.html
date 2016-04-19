@@ -113,7 +113,7 @@
           </p>
 
 
-          <input type="checkbox" ng-model="roundTrip" name="roundtrip"  id="checkboxRound">Round Trip</input>
+          <input type="checkbox" ng-model="roundTrip" name="roundtrip"  id="checkboxRound" ng-init="roundTrip=false">Round Trip</input>
 
           <div class="col-xs-12" style="height:25px;"></div>
 
@@ -143,6 +143,11 @@
         </div>
         <br>
       </div>
+      <div class="">
+        <input type="checkbox" ng-model="otherAirlines" name="otherAirlines"  id="checkboxOtherAir" ng-init="otherAirlines=false">Search Other Airlines</input>
+      </div>
+
+      <div class="col-xs-12" style="height:15px;"></div>
 
       <button type="submit" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
     </div>

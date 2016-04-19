@@ -4,7 +4,7 @@
 App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
 
   /*----------- Angular Bootstrap Datepicker -----------*/
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'MM/dd/yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
 
   $scope.open1 = function() {
@@ -52,30 +52,27 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   $scope.SetIncomingDate = function(IncomingDate) {
     FlightsSrv.setSelectedIncomingDate(IncomingDate);
   };
+   $scope.SetRoundTrip= function(roundTrip) {
+    FlightsSrv.setSelectedRoundTrip(roundTrip);
+  };
+  $scope.SetOtherAirlines= function(otherAirlines) {
+   FlightsSrv.setSelectedAirlines(otherAirlines);
+ };
 
   /* Find All Available Flights  */
-$scope.FuncToCall=function() {
-  $scope.SetIncomingDate($scope.flightDetails.indate);
-};
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
         $scope.SetIncomingDate($scope.inDate);
+        $scope.SetRoundTrip($scope.roundTrip);
+        $scope.SetOtherAirlines($scope.otherAirlines);
         $location.url('/flights');
   };
 
   $scope.SelectedClass = function(ticketClass){
-    FlightsSrv.setSelectedClass(ticketClass);
+    FlightsSrv.setSelectedClass($scope.ticketClass);
     //console.log(ticketClass);
   };
 
-  $scope.submitForm = function(isValid) {
-
-    // check to make sure the form is completely valid
-    if (isValid) {
-      alert('our form is amazing');
-    }
-
-  };
 
   /* Get Airports on page render  */
   AirportCodes();

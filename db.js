@@ -1,5 +1,6 @@
 (function() {
   var client = require('mongodb').MongoClient;
+  var moment = require('moment');
   var db;
 
   module.exports = {
@@ -95,29 +96,32 @@
       });
 
     },
-    
-     oneWaySearch: function(req, res, cb) {
+
+     oneWaySearch: function(flight, cb) {
 
 
-      db.collection('flights').find({
-        origin: req.params.origin,
-        destination: req.params.destination,
-        departingDateTime: req.params.departingDate,
+       db.collection('flights').find({
+        "origin": flight.origin,
+        "destination": flight.destination,
+        "departingDateTime": 1464991200000,// moment(flight.departingDate).toDate().getTime(),
+        "class" : flight.class
       }).toArray(function(err, result) {
         if (err) {
           console.log('error : ' + err);
 
         } else {
-          cb(res, result);
+          // console.log("DB find Result =>", result);
+          // return result;
+          cb(result);
         }
 
       });
 
     }
 
- 
-    
-    
+
+
+
 
   };
 
