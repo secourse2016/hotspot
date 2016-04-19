@@ -1,0 +1,163 @@
+<!-- PROMOTIONAL OFFERS -->
+
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/images/cairo.jpg">
+      <div class="caption">
+        <h3>Offer #1:New York - Cairo</h3>
+        <p>Explore the streets of Cairo like never before!</p>
+        <button type="submit" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Book</button>
+        <!-- <p><a href="#" class="btn btn-primary" role="Book" ng-click='SearchFlights()'>Book</a></p> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/images/munich.jpg">
+      <div class="caption">
+        <h3>Offer #2: Frankfurt - Munich</h3>
+        <p>Visit the great historic sights of the all-mighty Munich!</p>
+        <button type="submit" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Book</button>
+
+        <!-- <p><a href="#" class="btn btn-primary" role="Book" ng-click='SearchFlights()'>Book</a></p> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/images/newyork.jpg">
+      <div class="caption">
+        <h3>Offer #3: Miami - San Francisco</h3>
+        <p>Experience the exotic night life of wild San Francisco!</p>
+        <button type="submit" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Book</button>
+
+        <!-- <p><a href="/flights" class="btn btn-primary" role="Book" ng-click='SearchFlights()'>Book</a></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PROMOTIONAL OFFERS -->
+
+<!-- MAIN BANNER -->
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+      <div class="jumbotron main-banner" ng-submit="submitFrom(main-banner.$valid)" novalidate>
+        <h2>Search Ticket by Booking Reference</h2>
+        <div class="container">
+
+
+        <div class="col-md-2">
+        </div>
+          <div class="col-md-8">
+          <input type="text" name="bookingref" class="form-control" style="display:inline-block;" placeholder="Booking Reference" >
+          <div class="col-xs-12" style="height:15px;"></div>
+          <button type="submit" class="btn btn-primary"  ng-click='checkBookingRef()'>Search</button>
+        </div>
+
+      </div>
+      </div>
+  </div>
+</div>
+<!-- <div class="container"> -->
+
+<div class="row ">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron main-banner" ng-submit="submitFrom(main-banner.$valid)" novalidate>
+      <h2>Book a Flight</h2>
+
+      <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10">
+
+          <div name="airports" id="airports" required>
+
+
+            <input name="originAirports" id="originAirports" type="text" required placeholder="Flying From" ng-model="selectedOrigin" uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10" class="form-control" , typeahead-on-select="SetOriginAirport($item.iata)">
+
+            <div class="col-xs-12" style="height:25px;"></div>
+
+
+            <input name="destinationAirports" id="destinationAirports"
+                   type="text"
+                   required
+                   placeholder="Flying To"
+                   ng-model="selectedDestination"
+                   uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
+                   class="form-control"
+                   typeahead-on-select="SetDestinationAirport($item.iata)">
+
+          </div>
+
+          <div class="col-xs-12" style="height:25px;"></div>
+
+
+          <p class="input-group">
+            <input type="text" class="form-control" placeholder="Outgoing flight date" uib-datepicker-popup="{{format}}" ng-model="outDate" is-open="popup1.opened" close-text="Close" alt-input-formats="altInputFormats" />
+            <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open1()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+          </p>
+
+
+          <input type="checkbox" ng-model="roundTrip" name="roundtrip"  id="checkboxRound" ng-init="roundTrip=false">Round Trip</input>
+
+          <div class="col-xs-12" style="height:25px;"></div>
+
+          <p ng-show="roundTrip" class="input-group">
+            <input type="text" class="form-control" placeholder="Incoming flight date" uib-datepicker-popup="{{format}}" ng-model="inDate" is-open="popup2.opened" close-text="Close" />
+            <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open2()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                       </button>
+                      </span>
+          </p>
+        </div>
+
+
+
+        <div class="col-xs-12" style="height:8px;"></div>
+
+
+        <p>Ticket Class</p>
+        <div class="radio trip-option">
+          <label>
+            <input type="radio" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="1">Business</label>
+          <label>
+            <input type="radio" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="2">Economy</label>
+        </div>
+        <br>
+      </div>
+      <div class="">
+        <input type="checkbox" ng-model="otherAirlines" name="otherAirlines"  id="checkboxOtherAir" ng-init="otherAirlines=false">Search Other Airlines</input>
+      </div>
+
+      <div class="col-xs-12" style="height:15px;"></div>
+
+      <button type="submit" class="btn btn-primary" id='btnSearch' ng-click='SearchFlights()'>Search Flights</button>
+    </div>
+
+  </div>
+
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+<div class="col-xs-12" style="height:50px;"></div>
+<!-- MAIN BANNER -->
