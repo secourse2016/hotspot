@@ -182,7 +182,6 @@ module.exports = function(app, mongo) {
   });
 
   /**
-
  * ROUND-TRIP SEARCH REST ENDPOINT
  * @param origin - Flight Origin Location - Airport Code
  * @param destination - Flight Destination Location - Airport Code
