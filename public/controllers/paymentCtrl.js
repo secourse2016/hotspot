@@ -50,8 +50,28 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
   $scope.submitForm = function(isValid, info) {
     // check to make sure the form is completely valid
 
-    // if (isValid) {
+    if (typeof(info) == 'undefined') {
+      console.log("a7masy");
+      info = {
+      fname : 'Ahmed' ,
+      lname : 'Anwar',
+      passport : 'EGY',
+      passportIssueDate : '30-April-2016',
+      passportExpiryDate : '07-May-2016',
+      ccType : 'MasterCard',
+      ccNumber : '7530274291374281',
+      ccExpiryDate : '07-May-2016',
+      ccName : 'Ahmed Anwar',
+      email : 'ahmedanwarm@gmail.com',
+      country : 'Egypt',
+      add1 : 'Maadi, Cairo',
+      add2 : 'Mokatam, Cairo',
+      state : 'Cairo',
+      city : 'Cairo',
+      contactNumber : '01023005536'
+    };
         // PaymentSrv.setCreditCardNumber(info.ccNumber);
+      }
         info.flightType = FlightsSrv.getSelectedRoundTrip();
 
         info.bookingRefOut = ""+ info.country + info. contactNumber + info.ccNumber + 1;
@@ -63,7 +83,6 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
         }
         PaymentSrv.setUser(info);
         $location.url('/confirmation');
-    // }
 
   };
 

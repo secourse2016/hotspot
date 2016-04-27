@@ -473,9 +473,10 @@ Country <select ng-model="user.country" required>
 <div class="col-xs-12" style="height:20px;"></div>
 
         <!-- SUBMIT BUTTON -->
-        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Proceed To Confirm Your Payment</button>
 
     </form>
+    <button type="submit" class="btn btn-primary" ng-click = "submitForm(userForm.$valid, user)" >Proceed To Confirm Your Payment</button>
+    <!-- ng-disabled="userForm.$invalid" -->
     </div>
 </div>
 </div>
