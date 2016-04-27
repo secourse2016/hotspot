@@ -30,6 +30,10 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
     $scope.popup3.opened = true;
   };
 
+  $scope.open4 = function() {
+    $scope.popup4.opened = true;
+  };
+
   $scope.setDate = function(year, month, day) {
     $scope.dt = new Date(year, month, day);
   };
@@ -46,6 +50,10 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
     opened: false
   };
 
+  $scope.popup4 = {
+    opened: false
+  };
+
   // function to submit the form after all validation has occurred
   $scope.submitForm = function(isValid, info) {
     // check to make sure the form is completely valid
@@ -55,6 +63,7 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
       info = {
       fname : 'Ahmed' ,
       lname : 'Anwar',
+      dob: '09-June-1995',
       passport : 'EGY',
       passportIssueDate : '30-April-2016',
       passportExpiryDate : '07-May-2016',

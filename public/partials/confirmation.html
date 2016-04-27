@@ -135,6 +135,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <div class="row confirm">
+                            <h3 class="confirm-text">{{user.dob | date :'EEEE, MMMM d, y'}}</h3>
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="psprt">Passport Number:</label>
@@ -201,7 +208,7 @@
 
 
                     <div class="form-group">
-                        <label for="psprt">Country:</label>
+                        <label for="psprt">Nationality:</label>
                         <div class="row confirm">
                             <h3 class="confirm-text">{{user.country}}</h3>
                         </div>
