@@ -24,6 +24,12 @@ module.exports = function(app, mongo) {
     //BOOKING REF ID!
   });
 
+  app.get('/api/bookings/search/:ID', function(req, res){
+    require('../db').searchBooking(req.params.ID, function(booking){
+      res.json(booking);
+    });
+  });
+
   /* GET ALL STATES ENDPOINT */
   app.get('/api/data/codes', function(req, res) {
     var codes = require('../airports.json');
@@ -101,8 +107,8 @@ module.exports = function(app, mongo) {
         "cost": flight.cost,
         "class": flight.class,
         "capacity": flight.capacity,
-        "departingDateTime": moment(moment().add(i, 'days').calendar()).toDate().getTime(),
-        "arrivalDateTime": moment(moment().add(i , 'days').calendar()).toDate().getTime(),
+        "departingDateTime": moment(moment().add(i, 'days').calendar()).format('DD MMMM, YYYY'),
+        "arrivalDateTime": moment(moment().add(i+1, 'days').calendar()).format('DD MMMM, YYYY'),
         "duration": flight.duration,
         "origin": _origin,
         "destination": _destination,

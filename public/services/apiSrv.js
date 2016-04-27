@@ -33,7 +33,7 @@ App.factory('API', function($http) {
 				};
 
 				$http(req).success(function(res) {
-          console.log(res);
+          console.log("res in getOneSecureFromAirlines", res);
 					cb(res);
 				});
 			}

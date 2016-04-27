@@ -81,16 +81,17 @@
       // returningDateTime: req.params.returningDate,
 
       if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
       }
+
       if(isNaN(parseInt(flight.arrivalDateTime))){
-        flight.arrivalDateTime = moment(flight.arrivalDateTime).toDate().getTime();
-      }
+          flight.arrivalDateTime = moment(moment(flight.arrivalDateTime).toDate().getTime()).format('DD MMMM, YYYY');
+        }
       else{
-        flight.arrivalDateTime = moment(parseInt(flight.arrivalDateTime)).toDate().getTime();
+          flight.arrivalDateTime = moment(parseInt(flight.arrivalDateTime)).format('DD MMMM, YYYY');
       }
 
       db.collection('flights').find({
@@ -135,10 +136,10 @@
       // console.log("time in db ",moment(parseInt(flight.departingDateTime).toDate().getTime());
 
       if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
       }
       var findFlight = {
         "origin": flight.origin,
@@ -152,40 +153,39 @@
           console.log('error : ' + err);
           cb (err,{err});
         } else {
-          console.log("DB find Result =>", result);
-          // return result;
+          console.log("DB find Result =>", result);          // return result;
           cb(err,result);
         }
 
       });
 
-    }
+    },
 
-    //   bookingRefSearch: function(bookingRef, cb) {
-    //
-    //
-    //     db.collection('bookings').find({
-    //      "bookingRef": bookingRef,
-    //    }).toArray(function(err, result) {
-    //      if (err) {
-    //        console.log('error : ' + err);
-    //
-    //      } else {
-    //        // console.log("DB find Result =>", result);
-    //        // return result;
-    //        cb(result);
-    //      }
-    //
-    //    });
-    //
-    //  }
+      searchBooking: function(bookingRef, cb) {
+
+
+        db.collection('bookings').find({
+         "bookingRef": bookingRef,
+       }).toArray(function(err, result) {
+         if (err) {
+           console.log('error : ' + err);
+
+         } else {
+           // console.log("DB find Result =>", result);
+           // return result;
+           console.log("res in DB Booking ", result);
+           cb(result[0]);
+         }
+
+       });
+
+     }
 
 
 
 
 
   };
-console.log( moment(1462744800000).format('YYYY-MM-DD') );
 // console.log(moment(1462658400000).toDate().getTime());
 
 

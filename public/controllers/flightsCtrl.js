@@ -66,7 +66,7 @@ function getFlightsFromAPI(outflight, inflight){
   if($scope.flightDetails.tripType == "Round trip"){
     console.log($scope.flightDetails.tripType);
     if(FlightsSrv.getSelectedAirlines()){
-      API.getRoundSecureFromAirlines(res, function(res){
+      API.getRoundSecureFromAirlines( function(res){
         $scope.incomingFlightsArray.push(res.returnFlights[0]);
         $scope.outgoingFlightsArray.push(res.outgoingFlights[0]);
       });
