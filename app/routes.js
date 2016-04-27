@@ -99,7 +99,8 @@ module.exports = function(app, mongo) {
   function seedFlights(flight, _origin, _destination) {
 
     // loop until May 31 2016 starting today April-15-2016
-    for (var i = 7; i <= 46; i++) {
+    for (var i = 0; i <= 46; i++) {
+      console.log(moment(moment().add(i, 'days').calendar()).format('DD MMMM, YYYY'));
       var doc = {
         "flightNumber": flight.flightNumber,
         "aircraftType": flight.aircraftType,

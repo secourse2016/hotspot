@@ -1,6 +1,8 @@
 App.factory('API', function($http) {
   var otherAirlines = [
 	"http://ec2-52-90-41-197.compute-1.amazonaws.com",
+  "http://ec2-52-26-166-80.us-west-2.compute.amazonaws.com",
+  "http://ec2-54-152-123-100.compute-1.amazonaws.com",
   ""];
 
 
