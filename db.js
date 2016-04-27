@@ -81,16 +81,17 @@
       // returningDateTime: req.params.returningDate,
 
       if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
       }
+
       if(isNaN(parseInt(flight.arrivalDateTime))){
-        flight.arrivalDateTime = moment(flight.arrivalDateTime).toDate().getTime();
-      }
+          flight.arrivalDateTime = moment(moment(flight.arrivalDateTime).toDate().getTime()).format('DD MMMM, YYYY');
+        }
       else{
-        flight.arrivalDateTime = moment(parseInt(flight.arrivalDateTime)).toDate().getTime();
+          flight.arrivalDateTime = moment(parseInt(flight.arrivalDateTime)).format('DD MMMM, YYYY');
       }
 
       db.collection('flights').find({
@@ -135,10 +136,10 @@
       // console.log("time in db ",moment(parseInt(flight.departingDateTime).toDate().getTime());
 
       if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(flight.departingDateTime).toDate().getTime();
+        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).toDate().getTime();
+        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
       }
       var findFlight = {
         "origin": flight.origin,
@@ -152,8 +153,7 @@
           console.log('error : ' + err);
           cb (err,{err});
         } else {
-          console.log("DB find Result =>", result);
-          // return result;
+          console.log("DB find Result =>", result);          // return result;
           cb(err,result);
         }
 

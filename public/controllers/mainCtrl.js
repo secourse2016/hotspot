@@ -71,7 +71,12 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   $scope.checkBookingRef = function(refID) {
     console.log(refID);
     FlightsSrv.searchBookings(refID , function(res){
-      alert(res);
+
+	var alertData = "Name: " + res.firstName +" "+ res.lastName + "\n"+
+			"Flight: " + res.flightNumber +" "+ "\n"+
+			"Passport: " + res.passport +"\n"+
+			"Email: " + res.email +"\n";
+    alert(alertData);
     });
   };
 
