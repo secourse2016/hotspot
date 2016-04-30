@@ -24,8 +24,8 @@ var token  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzI
 					method: 'GET',
 					url: URL,
 					headers: {
-						'x-access-token': ""
-					}
+						'x-access-token': token
+          					}
 				};
 
 				$http(req).success(function(res) {
