@@ -80,11 +80,11 @@
 
       // returningDateTime: req.params.returningDate,
 
-      if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
+      if(isNaN(parseInt(flight.departureDateTime))){
+        flight.departureDateTime = moment(moment(flight.departureDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
+        flight.departureDateTime = moment(parseInt(flight.departureDateTime)).format('DD MMMM, YYYY');
       }
 
       if(isNaN(parseInt(flight.arrivalDateTime))){
@@ -97,7 +97,7 @@
       db.collection('flights').find({
         origin: flight.origin,
         destination: flight.destination,
-        departingDateTime: flight.departingDateTime,
+        departureDateTime: flight.departureDateTime,
         class: flight.class
       }).toArray(function(err, outGoingFlights) {
         if (err) {
@@ -107,7 +107,7 @@
           db.collection('flights').find({
             origin: flight.destination,
             destination: flight.origin,
-            departingDateTime: flight.arrivalDateTime,
+            departureDateTime: flight.arrivalDateTime,
             class: flight.class
           }).toArray(function(err, inComingFlights) {
             if (err) {
@@ -129,22 +129,17 @@
     },
 
     oneWaySearch: function(flight, cb) {
-      // console.log(flight.departingDateTime);
-      // console.log( moment(flight.departingDateTime).toDate());
-      // console.log( moment(flight.departingDateTime).toDate().getTime());
-      // console.log( moment(flight.departingDateTime).toDate().getTime() === 1462831200000);
-      // console.log("time in db ",moment(parseInt(flight.departingDateTime).toDate().getTime());
 
-      if(isNaN(parseInt(flight.departingDateTime))){
-        flight.departingDateTime = moment(moment(flight.departingDateTime).toDate().getTime()).format('DD MMMM, YYYY');
+      if(isNaN(parseInt(flight.departureDateTime))){
+        flight.departureDateTime = moment(moment(flight.departureDateTime).toDate().getTime()).format('DD MMMM, YYYY');
       }
       else{
-        flight.departingDateTime = moment(parseInt(flight.departingDateTime)).format('DD MMMM, YYYY');
+        flight.departureDateTime = moment(parseInt(flight.departureDateTime)).format('DD MMMM, YYYY');
       }
       var findFlight = {
         "origin": flight.origin,
         "destination": flight.destination,
-        "departingDateTime":  flight.departingDateTime,
+        "departureDateTime":  flight.departureDateTime,
         "class": flight.class
       };
       console.log("findFlight in db", findFlight)
