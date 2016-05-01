@@ -11,6 +11,7 @@ module.exports = function(app, mongo) {
   var express = require('express');
   var path = require('path');
   var http = require('http');
+  var stripe = require('stripe')( process.env.stripe_secret_key);
   var airlines = [
     "ec2-52-90-41-197.compute-1.amazonaws.com", //Austrian
     "ec2-52-26-166-80.us-west-2.compute.amazonaws.com", //KLM
@@ -339,5 +340,49 @@ module.exports = function(app, mongo) {
       });
     }
   }
+
+
+
+
+  app.post('/booking', function(req, res) {
+    console.log("/booking: " + req.body );
+      // retrieve the token
+      var stripeToken = req.body.token;
+      var flightCost  = req.body.cost;
+
+      // attempt to create a charge using token
+      stripe.charges.create({
+        amount: flightCost,
+        currency: "usd",
+        source: stripeToken,
+        description: "test"
+      }, function(err, data) {
+      if (err){
+        res.send({ refNum: null, errorMessage: err});
+        console.log(err.message);
+      }
+      else
+      {
+        console.log(data.status);
+      }
+         // payment successful
+         // create reservation in database
+         // get booking reference number and send it back to the user
+      });
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };

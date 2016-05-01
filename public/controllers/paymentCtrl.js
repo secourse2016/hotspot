@@ -1,6 +1,6 @@
 
 App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv) {
-
+// stripeProvider.setPublishableKey('pk_test_yNAnTNKDpawM5MfTomMji98b');
   $scope.payment = {
     // ccNumber : PaymentSrv.getCreditCardNumber(),
     // ccExpiryDate : PaymentSrv.getCreditCardExpiryDate(),
