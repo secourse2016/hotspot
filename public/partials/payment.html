@@ -29,6 +29,28 @@
   <input type="text" name="lname" class="form-control" placeholder="Please enter your Last Name here" ng-model="user.lname" required >
  <p ng-show="userForm.lname.$pristine" class="help-block"> Last Name is required</p>
 </div>
+
+<span class="asterisk_input">  </span>
+<label> Date Of Birth </label>
+<p class="input-group">
+  <input type="text"
+         required
+         class="form-control"
+         placeholder="Date of Birth"
+         uib-datepicker-popup="{{format}}"
+         ng-model="user.dob"
+         is-open="popup4.opened"
+         close-text="Close"
+         alt-input-formats="altInputFormats" />
+  <span class="input-group-btn">
+    <button type="button"
+            class="btn btn-default"
+            ng-click="open4()">
+            <i class="glyphicon glyphicon-calendar"></i>
+   </button>
+  </span>
+</p>
+
    <!-- Passport Info -->
      <div class="form-group">
 <span class="asterisk_input">  </span>
@@ -175,7 +197,7 @@
  <!-- Country Selection-->
      <p><span class="asterisk_input">  </span>
 
-Country <select ng-model="user.country" required>
+Nationality <select ng-model="user.country" required>
   <option value="AF">Afghanistan</option>
   <option value="AX">Åland Islands</option>
   <option value="AL">Albania</option>
@@ -473,9 +495,10 @@ Country <select ng-model="user.country" required>
 <div class="col-xs-12" style="height:20px;"></div>
 
         <!-- SUBMIT BUTTON -->
-        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Proceed To Confirm Your Payment</button>
 
     </form>
+    <button type="submit" class="btn btn-primary" ng-click = "submitForm(userForm.$valid, user)" >Proceed To Confirm Your Payment</button>
+    <!-- ng-disabled="userForm.$invalid" -->
     </div>
 </div>
 </div>
