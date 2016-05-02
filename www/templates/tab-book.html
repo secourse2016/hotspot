@@ -1,9 +1,24 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
-  </ion-content>
+<ion-view title="Book" id="tab-book">
+    <ion-content padding="true" style="background: url(img/p1cRVqqDSGz8QJbR9OwA_swiss.jpg) no-repeat center;background-size:cover;" class="has-header">
+        <form class="list">
+            <label class="item item-select">
+                <span class="input-label">From</span>
+                <select>
+                    <option></option>
+                </select>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">To</span>
+                <select>
+                    <option></option>
+                </select>
+            </label>
+            <ion-toggle toggle-class="">Other AirLines</ion-toggle>
+            <label class="item item-select">
+                <span class="input-label">Class</span>
+                <select></select>
+            </label>
+        </form>
+        <button id="book-button6" style="font-weight:600;" class="button button-dark  button-block button-clear">Proceed</button>
+    </ion-content>
 </ion-view>
