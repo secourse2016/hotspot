@@ -345,7 +345,7 @@ module.exports = function(app, mongo) {
 
 
   app.post('/booking', function(req, res) {
-    console.log("/booking: " + req.body );
+    console.log("/booking: " + JSON.stringify(req.body) );
       // retrieve the token
       var stripeToken = req.body.token;
       var flightCost  = req.body.cost;
@@ -364,6 +364,7 @@ module.exports = function(app, mongo) {
       else
       {
         console.log(data.status);
+        res.send(data.status);
       }
          // payment successful
          // create reservation in database

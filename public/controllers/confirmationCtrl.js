@@ -28,10 +28,26 @@ $scope.showPaymentScreen = function(){
    key: 'pk_test_yNAnTNKDpawM5MfTomMji98b',
    image: '/images/flag.png',
    locale: 'auto',
-   token: function(token) {
-     console.log(token);
+   token: function(response) {
+     console.log(response);
+
+     if (response.id != undefined)
+   {
+     var token = response.id
+    $http.post('/booking', { "token":token, "cost":$scope.totalCost*100}).success(function(res) {
+      console.log("res in api", res);
+
+      if (res == "succeeded")
+      {
+  $scope.SubmitBooking();
+  $scope.user.button = 'true';
+
+      }
+    });
+   }
+
    },
-   email: ""
+   email: $scope.user.email
  });
 
  handler.open({
