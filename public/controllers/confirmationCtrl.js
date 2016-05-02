@@ -23,6 +23,30 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
   }
 };
 
+$scope.showPaymentScreen = function(){
+  var handler = StripeCheckout.configure({
+   key: 'pk_test_yNAnTNKDpawM5MfTomMji98b',
+   image: '/images/flag.png',
+   locale: 'auto',
+   token: function(token) {
+     console.log(token);
+   },
+   email: ""
+ });
+
+ handler.open({
+   name: 'Swiss Airlines',
+   description: 'Ticket Payment',
+   amount: $scope.totalCost*100
+ });
+
+
+ // Close Checkout on page navigation:
+ $(window).on('popstate', function() {
+   handler.close();
+ });
+};
+
   $scope.SubmitBooking = function() {
     //user ready to go into database
     var user = PaymentSrv.getUser();

@@ -280,15 +280,17 @@
                     <br/>
 
                     <div>
+                        <!-- <button type="button" class="btn btn-primary" id='btnPayment' ng-click='showPaymentScreen()'>Pay</button> -->
                     <form action="/charge" method="POST">
                       <script
-                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
                       data-key="pk_test_yNAnTNKDpawM5MfTomMji98b"
                       data-amount={{totalCost*100}}
                       data-name="Swiss Airlines"
                       data-description="Ticket Payment"
                       data-image="/images/flag.png"
-                      data-locale="auto">
+                      data-locale="auto"
+                      data-email={{user.email}}>
                       </script>
                     </form>
                   </div>
