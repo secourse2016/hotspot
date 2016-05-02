@@ -14,8 +14,10 @@ module.exports = function(app, mongo) {
   var airlines = [
     "ec2-52-90-41-197.compute-1.amazonaws.com", //Austrian
     "ec2-52-26-166-80.us-west-2.compute.amazonaws.com", //KLM
-    "52.58.24.76"//Iberia
+    "52.58.24.76",
+    "" //Iberia
   ];
+  var airlinesToUrl = require('../airlines.json');
   var jwtoken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzIiwiaWF0IjoxNDYxMDMxNDEwLCJleHAiOjE0OTI1Njc0MTcsImF1ZCI6Ind3dy5zd2lzc2FpcmxpbmVzLmNvbSIsInN1YiI6ImhvdHNwb3QifQ.1ofRxR5MfGQ1uxojSKVQrr0vIZE7Nb276BcKMSzf5Lw";
 
 
@@ -27,7 +29,20 @@ module.exports = function(app, mongo) {
   });
 
   app.post('/api/user', function(req, res) {
-    require('../db').insertBooking(req.body.user, req.body.flight);
+    console.log(req.body.flight.tripType);
+    if (req.body.flight.tripType !== 'Round trip') {
+      var cases = 0;
+    }
+    else {
+      if (req.body.flight.outFlight.Airline == req.body.flight.inFlight.Airline) {
+        var cases = 1;
+      }
+      else{
+        var cases = 2;
+      }
+
+    }
+    postBooking(req.body.user, req.body.flight, cases);
     //BOOKING REF ID!
   });
 
@@ -69,8 +84,8 @@ module.exports = function(app, mongo) {
     });
   });
 
-  var array = [];
   app.get('/seed/flights', function(req, res) {
+    var array = [];
 
     // Data will be loaded from a  enerated JSON data into an array
 
@@ -164,6 +179,14 @@ module.exports = function(app, mongo) {
 
   });
 
+  app.post('/booking', function(req, res){
+    console.log("in booking");
+    require('../db').insertBooking(req.body.booking, function(result){
+      res.json(result);
+    });
+
+  });
+
   /* Middlewear For Secure API Endpoints */
   app.use('/api/flights/search/', function(req, res, next) {
 
@@ -246,6 +269,90 @@ module.exports = function(app, mongo) {
 
   });
 
+
+
+
+  var postBooking = function(user, flight, cases){
+    console.log("postBooking", cases);
+    var booking = {
+      passengerDetails: user,
+      class : flight.class,
+      cost : flight.cost,
+      outgoingFlightId : "",
+      returnFlightId : "",
+      paymentToken: "Stripe"
+    }
+    switch(cases){
+      case 0: {
+        booking.outgoingFlightId = flight.outFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+      } break;
+      case 1: {
+        booking.outgoingFlightId = flight.outFlight._id;
+        booking.returnFlightId = flight.inFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+
+      }break;
+      case 2:{
+        booking.outgoingFlightId = flight.outFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+        booking.outgoingFlightId = flight.inFlight._id;
+        var options2 = {
+          hostname : findAirline(flight.infFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+      }break;
+  }
+}
+
+  var findAirline = function(airlineName){
+    for (var i = 0; i < airlinesToUrl.length; i++) {
+      if(airlinesToUrl[i].name == airlineName)
+        return airlinesToUrl[i].ip;
+    }
+    return null;
+  };
 
   var getOtherAirlines = function(cb, origin, destination, date, flightClass, i) {
     if (i < airlines.length) {
@@ -339,5 +446,6 @@ module.exports = function(app, mongo) {
       });
     }
   }
+
 
 };
