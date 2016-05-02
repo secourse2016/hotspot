@@ -3,6 +3,7 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
 
   $scope.user = PaymentSrv.getUser();
   $scope.flight = FlightsSrv.getFlightInfo();
+  $scope.totalCost = 0;
   $scope.GoToMain = function() {
     // window.alert("Thank you for your purchase. Your ticket will be e-mailed to you shortly.");
     $location.url('/');
@@ -12,6 +13,16 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
     $location.url('/payment');
   };
 
+
+  $scope.getTotalCost = function(outF,inF) {
+  if (inF != undefined){
+    $scope.totalCost = parseInt(outF) + parseInt(inF);
+  }
+  else{
+    $scope.totalCost = outF;
+  }
+};
+
   $scope.SubmitBooking = function() {
     //user ready to go into database
     var user = PaymentSrv.getUser();
@@ -20,5 +31,6 @@ App.controller('confirmationCtrl',function($scope, PaymentSrv, $location, Flight
     //return booking reference id to display @ confirmation page
   };
 
+  $scope.getTotalCost(FlightsSrv.getFlightInfo().outFlight.cost,FlightsSrv.getFlightInfo().inFlight.cost);
 
 });

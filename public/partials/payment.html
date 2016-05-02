@@ -31,6 +31,7 @@
 </div>
 
 <span class="asterisk_input">  </span>
+<div>
 <label> Date Of Birth </label>
 <p class="input-group">
   <input type="text"
@@ -50,24 +51,20 @@
    </button>
   </span>
 </p>
+<p ng-show="userForm.dob.$pristine" class="help-block"> Date of Birth is required</p>
+</div>
 
    <!-- Passport Info -->
-     <div class="form-group">
+<div class="form-group">
 <span class="asterisk_input">  </span>
   <label>Passport 3 Letter Country Code</label>
   <input type="text" pattern='[A-Za-z\\s]*' name="pass" class="form-control" placeholder="Please enter your Passport info here" ng-model="user.passport" required ng-maxlength="3" ng-minlength="3">
  <p ng-show="userForm.pass.$pristine" class="help-block"> Your Passport info is required</p>
    <p ng-show="userForm.pass.$error.maxlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
       <p ng-show="userForm.pass.$error.minlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
-
 </div>
-<!-- Passport Issue Date -->
-<!-- <div>
-<span class="asterisk_input">  </span>
-<label> Passport Issue Date </label>
-  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportIssueDate" required >
-</div> -->
 
+<!-- Passport Issue Date -->
 <span class="asterisk_input">  </span>
 <label> Passport Issue Date </label>
 <p class="input-group">
@@ -90,15 +87,7 @@
 </p>
 
 <!-- Passport Expiry Date -->
-
 <div class="col-xs-12" style="height:20px;"></div>
-
-<!-- <div>
-<span class="asterisk_input">  </span>
-<label> Passport Expiry Date </label>
-  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.passportExpiryDate" required >
-</div> -->
-
 <span class="asterisk_input">  </span>
 <label> Passport Expiry Date </label>
 <p class="input-group">
@@ -121,67 +110,6 @@
 </p>
 
 <div class="col-xs-12" style="height:20px;"></div>
-
-    <!-- Credit Card Type -->
-<div class="form-group">
-<span class="asterisk_input">  </span>
-   <label>Credit Card Type</label>
-   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType" required>
-    <option value="amex" class="ccjs-amex">American Express</option>
-    <option value="discover" class="ccjs-discover">Discover</option>
-    <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
-    <option value="visa" class="ccjs-visa">Visa</option>
-    <option value="diners-club" class="ccjs-diners-club">Diners Club</option>
-    <option value="maestro" class="maestro">Maestro</option>
-    <option value="unionpay" class="unionpay">UnionPay</option>
-    <option value="visa-electron" class="visa-electron">Visa Electron</option>
-  </select>
-</div>
-        <!-- Card Number -->
-<div class="form-group">
-<span class="asterisk_input">  </span>
-  <label>Credit Card Number</label>
-  <input type="number" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="user.ccNumber" required ng-minlength="16" ng-maxlength="16">
-  <p ng-show="userForm.cnumber.$pristine" class="help-block"> Credit Card Number is required</p>
-  <p ng-show="userForm.cnumber.$error.minlength" class="help-block"> A credit card number must consist of 16 numbers</p>
-  <p ng-show="userForm.cnumber.$error.maxlength" class="help-block"> A credit card number must consist of 16 numbers</p>
-</div>
-
-<!-- Credit Card Expiry Date -->
-<!-- <span class="asterisk_input">  </span>
-<label> Credt Card Expiry Date </label>
-  <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="user.ccExpiryDate" required > -->
-
-  <span class="asterisk_input">  </span>
-  <label> Credit Card Expiry Date </label>
-  <p class="input-group">
-    <input type="text"
-           required
-           class="form-control"
-           placeholder="Credit Card Expiry Date"
-           uib-datepicker-popup="{{format}}"
-           ng-model="user.ccExpiryDate"
-           is-open="popup3.opened"
-           close-text="Close"
-           alt-input-formats="altInputFormats" />
-    <span class="input-group-btn">
-      <button type="button"
-              class="btn btn-default"
-              ng-click="open3()">
-              <i class="glyphicon glyphicon-calendar"></i>
-     </button>
-    </span>
-  </p>
-
-<div class="col-xs-12" style="height:20px;"></div>
-
-<!-- Name On Card -->
-<div class="form-group">
-<span class="asterisk_input">  </span>
-  <label>Name On Card</label>
-  <input type="text" name="cname" class="form-control" placeholder="Please enter the name on your card here" ng-model="user.ccName" required >
- <p ng-show="userForm.cname.$pristine" class="help-block"> Name On Card is required</p>
-</div>
 
 <!-- EMAIL -->
 <div class="form-group">
@@ -493,6 +421,60 @@ Nationality <select ng-model="user.country" required>
   <p ng-show="userForm.contact.$pristine" class="help-block"> Contact is required!</p>
 
 <div class="col-xs-12" style="height:20px;"></div>
+
+<!-- <div class="form-group">
+<span class="asterisk_input">  </span>
+<label>Credit Card Type</label>
+<select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType" required>
+<option value="amex" class="ccjs-amex">American Express</option>
+<option value="discover" class="ccjs-discover">Discover</option>
+<option value="mastercard" class="ccjs-mastercard">MasterCard</option>
+<option value="visa" class="ccjs-visa">Visa</option>
+<option value="diners-club" class="ccjs-diners-club">Diners Club</option>
+<option value="maestro" class="maestro">Maestro</option>
+<option value="unionpay" class="unionpay">UnionPay</option>
+<option value="visa-electron" class="visa-electron">Visa Electron</option>
+</select>
+</div>
+
+<div class="form-group">
+<span class="asterisk_input">  </span>
+<label>Credit Card Number</label>
+<input type="number" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="user.ccNumber" required ng-minlength="16" ng-maxlength="16">
+<p ng-show="userForm.cnumber.$pristine" class="help-block"> Credit Card Number is required</p>
+<p ng-show="userForm.cnumber.$error.minlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+<p ng-show="userForm.cnumber.$error.maxlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+</div>
+
+<span class="asterisk_input">  </span>
+<label> Credit Card Expiry Date </label>
+<p class="input-group">
+<input type="text"
+       required
+       class="form-control"
+       placeholder="Credit Card Expiry Date"
+       uib-datepicker-popup="{{format}}"
+       ng-model="user.ccExpiryDate"
+       is-open="popup3.opened"
+       close-text="Close"
+       alt-input-formats="altInputFormats" />
+<span class="input-group-btn">
+  <button type="button"
+          class="btn btn-default"
+          ng-click="open3()">
+          <i class="glyphicon glyphicon-calendar"></i>
+ </button>
+</span>
+</p>
+
+<div class="col-xs-12" style="height:20px;"></div>
+
+<div class="form-group">
+<span class="asterisk_input">  </span>
+<label>Name On Card</label>
+<input type="text" name="cname" class="form-control" placeholder="Please enter the name on your card here" ng-model="user.ccName" required >
+<p ng-show="userForm.cname.$pristine" class="help-block"> Name On Card is required</p>
+</div> -->
 
         <!-- SUBMIT BUTTON -->
 
