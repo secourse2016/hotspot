@@ -5,7 +5,7 @@ angular.module('starter.controllers',[])
 
 })
    
-.controller('bookCtrl', ['$scope','$http' ,'$state', FlightsSrv,
+.controller('bookCtrl', ['$scope','$http' ,'$state',
     function($scope,$http, $state, FlightsSrv) {
    
     $http.get('js/airports.json').success(function(data) {
@@ -21,13 +21,13 @@ angular.module('starter.controllers',[])
         else $scope.trip = "One Way";
       }
     
-   //FlightsSrv.setSelectedClass($scope.cla);
-  // FlightsSrv.setSelectedOriginAirPort($scope.mySelect);
-  //  FlightsSrv.setSelectedDestinationAirPort($scope.mySelect1);
-  //  FlightsSrv.setSelectIncomingDate($scope.dataA);
-  //  FlightsSrv.setSelectedOutgoingData($scope.dateD);
-  //  FlightsSrv.setSelectedRoundTrip($scope.twoWay);
-  //  FlightsSrv.setSelectedOriginAirLines($scope.other);
+   FlightsSrv.setSelectedClass($scope.cla);
+   FlightsSrv.setSelectedOriginAirPort($scope.mySelect);
+   lightsSrv.setSelectedDestinationAirPort($scope.mySelect1);
+    FlightsSrv.setSelectIncomingDate($scope.dataA);
+   FlightsSrv.setSelectedOutgoingData($scope.dateD);
+   FlightsSrv.setSelectedRoundTrip($scope.twoWay);
+   FlightsSrv.setSelectedOriginAirLines($scope.other);
 
 }])
 
