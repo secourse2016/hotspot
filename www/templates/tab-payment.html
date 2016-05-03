@@ -416,10 +416,17 @@
 
 
 
+<!-- City -->
+  <label class="item item-input item-stacked-label">
+  <span  class="input-label">  City:-  </span>
 
+  <input type="text" name="city" class="form-control" placeholder="Please enter here the City where you live" ng-model="user.city" required >
+  </label>
+<div class="padding">
 
+  <p ng-show="userForm.city.$pristine" class="help-block">* City is required!</p>
 
-
+</div>
 
 
 
