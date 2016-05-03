@@ -9,7 +9,7 @@ angular.module('starter.controllers',[])
     function($scope,$http, $state) {
    
     $http.get('js/airports.json').success(function(data) {
-      $scope.list = list;
+      $scope.list = data;
     });
 
  $scope.trip = "One Way";

@@ -3,17 +3,14 @@
         <form class="list">
             <label class="item item-select">
                 <span class="input-label">Origin</span>
-                <select>
-                    <option></option>
-                </select>
+              <select ng-model="mySelect" ng-options="item.name for item in list">    
+</select>
             </label>
             <label class="item item-select">
                 <span class="input-label">Destination</span>
-                <select>
-                    <option></option>
-                </select>
+                          <select ng-model="mySelect" ng-options="item.name for item in list">    
+</select>
             </label>
-
             <ion-toggle toggle-class="toggle-royal">Other AirLines</ion-toggle>
 
             <label class="item item-select">
