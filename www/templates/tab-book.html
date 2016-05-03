@@ -17,27 +17,21 @@
             <label class="item item-select">
                 <span class="input-label">Class</span>
                 <select>
-                    <option>Business</option>
+                    <option> Business</option>
                     <option>Economy</option>
                     <option></option>
                 </select>
             </label>
-            <label class="item item-select">
-                <span class="input-label">Trip Type</span>
-                <select>
-                    <option>Round Trip</option>
-                    <option>One Way Trip</option>
-                </select>
-            </label>
         </form>
+        <button ng-init-"twoWay = false" ng-click="trip = TwoWay" class="button">{{trip}}</button>
 
-        <label class="item item-input">
+        <label ng-hide=one class="item item-input">
   <span class="input-label">Departure Date </span>
   <input type="date">
 </label>
 
  <label class="item item-input">
-  <span class="input-label">Arrival Date </span>
+  <span ng-show ="twoWay" class="input-label">Arrival Date </span>
   <input type="date">
 </label>
     </ion-content>
