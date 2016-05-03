@@ -13,7 +13,11 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
     // country : PaymentSrv.getCountry(),
     // contactNumber : PaymentSrv.getContactNumber()
   };
-
+  $scope.seats = FlightsSrv.getNumberOfSeats();
+  $scope.passengerDetails = [];
+  for (var i = 0; i < $scope.seats; i++) {
+    $scope.passengerDetails.push({});
+  }
   /*----------- Angular Bootstrap Datepicker -----------*/
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
@@ -57,7 +61,7 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
   // function to submit the form after all validation has occurred
   $scope.submitForm = function(isValid, info) {
     // check to make sure the form is completely valid
-
+    console.log($scope.passengerDetails);
     if (typeof(info) == 'undefined') {
       console.log("a7masy");
       info = {
@@ -65,19 +69,19 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
       lname : 'Anwar',
       dob: '09-June-1995',
       passport : 'EGY',
-      passportIssueDate : '30-April-2016',
+      // passportIssueDate : '30-April-2016',
       passportExpiryDate : '07-May-2016',
-      ccType : 'MasterCard',
-      ccNumber : '7530274291374281',
-      ccExpiryDate : '07-May-2016',
-      ccName : 'Ahmed Anwar',
+      // ccType : 'MasterCard',
+      // ccNumber : '7530274291374281',
+      // ccExpiryDate : '07-May-2016',
+      // ccName : 'Ahmed Anwar',
       email : 'ahmedanwarm@gmail.com',
       country : 'Egypt',
-      add1 : 'Maadi, Cairo',
-      add2 : 'Mokatam, Cairo',
-      state : 'Cairo',
-      city : 'Cairo',
-      contactNumber : '01023005536'
+      // add1 : 'Maadi, Cairo',
+      // add2 : 'Mokatam, Cairo',
+      // state : 'Cairo',
+      // city : 'Cairo',
+      // contactNumber : '01023005536'
     };
         // PaymentSrv.setCreditCardNumber(info.ccNumber);
       }

@@ -22,7 +22,8 @@ App.config(function($routeProvider) {
       controller: 'confirmationCtrl'
     })
     .when('/passenger', {
-      templateUrl: '/partials/passengerInfo.html'
+      templateUrl: '/partials/passengerInfo.html',
+      controller: 'paymentCtrl'
     })
 
   .when('/payment', {

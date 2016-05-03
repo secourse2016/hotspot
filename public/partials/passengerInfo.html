@@ -1,10 +1,35 @@
+<link type="text/css" rel="stylesheet" href="/styles/materialize.min.css"  media="screen,projection"/>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 <script>$('.collapsible').collapsible();</script>
+
 <ul class="collapsible popout" data-collapsible="accordion">
-   <li>
+   <li ng-repeat="p in passengerDetails">
      <div class="collapsible-header">Third</div>
-     <div class="collapsible-body">
+     <div class="collapsible-body" >
        <div style="background-color : rgba(255,255,255,1)">
          <p>Lorem ipsum dolor sit amet.</p></div>
       </div>
    </li>
  </ul>
+<input aria-owns="departure_root"
+  aria-readonly="false"
+  aria-expanded="true"
+  aria-haspopup="true"
+  tabindex="-1"
+  readonly=""
+  aria-invalid="false"
+  class="ng-pristine ng-valid ng-isolate-scope ng-empty picker__input ng-touched picker__input--active"
+  input-date=""
+  name="departure"
+  id="departure"
+  ng-model="formData.outgoingDate"
+  type="text">
+<h3>dadfad {{formData.outgoingDate}}</h3>
+<script type="text/javascript">
+$('.datepicker').pickadate({
+  selectMonths: true, // Creates a dropdown to control month
+  selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+</script>
+<input type="date" class="datepicker" ng-model="testDate">
+<h1>{{testDate}} 3</h1>
