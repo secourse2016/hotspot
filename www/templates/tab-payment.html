@@ -109,7 +109,7 @@
 
   <span  class="input-label"> Name On Card :-</span>
 
-  <input type="text" name="cname" class="form-control" placeholder="Please enter the name on your card here" ng-model="user.ccName" required >
+  <input type="text" name="cname" placeholder="Please enter the name on your card here" ng-model="user.ccName" required >
 
  </label>
 
@@ -119,6 +119,29 @@
    <p ng-show="userForm.cname.$pristine" class="help-block">* Name On Card is required</p>
 
 </div>
+
+<!-- EMAIL -->
+ <label class="item item-input item-stacked-label">
+
+  <span  class="input-label"> Email :-</span>
+
+  <input type="email" name="email" placeholder="example@example.com" ng-model="user.email" required>
+
+</label>
+ 
+<div class="padding">
+
+  <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block"> Please enter a valid email.</p>
+
+</div>
+
+
+
+
+
+
+
+
 
 
 
