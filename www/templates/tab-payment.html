@@ -395,12 +395,40 @@
 
 <div class="padding">
 
-  <p ng-show="userForm.country.$error.required" class="help-block"> * country is required</p>
-
-
-
+  <p ng-show="userForm.country.$error.required" class="help-block"> * country is required!</p>
 
 </div>
+
+
+
+<!-- State -->
+  <label class="item item-input item-stacked-label">
+  <span  class="input-label">  State:-  </span>
+  <input type="text" name="state" placeholder="Please enter your State here" ng-model="user.state" required >
+
+  </label>
+
+<div class="padding">
+
+  <p ng-show="userForm.state.$pristine" class="help-block">* State is required!</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
