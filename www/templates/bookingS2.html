@@ -55,6 +55,20 @@
                       <div class="col">Cost</div>
                    
                     </div>
+              <div class="row" ng-repeat="data in ctrl.data2">
+          <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>
+          <div class="col">{{data.Airline}}</div>
+          <div class="col">{{data.Flight Number}}</div>
+          <div class="col">{{data.Aircraft Type}}</div>
+          <div class="col">{{data.Aircraft Model}}</div>
+          <div class="col">{{data.Capacity}}</div>
+          <div class="col">{{data.Departure Date}}</div>
+          <div class="col">{{data.Duration}}</div>
+          <div class="col">{{data.Class}}</div>
+          <div class="col">{{data.account}}</div>
+
+        </div>
+
 
 
     </ion-content>
