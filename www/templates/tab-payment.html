@@ -62,9 +62,39 @@
 
 
 
+ <label class="item item-input item-stacked-label">
+
+
+   <span  class="input-label"> Credit Card Type :-</span>
+
+   <select name="card-type" class="ccjs-hidden-card-type" ng-model="user.ccType" required>
+    <option value="amex" class="ccjs-amex">American Express</option>
+    <option value="discover" class="ccjs-discover">Discover</option>
+    <option value="mastercard" class="ccjs-mastercard">MasterCard</option>
+    <option value="visa" class="ccjs-visa">Visa</option>
+    <option value="diners-club" class="ccjs-diners-club">Diners Club</option>
+    <option value="maestro" class="maestro">Maestro</option>
+    <option value="unionpay" class="unionpay">UnionPay</option>
+    <option value="visa-electron" class="visa-electron">Visa Electron</option>
+  </select>
 
 
 
+ </label>
+
+<!-- Card Number -->
+ <label class="item item-input item-stacked-label">
+
+<span  class="input-label"> Credit Card Number :-</span>
+  
+  <input type="number" name="cnumber" class="form-control" placeholder="Please enter your credit card number here" ng-model="user.ccNumber" required ng-minlength="16" ng-maxlength="16">
+  <p ng-show="userForm.cnumber.$pristine" class="help-block"> Credit Card Number is required</p>
+  <p ng-show="userForm.cnumber.$error.minlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+  <p ng-show="userForm.cnumber.$error.maxlength" class="help-block"> A credit card number must consist of 16 numbers</p>
+
+
+
+ </label>
 
 
 
