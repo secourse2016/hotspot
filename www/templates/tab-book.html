@@ -18,11 +18,15 @@
                 <select>
                     <option>Business</option>
                     <option>Economy</option>
-                    <option></option>
                 </select>
             </label>
+                    <button ng-init-"twoWay = false" ng-click="twoWay = !twoWay"class="button button-light button-block">{{trip}}</button>
+                    <label style="text-align: center;" class ="item label-block" ng-show ="!twoWay">One Way </label>
+                     <label style="text-align: center;" class ="item label-block" ng-show ="twoWay">Round Trip </label>
+
+
         </form>
-        <button ng-init-"twoWay = false" ng-click="twoWay = !twoWay"class="button button-light button-block">{{trip}}</button>
+
 
         <label ng-hide=one class="item item-input">
   <span class="input-label">Departure Date </span>

@@ -12,7 +12,7 @@ angular.module('starter.controllers',[])
       $scope.list = data;
     });
 
- $scope.trip = "One Way";
+ $scope.trip = "Change Trip Type";
 
      
       $scope.toggle = function() {
