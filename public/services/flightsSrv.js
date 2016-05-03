@@ -71,6 +71,13 @@ App.factory('FlightsSrv', function($http) {
     getSelectedAirlines: function() {
       return this.SelectedAirlines;
     },
+    ///////////////////////////////////////////////////////////////////
+    setNumberOfSeats: function(value) {
+      this.numberOfSeats = value;
+    },
+    getNumberOfSeats: function() {
+      return this.numberOfSeats;
+    },
     ////////////////////////////////////////////////////////////////////
     searchBookings: function(value, cb) {
       var URL = '/api/bookings/search/' + value;

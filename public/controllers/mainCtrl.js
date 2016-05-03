@@ -58,12 +58,14 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   $scope.SetOtherAirlines= function(otherAirlines) {
    FlightsSrv.setSelectedAirlines(otherAirlines);
  };
+ $scope.SetNumberOfSeats= function(s) {
+  FlightsSrv.setNumberOfSeats(s);
+};
 
   /* Find All Available Flights  */
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
-        console.log($scope.outDate);
-        console.log($scope.inDate);
+        $scope.SetNumberOfSeats($scope.seats);
         $scope.SetIncomingDate($scope.inDate);
         $scope.SetRoundTrip($scope.roundTrip);
         $scope.SetOtherAirlines($scope.otherAirlines);
