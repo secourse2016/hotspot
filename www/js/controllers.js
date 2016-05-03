@@ -8,8 +8,13 @@ angular.module('starter.controllers',[])
 .controller('bookCtrl', ['$scope','$http' ,'$state',
     function($scope,$http, $state) {
    
+    $http.get('js/airports.json').success(function(data) {
+      $scope.list = list;
+    });
 
-      $scope.trip = "One Way";
+ $scope.trip = "One Way";
+
+     
       $scope.toggle = function() {
        $scope.twoWay = !($scope.twoWay);
         if($scope.twoWay == true) $scope.trip = "Two Way";

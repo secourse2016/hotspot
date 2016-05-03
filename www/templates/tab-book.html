@@ -13,17 +13,19 @@
                     <option></option>
                 </select>
             </label>
+
             <ion-toggle toggle-class="toggle-royal">Other AirLines</ion-toggle>
+
             <label class="item item-select">
                 <span class="input-label">Class</span>
                 <select>
-                    <option> Business</option>
+                    <option>Business</option>
                     <option>Economy</option>
                     <option></option>
                 </select>
             </label>
         </form>
-        <button ng-init-"twoWay = false" ng-click="trip = TwoWay" class="button">{{trip}}</button>
+        <button ng-init-"twoWay = false" ng-click="twoWay = !twoWay"class="button">{{trip}}</button>
 
         <label ng-hide=one class="item item-input">
   <span class="input-label">Departure Date </span>
