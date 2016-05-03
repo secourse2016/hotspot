@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.App.factory('FlightsSrv', function ($http) {
+.factory('FlightsSrv', function ($http) {
      return {
          getAirportCodes : function() {
            return $http.get('/api/data/codes');
@@ -36,11 +36,9 @@ angular.module('starter.services', [])
          },
          ///////////////////////////////////////////////////////////////////
          setSelectedClass: function(value){
-           if(value == 1)
-            this.selectedClass="business";
-            else {
-              this.selectedClass="economy";
-            }
+          
+            this.selectedClass=value;
+            
          },
          getSelectedClass: function(){
           return this.selectedClass;
