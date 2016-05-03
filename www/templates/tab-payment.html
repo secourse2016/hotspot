@@ -1,0 +1,81 @@
+<ion-view title="Payment page" id="tab-payment">
+
+ <ion-content padding="true" style="background: url(/home/ezzo/Desktop/images.jpg) no-repeat center;background-size:cover;" class="has-header"
+>
+
+<div class="bar bar-header bar-assertive">
+
+   <button class="button icon ion-navicon"></button>
+      <h1  style="color:#000000"class="title">Swiss Airlines</h1>
+
+   <button class="button icon ion-home"></button>
+</div>
+
+
+
+<form name ="userForm" novalidate>
+
+<div class="list">
+
+
+<!-- First name -->
+
+ <label class="item item-input item-stacked-label">
+
+ <span  class="input-label">First Name :- </span>
+
+ <input type="text" name="fname" class="form-control" placeholder="Please enter your First Name here" ng-model="user.fname" required >
+
+ <div class="padding">
+ 	 <p ng-show="userForm.fname.$error.$pristine" class="help-block"> *First Name is required</p>
+ </div>
+
+</label>
+
+<!-- Last Name -->
+ <label class="item item-input item-stacked-label">
+
+ <span  class="input-label">Last Name :- </span>
+ <input type="text" name="lname" class="form-control" placeholder="Please enter your Last Name here" ng-model="user.lname" required >
+ </label>
+
+<div class="padding">
+ 	 <p ng-show="userForm.lname.$error.$pristine" class="help-block"> *Last Name is required</p>
+</div>
+
+<!-- Passport Info -->
+ <label class="item item-input item-stacked-label">
+
+<span  class="input-label"> Passport 3 Letter Country Code :-</span>
+
+<input type="text" pattern='[A-Za-z\\s]*' name="pass" class="form-control" placeholder="Please enter your Passport info here" ng-model="user.passport" required ng-maxlength="3" ng-minlength="3">
+ </label>
+
+ <div class="padding">
+
+ <p ng-show="userForm.pass.$pristine" class="help-block"> Your Passport info is required</p>
+   <p ng-show="userForm.pass.$error.maxlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
+      <p ng-show="userForm.pass.$error.minlength" class="help-block"> A Passport entry must consist of 3 letters only </p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</form>
+
+
+    </ion-content>
+
+
+
+</ion-view>
