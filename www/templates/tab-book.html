@@ -22,7 +22,7 @@
                 </select>
             </label>
         </form>
-        <button ng-init-"twoWay = false" ng-click="twoWay = !twoWay"class="button">{{trip}}</button>
+        <button ng-init-"twoWay = false" ng-click="twoWay = !twoWay"class="button button-light button-block">{{trip}}</button>
 
         <label ng-hide=one class="item item-input">
   <span class="input-label">Departure Date </span>
@@ -33,5 +33,10 @@
   <span ng-show ="twoWay" class="input-label">Arrival Date </span>
   <input type="date">
 </label>
+
+
+<button class="button button button-block">
+      Submit
+    </button>
     </ion-content>
 </ion-view>
