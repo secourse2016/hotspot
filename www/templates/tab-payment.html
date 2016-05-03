@@ -459,7 +459,7 @@
   <label class="item item-input item-stacked-label">
   <span  class="input-label">  City:-  </span>
 
-  <input type="text" name="city" class="form-control" placeholder="Please enter here the City where you live" ng-model="user.city" required >
+  <input type="text" name="city" placeholder="Please enter here the City where you live" ng-model="user.city" required >
   </label>
 <div class="padding">
 
@@ -469,6 +469,20 @@
 
 
 
+
+
+
+<!-- Contact Number -->
+ <label class="item item-input item-stacked-label">
+  <span  class="input-label">Contact Number :- </span>
+  
+  <input type="number" name="contact"  placeholder="Please enter your Contact Number here" ng-model="user.contactNumber" required >
+
+  <div class="padding">
+
+  <p ng-show="userForm.contact.$pristine" class="help-block">* Contact is required!</p>
+
+</div>
 
 <div class="padding">
 <button type="submit" class="button button-block button-assertive" ng-click = "submitForm(userForm.$valid, user)">
