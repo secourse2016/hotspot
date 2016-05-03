@@ -14,7 +14,7 @@
             <ion-toggle toggle-class="toggle-royal">Other AirLines</ion-toggle>
 
             <label class="item item-select">
-                <span class="input-label">Class</span>
+                <span ng-model ="cls" class="input-label">Class</span>
                 <select>
                     <option>Business</option>
                     <option>Economy</option>
@@ -29,17 +29,17 @@
 
 
         <label ng-hide=one class="item item-input">
-  <span class="input-label">Departure Date </span>
+  <span ng-model ="dateD"class="input-label">Departure Date </span>
   <input type="date">
 </label>
 
  <label class="item item-input">
-  <span ng-show ="twoWay" class="input-label">Arrival Date </span>
+  <span ng-model="dataA"ng-show ="twoWay" class="input-label">Arrival Date </span>
   <input type="date">
 </label>
 
 
-<button class="button button button-block">
+<button ng-click="getData()" class="button button button-block">
       Submit
     </button>
     </ion-content>
