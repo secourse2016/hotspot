@@ -1,50 +1,87 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+.App.factory('FlightsSrv', function ($http) {
+     return {
+         getAirportCodes : function() {
+           return $http.get('/api/data/codes');
+         },
+         ///////////////////////////////////////////////////////////////////
+         setFlightInfo : function(flightInfo) {
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+              this.flightInfo = flightInfo;
+         },
+         getFlightInfo : function(){
+           return this.flightInfo;
+         },
+         ///////////////////////////////////////////////////////////////////
+         setSelectedOriginAirport: function(value) {
+           this.selectedOriginAirport = value;
+         },
+         getSelectedOriginAirport: function() {
+           return this.selectedOriginAirport;
+         },
+         /////////////////////////////////////////// s////////////////////////
+          getSelectedIncomingDate: function() {
+           return this.SelectedIncomingDate;
+         },
+         setSelectedIncomingDate: function(value) {
+            this.SelectedIncomingDate = value;
+         },
+         ///////////////////////////////////////////////////////////////////
+         setSelectedDestinationAirport: function(value) {
+           this.selectedDestinationAirport = value;
+         },
+         getSelectedDestinationAirport: function() {
+           return this.selectedDestinationAirport;
+         },
+         ///////////////////////////////////////////////////////////////////
+         setSelectedClass: function(value){
+           if(value == 1)
+            this.selectedClass="business";
+            else {
+              this.selectedClass="economy";
+            }
+         },
+         getSelectedClass: function(){
+          return this.selectedClass;
+         },
+         ///////////////////////////////////////////////////////////////////
+         getSelectedOutgoingDate: function() {
+           return this.SelectedOutgoingDate;
+         },
+         setSelectedOutgoingDate: function(value) {
+            this.SelectedOutgoingDate = value;
+         },
+         ///////////////////////////////////////////////////////////////////
+         getSelectedRoundTrip: function() {
+           return this.SelectedRoundTrip;
+         },
+         setSelectedRoundTrip: function(value) {
+           if(value)
+            this.SelectedRoundTrip = "Round trip";
+          else {
+            this.SelectedRoundTrip = "One-way trip"
+          }
+         },
+         ///////////////////////////////////////////////////////////////////
+         setSelectedAirlines: function(value){
+           this.SelectedAirlines = value;
+         },
+         getSelectedAirlines: function(){
+           return this.SelectedAirlines ;
+         },
+         ////////////////////////////////////////////////////////////////////
+         searchBookings: function(value, cb) {
+           var URL = '/api/bookings/search/' + value;
+           var req = {
+             method: 'GET',
+             url: URL,
+           };
 
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
-      }
-      return null;
-    }
-  };
-});
+           $http(req).success(function(res) {
+             console.log("booking search results = ", res);
+             cb(res);
+           });
+         }
+     };
+ });

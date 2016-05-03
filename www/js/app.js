@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-.state('payment', {
+.state('tab.payment', {
     url: '/book/:tab-payment',
     views: {
       'tab-payment': {

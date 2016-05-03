@@ -11,7 +11,7 @@
                           <select ng-model="mySelect" ng-options="item.name for item in list">    
 </select>
             </label>
-            <ion-toggle toggle-class="toggle-royal">Other AirLines</ion-toggle>
+            <ion-toggle  ng-model = "other" toggle-class="toggle-royal">Other AirLines</ion-toggle>
 
             <label class="item item-select">
                 <span ng-model ="cls" class="input-label">Class</span>
@@ -28,18 +28,18 @@
         </form>
 
 
+
         <label ng-hide=one class="item item-input">
   <span ng-model ="dateD"class="input-label">Departure Date </span>
   <input type="date">
 </label>
 
  <label class="item item-input">
-  <span ng-model="dataA"ng-show ="twoWay" class="input-label">Arrival Date </span>
+  <span ng-model="dateA"ng-show ="twoWay" class="input-label">Arrival Date </span>
   <input type="date">
 </label>
 
-
-<button ng-click="getData()" class="button button button-block">
+<button ng-click= "getData" class="button button button-block">
       Submit
     </button>
     </ion-content>
