@@ -417,7 +417,16 @@
 
 </div>
 
-
+<!-- Address 1 -->
+ <label class="item item-input item-stacked-label">
+<div class="form-group">
+<span class="asterisk_input">  </span>
+  <label>Address 1</label>
+  <input type="text" name="add1" class="form-control" placeholder="Please enter your address here" ng-model="user.add1" required ng-minlength="1">
+  <div class="padding">
+  <p ng-show="userForm.add1.$pristine" class="help-block"> Address 1 is required</p>
+      <p ng-show="userForm.add1.$error.minlength" class="help-block">Address 1 is required </p>
+      </div>
 
 <!-- State -->
   <label class="item item-input item-stacked-label">
