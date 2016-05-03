@@ -39,3 +39,6 @@ angular.module('starter.controllers',[])
 .controller('paymentCtrl', function($scope) {
 
 })
+.controller('book2Ctrl', function($scope,$http) {
+
+})
