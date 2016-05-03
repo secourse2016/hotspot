@@ -29,7 +29,12 @@
                   </thead>
                   <tr ng-repeat="f in outgoingFlightsArray">
                     <td>
-                      <input type="radio" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
+                      <form action="#">
+                        <p>
+                          <input type="radio" id = "{{$index}}" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
+                          <label for="{{$index}}">{{$index}}</label>
+                        </p>
+                      </form>
                     </td>
                     <td>
                       {{f.Airline}}

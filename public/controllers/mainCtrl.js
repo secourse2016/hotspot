@@ -62,6 +62,8 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   /* Find All Available Flights  */
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
+        console.log($scope.outDate);
+        console.log($scope.inDate);
         $scope.SetIncomingDate($scope.inDate);
         $scope.SetRoundTrip($scope.roundTrip);
         $scope.SetOtherAirlines($scope.otherAirlines);

@@ -81,20 +81,30 @@
 
           <div name="airports" id="airports" required>
 
-
-            <input name="originAirports" id="originAirports" type="text" required placeholder="Flying From" ng-model="selectedOrigin" uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10" class="form-control" , typeahead-on-select="SetOriginAirport($item.iata)">
+            <div class="input-field">
+              <input name="originAirports" id="originAirports"
+              type="text"
+              required
+              ng-model="selectedOrigin"
+              uib-typeahead="airport.name for airport in Airports | filter:$viewValue | limitTo:10"
+              class="form-control"
+              typeahead-on-select="SetOriginAirport($item.iata)">
+              <label style="color: black" for="originAirports">Flying From</label>
+            </div>
 
             <div class="col-xs-12" style="height:25px;"></div>
 
+            <div class="input-field">
+              <input name="destinationAirports" id="destinationAirports"
+              type="text"
+              required
+              ng-model="selectedDestination"
+              uib-typeahead="airport.name for airport in Airports | filter:$viewValue | limitTo:10"
+              class="form-control"
+              typeahead-on-select="SetDestinationAirport($item.iata)">
+              <label style="color: black" for="destinationAirports">Flying To</label>
+            </div>
 
-            <input name="destinationAirports" id="destinationAirports"
-                   type="text"
-                   required
-                   placeholder="Flying To"
-                   ng-model="selectedDestination"
-                   uib-typeahead="airport.iata for airport in Airports | filter:$viewValue | limitTo:10"
-                   class="form-control"
-                   typeahead-on-select="SetDestinationAirport($item.iata)">
 
           </div>
 
@@ -102,18 +112,37 @@
 
 
           <p class="input-group">
-            <input type="text" class="form-control" placeholder="Outgoing flight date" uib-datepicker-popup="{{format}}" ng-model="outDate" is-open="popup1.opened" close-text="Close" alt-input-formats="altInputFormats" />
+            <input type="text"
+            class="form-control"
+            placeholder="Outgoing flight date"
+            uib-datepicker-popup="{{format}}"
+            ng-model="outDate"
+            is-open="popup1.opened"
+            close-text="Close"
+            alt-input-formats="altInputFormats" />
             <span class="input-group-btn">
-                        <button type="button"
-                                class="btn btn-default"
-                                ng-click="open1()">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                       </button>
-                      </span>
+              <button type="button"
+                class="btn btn-default"
+                ng-click="open1()">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
           </p>
 
+          <!-- <script type="text/javascript">
+            $('.datepicker').pickadate({
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+          </script>
+          <input type="date" class="datepicker" ng-model= "outDate"> -->
 
-          <input type="checkbox" ng-model="roundTrip" name="roundtrip"  id="checkboxRound" ng-init="roundTrip=false">Round Trip</input>
+          <form action="#">
+            <p>
+              <input type="checkbox" ng-model="roundTrip" name="roundtrip"  id="checkboxRound" ng-init="roundTrip=false"></input>
+              <label style="color: black" for="checkboxRound">Round Trip</label>
+            </p>
+          </form>
 
           <div class="col-xs-12" style="height:25px;"></div>
 
@@ -127,6 +156,8 @@
                        </button>
                       </span>
           </p>
+
+          <!-- <input ng-show="roundTrip" type="date" class="datepicker" ng-model= "inDate"> -->
         </div>
 
 
@@ -135,17 +166,41 @@
 
 
         <p>Ticket Class</p>
-        <div class="radio trip-option">
+
+        <!-- <div class="radio trip-option">
           <label>
             <input type="radio" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="1">Business</label>
-          <label>
-            <input type="radio" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="2">Economy</label>
-        </div>
+            <label>
+              <input type="radio" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="2">Economy</label>
+            </div> -->
+            <div class="container">
+              <form action="#">
+                <p>
+                  <input type="radio" id="business" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="1"/>
+                  <label for="business">Business</label>
+                </p>
+                <p>
+                  <input type="radio" id="economy" ng-model="ticketClass" ng-checked="SelectedClass(ticketClass)" value="2"/>
+                  <label for="economy">Economy</label>
+                </p>
+              </form>
+            </div>
+
         <br>
       </div>
+
       <div class="">
-        <input type="checkbox" ng-model="otherAirlines" name="otherAirlines"  id="checkboxOtherAir" ng-init="otherAirlines=false">Search Other Airlines</input>
+        <form action="#">
+          <p>
+            <input type="checkbox" ng-model="otherAirlines" name="otherAirlines"  id="checkboxOtherAir" ng-init="otherAirlines=false"></input>
+            <label style="color: black" for="checkboxOtherAir">Search Other Airlines</label>
+          </p>
+        </form>
       </div>
+
+      <!-- <div class="">
+        <input type="checkbox" ng-model="otherAirlines" name="otherAirlines"  id="checkboxOtherAir" ng-init="otherAirlines=false">Search Other Airlines</input>
+      </div> -->
 
       <div class="col-xs-12" style="height:15px;"></div>
 
