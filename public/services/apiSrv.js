@@ -67,6 +67,21 @@ var token  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzI
       return $http.post('/api/secure/bookings', {
         "wt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzIiwiaWF0IjoxNDYxMDMxNDEwLCJleHAiOjE0OTI1Njc0MTcsImF1ZCI6Ind3dy5zd2lzc2FpcmxpbmVzLmNvbSIsInN1YiI6ImhvdHNwb3QifQ.1ofRxR5MfGQ1uxojSKVQrr0vIZE7Nb276BcKMSzf5Lw"
       });
+    },
+    getPublicKey: function(url, cb){
+      var URL = url + '/stripe/pubkey' + "?wt=" + token;
+      var req = {
+        method: 'GET',
+        url: URL,
+        header: {
+          'x-access-token': token
+        }
+      };
+      $http(req).success(function(res){
+        console.log("getPublicKey", res);
+        cb(res);
+      });
+
     }
   }
 });
