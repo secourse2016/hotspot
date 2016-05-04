@@ -20,7 +20,7 @@
     },
     insertBooking: function(booking, cb) {
 
-
+	booking.refNum = "N"+ moment().toDate().getTime()+"A";
       console.log("insert Booking flag ", booking);
       db.collection('bookings').insert(booking, function(err) {
         var response = { refNum : "" , errorMessage : ""};
@@ -30,7 +30,7 @@
           console.log('error');
         }
         else {
-          response.refNum = "N"+ moment().toDate().getTime()+"A" ;
+          response.refNum = booking.refNum ;
         console.log("response in db", response.refNum); 
 	 cb(response);
           console.log('insert BOOKING successful');
@@ -122,7 +122,7 @@
 
 
         db.collection('bookings').find({
-         "bookingRef": bookingRef,
+         "refNum": bookingRef,
        }).toArray(function(err, result) {
          if (err) {
            console.log('error : ' + err);
