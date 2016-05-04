@@ -18,63 +18,24 @@
     close: function() {
       db.close();
     },
-    insertBooking: function(user, flight) {
-      var outBooking = {
-        "firstName": user.fname,
-        "lastName": user.lname,
-        "passport": user.passport,
-        "passportIssueDate": user.passportIssueDate,
-        "passportExpiryDate": user.passportExpiryDate,
-        "creditCardType": user.ccType,
-        "creditCardNumber": user.ccNumber,
-        "creditCardExpiryDate": user.ccExpiryDate,
-        "nameOnCreditCard": user.ccName,
-        "email": user.email,
-        "country": user.country,
-        "address1": user.add1,
-        "address2": user.add2,
-        "state": user.state,
-        "city": user.city,
-        "contactNumber": user.contactNumber,
-        "flightNumber": flight.outFlight.flightNumber,
-        "bookingRef": user.bookingRefOut
-      };
+    insertBooking: function(booking, cb) {
 
-      var inBooking;
-      if (flight.trip == 'round') {
-        inBooking = {
-          "firstName": user.fname,
-          "lastName": user.lname,
-          "passport": user.passport,
-          "passportIssueDate": user.passportIssueDate,
-          "passportExpiryDate": user.passportExpiryDate,
-          "creditCardType": user.ccType,
-          "creditCardNumber": user.ccNumber,
-          "creditCardExpiryDate": user.ccExpiryDate,
-          "nameOnCreditCard": user.ccName,
-          "email": user.email,
-          "country": user.country,
-          "address1": user.add1,
-          "address2": user.add2,
-          "state": user.state,
-          "city": user.city,
-          "contactNumber": user.contactNumber,
-          "flightNumber": flight.inFlight.flightNumber,
-          "bookingRef": user.bookingRefIn
-        };
-      }
 
-      db.collection('bookings').insert(outBooking, function(err, data) {
-        if (err) console.log('error');
-        else console.log('insert OUTGOING-BOOKING successful');
+      console.log("insert Booking flag ", booking);
+      db.collection('bookings').insert(booking, function(err) {
+        var response = { refNum : "" , errorMessage : ""};
+        if (err) {
+          response.errorMessage = "error inserting into database";
+          cb(response);
+          console.log('error');
+        }
+        else {
+          response.refNum = booking.outgoingFlightId;
+          cb(response);
+          console.log('insert BOOKING successful');
+        }
       });
 
-      if (flight.trip == 'round') {
-        db.collection('bookings').insert(inBooking, function(err, data) {
-          if (err) console.log('error');
-          else console.log('insert INCOMING-BOOKING successful');
-        });
-      }
     },
     roundTripSearch: function(flight, cb) {
 
@@ -142,13 +103,13 @@
         "departureDateTime":  flight.departureDateTime,
         "class": flight.class
       };
-      console.log("findFlight in db", findFlight)
+      // console.log("findFlight in db", findFlight)
       db.collection('flights').find(findFlight).toArray(function(err, result) {
         if (err) {
           console.log('error : ' + err);
           cb (err,{err});
         } else {
-          console.log("DB find Result =>", result);          // return result;
+          // console.log("DB find Result =>", result);          // return result;
           cb(err,result);
         }
 

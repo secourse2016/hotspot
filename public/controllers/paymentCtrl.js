@@ -1,6 +1,5 @@
-
 App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv) {
-
+  // stripeProvider.setPublishableKey('pk_test_yNAnTNKDpawM5MfTomMji98b');
   $scope.payment = {
     // ccNumber : PaymentSrv.getCreditCardNumber(),
     // ccExpiryDate : PaymentSrv.getCreditCardExpiryDate(),
@@ -13,7 +12,11 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
     // country : PaymentSrv.getCountry(),
     // contactNumber : PaymentSrv.getContactNumber()
   };
-
+  $scope.seats = FlightsSrv.getNumberOfSeats();
+  $scope.passengerDetails = [];
+  for (var i = 0; i < $scope.seats; i++) {
+    $scope.passengerDetails.push({});
+  }
   /*----------- Angular Bootstrap Datepicker -----------*/
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
@@ -57,41 +60,40 @@ App.controller('paymentCtrl', function($scope, PaymentSrv, $location, FlightsSrv
   // function to submit the form after all validation has occurred
   $scope.submitForm = function(isValid, info) {
     // check to make sure the form is completely valid
-
+    console.log("submitForm in paymentCtrl", $scope.passengerDetails);
     if (typeof(info) == 'undefined') {
       console.log("a7masy");
-      info = {
-      fname : 'Ahmed' ,
-      lname : 'Anwar',
-      dob: '09-June-1995',
-      passport : 'EGY',
-      passportIssueDate : '30-April-2016',
-      passportExpiryDate : '07-May-2016',
-      ccType : 'MasterCard',
-      ccNumber : '7530274291374281',
-      ccExpiryDate : '07-May-2016',
-      ccName : 'Ahmed Anwar',
-      email : 'ahmedanwarm@gmail.com',
-      country : 'Egypt',
-      add1 : 'Maadi, Cairo',
-      add2 : 'Mokatam, Cairo',
-      state : 'Cairo',
-      city : 'Cairo',
-      contactNumber : '01023005536'
-    };
-        // PaymentSrv.setCreditCardNumber(info.ccNumber);
-      }
-        info.flightType = FlightsSrv.getSelectedRoundTrip();
+      info = [];
+        // fname : 'Ahmed' ,
+        // lname : 'Anwar',
+        // dob: '09-June-1995',
+        // passport : 'EGY',
+        // passportIssueDate : '30-April-2016',
+        // passportExpiryDate : '07-May-2016',
+        // ccType : 'MasterCard',
+        // ccNumber : '7530274291374281',
+        // ccExpiryDate : '07-May-2016',
+        // ccName : 'Ahmed Anwar',
+        // email : 'ahmedanwarm@gmail.com',
+        // country : 'Egypt',
+        // add1 : 'Maadi, Cairo',
+        // add2 : 'Mokatam, Cairo',
+        // state : 'Cairo',
+        // city : 'Cairo',
+        // contactNumber : '01023005536'
 
-        info.bookingRefOut = ""+ info.country + info. contactNumber + info.ccNumber + 1;
-        if (info.flightType == "Round trip"){
-          info.bookingRefIn = ""+ info.country + info. contactNumber + info.ccNumber + 2;
-        }
-        else{
-          info.bookingRefIn = "(No incoming flight selected)";
-        }
-        PaymentSrv.setUser(info);
-        $location.url('/confirmation');
+      // PaymentSrv.setCreditCardNumber(info.ccNumber);
+    }
+    // info.flightType = FlightsSrv.getSelectedRoundTrip();
+
+    // info.bookingRefOut = "" + info.country + info.contactNumber + info.ccNumber + 1;
+    // if (info.flightType == "Round trip") {
+    //   info.bookingRefIn = "" + info.country + info.contactNumber + info.ccNumber + 2;
+    // } else {
+    //   info.bookingRefIn = "(No incoming flight selected)";
+    // }
+    PaymentSrv.setPassengerDetails($scope.passengerDetails);
+    $location.url('/confirmation');
 
   };
 

@@ -40,3 +40,17 @@ make views left aligned
 add carousel
 progress bar
 Modal instead of alert in send tickets
+
+
+
+
+Stripe
+FE:
+1. enter card info
+2. card goes to stripe
+3. stripe gives TOKEN permission to pay
+4. FE sends to backend token
+
+BE:
+1. BE takes token and pays in stripe
+2. Stripe returns fail/succeed for payment
