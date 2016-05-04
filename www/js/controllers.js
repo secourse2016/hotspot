@@ -64,6 +64,8 @@ angular.module('starter.controllers',[])
 
   };
 
+$scope.tobook2=function() {$location.url("/tab/bookingS2");};
+
 }])
 
    
