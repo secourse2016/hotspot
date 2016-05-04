@@ -89,14 +89,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 }
  
  })
- .state('tab.confirm', {
-      url: '/tab-confirm',
-      views: {
-        'tab-confirm': {
-          templateUrl: 'templates/tab-confirm.html',
-          controller: 'confirmCtrl'
-        }
-      }
+ .state('confirm', {
+      url: '/tab/confirm',
+      templateUrl: 'templates/tab-confirm.html'
+      
     })
  
   // if none of the above states are matched, use this as the fallback

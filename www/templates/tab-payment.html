@@ -17,8 +17,11 @@
 </div>
 
 <form name ="userForm" novalidate>
+<br>
+</br>
 
 <div class="list">
+
 
 
 <!-- First name -->
@@ -420,7 +423,7 @@
   <option value="ZM">Zambia</option>
   <option value="ZW">Zimbabwe</option>
 </select></p>
-
+</label>
 
 <div class="padding">
 
@@ -430,21 +433,20 @@
 
 <!-- Address 1 -->
  <label class="item item-input item-stacked-label">
-<div class="form-group">
-<span class="asterisk_input">  </span>
-  <label>Address 1</label>
+  <span  class="input-label"> Address 1:-  </span>
   <input type="text" name="add1" class="form-control" placeholder="Please enter your address here" ng-model="user.add1" required ng-minlength="1">
+</label>
   <div class="padding">
   <p ng-show="userForm.add1.$pristine" class="help-block"> Address 1 is required</p>
       <p ng-show="userForm.add1.$error.minlength" class="help-block">Address 1 is required </p>
       </div>
 
 <!-- Address 2 -->
- <label class="item item-input item-stacked-label">
-      <div class="form-group">
-  <label>Address 2</label>
-  <input type="text" name="add2" class="form-control" placeholder="Please enter an alternative address here" ng-model="user.add2" >
 
+ <label class="item item-input item-stacked-label">
+  <span  class="input-label"> Address 2:-  </span>
+  <input type="text" name="add2" class="form-control" placeholder="Please enter an alternative address here" ng-model="user.add2" >
+</label>
 <div class="col-xs-12" style="height:20px;"></div>
 
 <!-- State -->
@@ -494,7 +496,7 @@
 
 
 <div class="padding">
-<button type="submit" class="button button-block button-assertive" ng-click = "submitForm(userForm.$valid, user)">
+<button type="submit"    ui-sref="confirm"  class="button button-block button-assertive" ng-click = "submitForm(userForm.$valid, user)">
       Submit
     </button>
 </div>
