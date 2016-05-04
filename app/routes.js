@@ -218,14 +218,15 @@ module.exports = function(app, mongo) {
   });
 
 
-  app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
     var flight = {
         "origin": req.params.origin,
         "destination": req.params.destination,
         "departureDateTime": req.params.departingDate,
-        "class": req.params.class
+        "class": req.params.class,
+        "seats": req.params.seats
       }
       // console.log("before querying the db");
     mongo.oneWaySearch(flight, function(err, result) {
@@ -235,13 +236,14 @@ module.exports = function(app, mongo) {
     });
 
   });
-  app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
     var flight = {
       "origin": req.params.origin,
       "destination": req.params.destination,
       "departureDateTime": req.params.departingDate,
       "arrivalDateTime": req.params.returningDate,
-      "class": req.params.class
+      "class": req.params.class,
+      "seats": req.params.seats
     }
     mongo.roundTripSearch(flight, function(outGoingFlights, inComingFlights) {
       var flights = {};
@@ -251,7 +253,7 @@ module.exports = function(app, mongo) {
     });
   });
 
-  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:class', function(req, res) {
+  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     var origin = req.params.origin;
     var destination = req.params.destination;
     var departingDate = req.params.departingDate;
@@ -259,10 +261,10 @@ module.exports = function(app, mongo) {
     var seats = req.params.seats;
     getOtherAirlines(function(result) {
       res.json(result);
-    }, origin, destination, departingDate, flightClass, 0)
+    }, origin, destination, departingDate, flightClass, seats, 0)
   });
 
-  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
     var origin = req.params.origin;
     var destination = req.params.destination;
     var departingDate = req.params.departingDate;
@@ -271,7 +273,7 @@ module.exports = function(app, mongo) {
     var seats = req.params.seats;
     getOtherAirlinesRound(function(result) {
       res.json(result);
-    }, origin, destination, departingDate, arrivalDate, flightClass, 0)
+    }, origin, destination, departingDate, arrivalDate, flightClass, seats, 0)
 
   });
 
@@ -362,11 +364,11 @@ module.exports = function(app, mongo) {
     return null;
   };
 
-  var getOtherAirlines = function(cb, origin, destination, date, flightClass, i) {
+  var getOtherAirlines = function(cb, origin, destination, date, flightClass, seats, i) {
     if (i < airlines.length) {
       var options = {
         host: airlines[i],
-        path: '/api/flights/search/' + origin + '/' + destination + '/' + date + '/' + flightClass + '?wt=' + jwtoken,
+        path: '/api/flights/search/' + origin + '/' + destination + '/' + date + '/' + flightClass + '/' + seats + '?wt=' + jwtoken,
         headers: {
           'x-access-token': jwtoken
         }
@@ -389,14 +391,14 @@ module.exports = function(app, mongo) {
               if (validJSON && flightsData.outgoingFlights)
                 newFlights.outgoingFlights = newFlights.outgoingFlights.concat(flightsData.outgoingFlights);
               cb(newFlights);
-            }, origin, destination, date, flightClass, i + 1)
+            }, origin, destination, date, flightClass, seats, i + 1)
           });
       }).on('error', function(e) {
         console.log("ERROR " + e)
 
         getOtherAirlines(function(newFlights) {
           cb(newFlights);
-        }, origin, destination, date, flightClass, i + 1)
+        }, origin, destination, date, flightClass, seats, i + 1)
       }).setTimeout(3000, function() {
         this.abort();
       });
@@ -407,11 +409,11 @@ module.exports = function(app, mongo) {
     }
   };
 
-  var getOtherAirlinesRound = function(cb, origin, destination, outDate, inDate, flightClass, i) {
+  var getOtherAirlinesRound = function(cb, origin, destination, outDate, inDate, flightClass, seats, i) {
     if (i < airlines.length) {
       var options = {
         host: airlines[i],
-        path: '/api/flights/search/' + origin + '/' + destination + '/' + outDate + '/' + inDate + '/' + flightClass + '?wt=' + jwtoken,
+        path: '/api/flights/search/' + origin + '/' + destination + '/' + outDate + '/' + inDate + '/' + flightClass + '/' + seats + '?wt=' + jwtoken,
         headers: {
           'x-access-token': jwtoken
         }
@@ -436,14 +438,14 @@ module.exports = function(app, mongo) {
                 newFlights.outgoingFlights = newFlights.outgoingFlights.concat(flightsData.outgoingFlights);
               newFlights.returnFlights = newFlights.returnFlights.concat(flightsData.returnFlights);
               cb(newFlights);
-            }, origin, destination, outDate, inDate, flightClass, i + 1)
+            }, origin, destination, outDate, inDate, flightClass, seats, i + 1)
           });
       }).on('error', function(e) {
         console.log("ERROR " + e)
 
         getOtherAirlinesRound(function(newFlights) {
           cb(newFlights);
-        }, origin, destination, outDate, inDate, flightClass, i + 1)
+        }, origin, destination, outDate, inDate, flightClass, seats, i + 1)
       }).setTimeout(3000, function() {
         this.abort();
       });

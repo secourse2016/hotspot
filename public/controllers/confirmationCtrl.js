@@ -1,5 +1,5 @@
 App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, FlightsSrv, API, $http) {
-
+  var jwtoken  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzIiwiaWF0IjoxNDYxMDMxNDEwLCJleHAiOjE0OTI1Njc0MTcsImF1ZCI6Ind3dy5zd2lzc2FpcmxpbmVzLmNvbSIsInN1YiI6ImhvdHNwb3QifQ.1ofRxR5MfGQ1uxojSKVQrr0vIZE7Nb276BcKMSzf5Lw";
   $scope.passengerDetails = PaymentSrv.getPassengerDetails();
   $scope.flight = FlightsSrv.getFlightInfo();
   $scope.totalCost = 0;
@@ -70,12 +70,12 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
             if (response.id != undefined) {
               var token = response.id
               console.log("token in handler = ", token);
-              $http.post('/booking', {
+              $http.post('http://' + URL + '/booking?wt=' + jwtoken, {
                 "passengerDetails": $scope.passengerDetails,
                 "class": $scope.class,
                 "outgoingFlightId": $scope.flight.outFlight._id,
                 "returnFlightId": $scope.flight.inFlight._id,
-                "token": token,
+                "paymentToken": token,
                 "cost": $scope.totalCost * 100
               }).success(function(res) {
                 console.log("res in showPaymentScreen", res);
@@ -93,11 +93,15 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
         });
 
         handler.open({
-          name: 'Swiss Airlines',
+          name: outFlight.Airline,
           description: 'Ticket Payment',
           amount: $scope.totalCost * 100
         });
 
+      });
+      // Close Checkout on page navigation:
+      $(window).on('popstate', function() {
+        handler.close();
       });
     }
     else{
@@ -105,8 +109,96 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
       var URL2 = findAirline(inFlight.Airline);
       API.getPublicKey(URL1, function(res){
         console.log(res);
-        Strip.setPublishableKey(res);
 
+        var handler = StripeCheckout.configure({
+          key: res,
+          image: '/images/flag.png',
+          locale: 'auto',
+          token: function(response) {
+            console.log(response);
+
+            if (response.id != undefined) {
+              var token = response.id
+              console.log("token in handler = ", token);
+              $http.post('http://' + URL1 + '/booking?wt=' + jwtoken, {
+                "passengerDetails": $scope.passengerDetails,
+                "class": $scope.class,
+                "outgoingFlightId": $scope.flight.outFlight._id,
+                "returnFlightId": "",
+                "paymentToken": token,
+                "cost": $scope.totalCost * 100
+              }).success(function(res) {
+                console.log("res in showPaymentScreen", res);
+
+                if (res == "succeeded") {
+
+                  // $scope.SubmitBooking();
+                  $scope.user.button = 'true';
+
+                }
+              });
+            }
+
+          },
+          email: $scope.passengerDetails[0].email
+        });
+
+        handler.open({
+          name: outFlight.Airline,
+          description: 'Ticket Payment',
+          amount: $scope.flight.outFlight.cost * 100
+        });
+
+      });
+
+      API.getPublicKey(URL2, function(res){
+        console.log(res);
+
+        var handler2 = StripeCheckout.configure({
+          key: res,
+          image: '/images/flag.png',
+          locale: 'auto',
+          token: function(response) {
+            console.log(response);
+
+            if (response.id != undefined) {
+              var token = response.id
+              console.log("token in handler = ", token);
+              $http.post('http://' + URL2 + '/booking?wt=' + jwtoken, {
+                "passengerDetails": $scope.passengerDetails,
+                "class": $scope.class,
+                "outgoingFlightId": $scope.flight.inFlight._id,
+                "returnFlightId": "",
+                "paymentToken": token,
+                "cost": $scope.flight.inFlight.cost * 100
+              }).success(function(res) {
+                console.log("res in showPaymentScreen", res);
+
+                if (res == "succeeded") {
+
+                  // $scope.SubmitBooking();
+                  $scope.user.button = 'true';
+
+                }
+              });
+            }
+
+          },
+          email: $scope.passengerDetails[0].email
+        });
+
+        handler2.open({
+          name: inFlight.Airline,
+          description: 'Ticket Payment',
+          amount: $scope.totalCost * 100
+        });
+
+      });
+
+      // Close Checkout on page navigation:
+      $(window).on('popstate', function() {
+        handler.close();
+        handler2.close();
       });
     }
 
@@ -115,10 +207,7 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
 
 
 
-    // Close Checkout on page navigation:
-    $(window).on('popstate', function() {
-      handler.close();
-    });
+
   };
 
   // $scope.SubmitBooking = function() {

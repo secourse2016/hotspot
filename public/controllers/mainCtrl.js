@@ -1,7 +1,7 @@
 /**
  * Main Controller
  */
-App.controller('mainCtrl', function($scope, $http, FlightsSrv, $location) {
+App.controller('mainCtrl', function($scope, $http, API, FlightsSrv, $location) {
   //  Stripe.setPublishableKey('pk_test_yNAnTNKDpawM5MfTomMji98b');
 
   //  Stripe.card.createToken({
@@ -74,6 +74,7 @@ App.controller('mainCtrl', function($scope, $http, FlightsSrv, $location) {
  };
  $scope.SetNumberOfSeats= function(s) {
   FlightsSrv.setNumberOfSeats(s);
+  API.setNumberOfSeats(s);
 };
 
   /* Find All Available Flights  */
