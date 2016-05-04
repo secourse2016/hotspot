@@ -64,6 +64,131 @@
           <div class="col">{{flight.inFlight.seatmap[0].cost | currency}} - {{flight.outFlight.seatmap[0].cost * 1.1 | currency}}</div>
 
         </div>
+        
+         <div class="form-group">
+          <label for="fname">First Name:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.fname}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="lname">Last Name:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.lname}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passport}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Issue Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportIssueDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Passport Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Type:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccType}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Number:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccNumber}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Credit Card Expiry Date:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Name on Credit Card:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.ccName}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Email:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.email}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Country:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.country}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">Address 1:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add1}}</h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="psprt">Address 2:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.add2}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">State:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.state}}</h3>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="psprt">City:</label>
+          <div class="row confirm">
+              <h3 class="confirm-text">{{user.city}}</h3>
+          </div>
+        </div>
+
+
+        <!-- <div class="well"> -->
+          <label for="psprt">Contact Number:</label>
+          <div class="row well" style="text-align:left">
+              <h3 class="">{{user.contactNumber}}</h3>
+          </div>
                 
 
 <button class="btn btn-primary" id='btnSearch' ng-disabled="user.button == 'true'" ng-click='EditInfo()'>
