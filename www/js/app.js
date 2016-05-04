@@ -76,7 +76,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'paymentCtrl'
       }
     }
-  });
+  })
+.state('bookingS2', {
+    url: "/bookingS2",
+    templateUrl: 'templates/bookingS2.html'
+});
+
+ .state('tab.book-confirm', {
+ url: '/book/:confirm',
+ views: {
+ 'tab-confirm': {
+ templateUrl: 'templates/tab-confirm.html',
+ controller: 'confirmCtrl'
+ }
+ }
+ })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
  
