@@ -68,14 +68,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-.state('tab.payment', {
-    url: '/book/:tab-payment',
-    views: {
-      'tab-payment': {
-        templateUrl: 'templates/tab-payment.html',
-        controller: 'paymentCtrl'
-      }
-    }
+.state('payment', {
+    url: '/tab/payment',
+    
+        templateUrl: 'templates/tab-payment.html'
+     
   })
 .state('bookingS2', {
     url: '/tab/bookingS2',
