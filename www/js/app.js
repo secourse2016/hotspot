@@ -92,6 +92,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 }
  
  })
+ .state('tab.confirm', {
+      url: '/tab-confirm',
+      views: {
+        'tab-confirm': {
+          templateUrl: 'templates/tab-confirm.html',
+          controller: 'confirmCtrl'
+        }
+      }
+    })
  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
