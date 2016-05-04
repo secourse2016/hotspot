@@ -78,7 +78,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 .state('bookingS2', {
-    url: "/bookingS2",
+    url: '/tab/bookingS2',
     templateUrl: 'templates/bookingS2.html'
 })
 
