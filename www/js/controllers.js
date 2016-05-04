@@ -5,7 +5,7 @@ angular.module('starter.controllers',[])
 
 })
    
-.controller('bookCtrl', ['$scope','$http' ,'$state',
+.controller('bookCtrl', ['$scope','$http' ,'$state','FlightsSrv',
     function($scope,$http, $state, FlightsSrv) {
    
     $http.get('js/airports.json').success(function(data) {
@@ -20,14 +20,33 @@ angular.module('starter.controllers',[])
         if($scope.twoWay == true) $scope.trip = "Two Way";
         else $scope.trip = "One Way";
       }
-    
-   FlightsSrv.setSelectedClass($scope.cla);
-   FlightsSrv.setSelectedOriginAirPort($scope.mySelect);
-   lightsSrv.setSelectedDestinationAirPort($scope.mySelect1);
-    FlightsSrv.setSelectIncomingDate($scope.dataA);
-   FlightsSrv.setSelectedOutgoingData($scope.dateD);
-   FlightsSrv.setSelectedRoundTrip($scope.twoWay);
-   FlightsSrv.setSelectedOriginAirLines($scope.other);
+
+       /* Record User's Selected Destination Airport  */
+  $scope.SetDestinationAirport = function(destAirport) {
+    FlightsSrv.setSelectedDestinationAirport(destAirport);
+  };
+
+   $scope.SetOutgoingDate = function(outgoingDate) {
+    FlightsSrv.setSelectedOutgoingDate(outgoingDate);
+  };
+  $scope.SetIncomingDate = function(IncomingDate) {
+    FlightsSrv.setSelectedIncomingDate(IncomingDate);
+  };
+   $scope.SetRoundTrip= function(roundTrip) {
+    FlightsSrv.setSelectedRoundTrip(roundTrip);
+  };
+  $scope.SetOtherAirlines= function(otherAirlines) {
+   FlightsSrv.setSelectedAirlines(otherAirlines);
+ };
+
+  /* Find All Available Flights  */
+  $scope.SearchFlights = function() {
+        $scope.SetOutgoingDate($scope.outDate);
+        $scope.SetIncomingDate($scope.inDate);
+        $scope.SetRoundTrip($scope.roundTrip);
+        $scope.SetOtherAirlines($scope.otherAirlines);
+        
+  };
 
 }])
 
@@ -37,8 +56,5 @@ angular.module('starter.controllers',[])
 })
 
 .controller('paymentCtrl', function($scope) {
-
-})
-.controller('book2Ctrl', function($scope,$http) {
 
 })
