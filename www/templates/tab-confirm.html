@@ -9,39 +9,62 @@
 
    <button class="button icon ion-home"></button>
 </div>
-<label for="fname">Outgoing Flight:</label>
+ <div>
+	<h1>Outgoing flights</h1>
+ </div>
+    <ion-content>
+                  <div class="row header">
+               
+                       <div class="col">Flight Number</div>
+                       <div class="col">Aircraft</div>
+                       <div class="col">Capacity</div>
+                       <div class="col">Date</div>
+                       <div class="col">Duration</div>
+                       <div class="col">Available seats</div>
+                       <div class="col">Price range</div>
+                       </div>
 
-          <table style="background-color: white " class="table table-bordered">
-            <thead style="background-color: #FF8080">
-              <tr>
+                        <div class="row">
+       
+       
+          <div class="col">{{flight.outFlight.flightNumber}</div>
+          <div class="col">{{flight.outFlight.aircraft}}}</div>
+          <div class="col">{{flight.outFlight.capacity}}</div>
+          <div class="col">{{flight.outFlight.date | date : 'EEEE, MMMM d, y'}}</div>
+          <div class="col">{{flight.outFlight.duration}</div>
+          <div class="col">{{flight.outFlight.availableSeats}}</div>
+          <div class="col">{{flight.outFlight.seatmap[0].cost | currency}} - {{flight.outFlight.seatmap[0].cost * 1.1 | currency}}</div>
 
-                <th>Flight Number</th>
-                <th>Aircraft</th>
-                <th>Capacity</th>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Available Seats</th>
-                <th>Price Range</th>
-              </tr>
-            </thead>
-            </table>
+        </div>
 
-            <label for="fname">Return Flight:</label>
+         <div>
+	<h2>Returning flights</h2>
+ </div>
+    <ion-content>
+                  <div class="row header">
+               
+                       <div class="col">Flight Number</div>
+                       <div class="col">Aircraft</div>
+                       <div class="col">Capacity</div>
+                       <div class="col">Date</div>
+                       <div class="col">Duration</div>
+                       <div class="col">Available seats</div>
+                       <div class="col">Price range</div>
+                       </div>
 
-          <table style="background-color: white " class="table table-bordered">
-            <thead style="background-color: #FF8080">
-              <tr>
+                        <div class="row">
+       
+       
+          <div class="col">{{flight.inFlight.flightNumber}</div>
+          <div class="col">{{flight.inFlight.aircraft}}}</div>
+          <div class="col">{{flight.inFlight.capacity}}</div>
+          <div class="col">{{flight.inFlight.date | date : 'EEEE, MMMM d, y'}}</div>
+          <div class="col">{{flight.inFlight.duration}</div>
+          <div class="col">{{flight.inFlight.availableSeats}}</div>
+          <div class="col">{{flight.inFlight.seatmap[0].cost | currency}} - {{flight.outFlight.seatmap[0].cost * 1.1 | currency}}</div>
 
-                <th>Flight Number</th>
-                <th>Aircraft</th>
-                <th>Capacity</th>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Available Seats</th>
-                <th>Price Range</th>
-              </tr>
-            </thead>
-            </table>
+        </div>
+                
 
 <button class="btn btn-primary" id='btnSearch' ng-disabled="user.button == 'true'" ng-click='EditInfo()'>
    Edit information
@@ -80,13 +103,6 @@
 </label>
 <br>
 </br>
-
-
-
-
-
-
-
 
 <button class="button icon icon-left ion-home" ng-model="button" ng-show="user.button == 'true'"id='btnFinish' ng-click='GoToMain()'>
    Back to home
