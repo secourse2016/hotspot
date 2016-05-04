@@ -11,11 +11,14 @@ module.exports = function(app, mongo) {
   var express = require('express');
   var path = require('path');
   var http = require('http');
+  var stripe = require('stripe')( process.env.stripe_secret_key);
   var airlines = [
     "ec2-52-90-41-197.compute-1.amazonaws.com", //Austrian
     "ec2-52-26-166-80.us-west-2.compute.amazonaws.com", //KLM
-    "52.58.24.76"//Iberia
+    "52.58.24.76",
+    "" //Iberia
   ];
+  var airlinesToUrl = require('../airlines.json');
   var jwtoken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzIiwiaWF0IjoxNDYxMDMxNDEwLCJleHAiOjE0OTI1Njc0MTcsImF1ZCI6Ind3dy5zd2lzc2FpcmxpbmVzLmNvbSIsInN1YiI6ImhvdHNwb3QifQ.1ofRxR5MfGQ1uxojSKVQrr0vIZE7Nb276BcKMSzf5Lw";
 
 
@@ -27,7 +30,20 @@ module.exports = function(app, mongo) {
   });
 
   app.post('/api/user', function(req, res) {
-    require('../db').insertBooking(req.body.user, req.body.flight);
+    console.log(req.body.flight.tripType);
+    if (req.body.flight.tripType !== 'Round trip') {
+      var cases = 0;
+    }
+    else {
+      if (req.body.flight.outFlight.Airline == req.body.flight.inFlight.Airline) {
+        var cases = 1;
+      }
+      else{
+        var cases = 2;
+      }
+
+    }
+    postBooking(req.body.passengerDetails, req.body.flight, cases);
     //BOOKING REF ID!
   });
 
@@ -41,6 +57,11 @@ module.exports = function(app, mongo) {
   app.get('/api/data/codes', function(req, res) {
     var codes = require('../airports.json');
     res.json(codes);
+  });
+
+  app.get('/api/data/airlines', function(req, res){
+    var airlines = require('../airlines.json');
+    res.json(airlines);
   });
 
   /*GET ALL FLIGHTS (DUMMY) */
@@ -69,8 +90,8 @@ module.exports = function(app, mongo) {
     });
   });
 
-  var array = [];
   app.get('/seed/flights', function(req, res) {
+    var array = [];
 
     // Data will be loaded from a  enerated JSON data into an array
 
@@ -164,6 +185,14 @@ module.exports = function(app, mongo) {
 
   });
 
+  // app.post('/booking', function(req, res){
+  //   console.log("in /booking", req.body);
+  //   require('../db').insertBooking(req.body.booking, function(result){
+  //     res.json(result);
+  //   });
+  //
+  // });
+
   /* Middlewear For Secure API Endpoints */
   app.use('/api/flights/search/', function(req, res, next) {
 
@@ -189,14 +218,15 @@ module.exports = function(app, mongo) {
   });
 
 
-  app.get('/api/flights/search/:origin/:destination/:departingDate/:class', function(req, res) {
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     // retrieve params from req.params.{{origin | departingDate | ...}}
     // return this exact format
     var flight = {
         "origin": req.params.origin,
         "destination": req.params.destination,
         "departureDateTime": req.params.departingDate,
-        "class": req.params.class
+        "class": req.params.class,
+        "seats": req.params.seats
       }
       // console.log("before querying the db");
     mongo.oneWaySearch(flight, function(err, result) {
@@ -206,13 +236,14 @@ module.exports = function(app, mongo) {
     });
 
   });
-  app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+  app.get('/api/flights/search/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
     var flight = {
       "origin": req.params.origin,
       "destination": req.params.destination,
       "departureDateTime": req.params.departingDate,
       "arrivalDateTime": req.params.returningDate,
-      "class": req.params.class
+      "class": req.params.class,
+      "seats": req.params.seats
     }
     mongo.roundTripSearch(flight, function(outGoingFlights, inComingFlights) {
       var flights = {};
@@ -222,7 +253,7 @@ module.exports = function(app, mongo) {
     });
   });
 
-  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:class', function(req, res) {
+  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:class/:seats', function(req, res) {
     var origin = req.params.origin;
     var destination = req.params.destination;
     var departingDate = req.params.departingDate;
@@ -230,10 +261,10 @@ module.exports = function(app, mongo) {
     var seats = req.params.seats;
     getOtherAirlines(function(result) {
       res.json(result);
-    }, origin, destination, departingDate, flightClass, 0)
+    }, origin, destination, departingDate, flightClass, seats, 0)
   });
 
-  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:returningDate/:class', function(req, res) {
+  app.get('/api/flights/searchOtherAirlines/:origin/:destination/:departingDate/:returningDate/:class/:seats', function(req, res) {
     var origin = req.params.origin;
     var destination = req.params.destination;
     var departingDate = req.params.departingDate;
@@ -242,16 +273,102 @@ module.exports = function(app, mongo) {
     var seats = req.params.seats;
     getOtherAirlinesRound(function(result) {
       res.json(result);
-    }, origin, destination, departingDate, arrivalDate, flightClass, 0)
+    }, origin, destination, departingDate, arrivalDate, flightClass, seats, 0)
 
   });
 
 
-  var getOtherAirlines = function(cb, origin, destination, date, flightClass, i) {
+  app.get('/stripe/pubkey', function(req, res){
+    res.send(process.env.stripe_publishable_key);
+  });
+
+  var postBooking = function(passengerInfo, flight, cases){
+    console.log("postBooking", cases);
+    var booking = {
+      passengerDetails: passengerInfo,
+      class : flight.class,
+      cost : flight.cost,
+      outgoingFlightId : "",
+      returnFlightId : "",
+      paymentToken: "Stripe"
+    }
+    switch(cases){
+      case 0: {
+        booking.outgoingFlightId = flight.outFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+      } break;
+      case 1: {
+        booking.outgoingFlightId = flight.outFlight._id;
+        booking.returnFlightId = flight.inFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+
+      }break;
+      case 2:{
+        booking.outgoingFlightId = flight.outFlight._id;
+        var options = {
+          hostname : findAirline(flight.outFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+        booking.outgoingFlightId = flight.inFlight._id;
+        var options2 = {
+          hostname : findAirline(flight.infFlight.Airline),
+          path : '/booking' + "?wt=" + jwtoken,
+          method : 'POST',
+          headers : {
+            'x-access-token': jwtoken
+          },
+          body : booking
+        }
+        http.request(options, function(res){
+          console.log("res in postBooking", res);
+        });
+      }break;
+  }
+}
+
+  var findAirline = function(airlineName){
+    for (var i = 0; i < airlinesToUrl.length; i++) {
+      if(airlinesToUrl[i].name == airlineName)
+        return airlinesToUrl[i].ip;
+    }
+    return null;
+  };
+
+  var getOtherAirlines = function(cb, origin, destination, date, flightClass, seats, i) {
     if (i < airlines.length) {
       var options = {
         host: airlines[i],
-        path: '/api/flights/search/' + origin + '/' + destination + '/' + date + '/' + flightClass + '?wt=' + jwtoken,
+        path: '/api/flights/search/' + origin + '/' + destination + '/' + date + '/' + flightClass + '/' + seats + '?wt=' + jwtoken,
         headers: {
           'x-access-token': jwtoken
         }
@@ -274,14 +391,14 @@ module.exports = function(app, mongo) {
               if (validJSON && flightsData.outgoingFlights)
                 newFlights.outgoingFlights = newFlights.outgoingFlights.concat(flightsData.outgoingFlights);
               cb(newFlights);
-            }, origin, destination, date, flightClass, i + 1)
+            }, origin, destination, date, flightClass, seats, i + 1)
           });
       }).on('error', function(e) {
         console.log("ERROR " + e)
 
         getOtherAirlines(function(newFlights) {
           cb(newFlights);
-        }, origin, destination, date, flightClass, i + 1)
+        }, origin, destination, date, flightClass, seats, i + 1)
       }).setTimeout(3000, function() {
         this.abort();
       });
@@ -292,11 +409,11 @@ module.exports = function(app, mongo) {
     }
   };
 
-  var getOtherAirlinesRound = function(cb, origin, destination, outDate, inDate, flightClass, i) {
+  var getOtherAirlinesRound = function(cb, origin, destination, outDate, inDate, flightClass, seats, i) {
     if (i < airlines.length) {
       var options = {
         host: airlines[i],
-        path: '/api/flights/search/' + origin + '/' + destination + '/' + outDate + '/' + inDate + '/' + flightClass + '?wt=' + jwtoken,
+        path: '/api/flights/search/' + origin + '/' + destination + '/' + outDate + '/' + inDate + '/' + flightClass + '/' + seats + '?wt=' + jwtoken,
         headers: {
           'x-access-token': jwtoken
         }
@@ -321,14 +438,14 @@ module.exports = function(app, mongo) {
                 newFlights.outgoingFlights = newFlights.outgoingFlights.concat(flightsData.outgoingFlights);
               newFlights.returnFlights = newFlights.returnFlights.concat(flightsData.returnFlights);
               cb(newFlights);
-            }, origin, destination, outDate, inDate, flightClass, i + 1)
+            }, origin, destination, outDate, inDate, flightClass, seats, i + 1)
           });
       }).on('error', function(e) {
         console.log("ERROR " + e)
 
         getOtherAirlinesRound(function(newFlights) {
           cb(newFlights);
-        }, origin, destination, outDate, inDate, flightClass, i + 1)
+        }, origin, destination, outDate, inDate, flightClass, seats, i + 1)
       }).setTimeout(3000, function() {
         this.abort();
       });
@@ -339,5 +456,38 @@ module.exports = function(app, mongo) {
       });
     }
   }
+
+
+  app.post('/booking', function(req, res) {
+    console.log("in stripe/booking ay 7aga");
+    console.log("/booking: " + JSON.stringify(req.body) );
+      // retrieve the token
+      var stripeToken = req.body.token;
+      var flightCost  = req.body.cost;
+
+      // attempt to create a charge using token
+      stripe.charges.create({
+        amount: flightCost,
+        currency: "usd",
+        source: stripeToken,
+        description: "test"
+      }, function(err, data) {
+      if (err){
+        res.send({ refNum: null, errorMessage: err});
+        console.log(err.message);
+      }
+      else
+      {
+        var passengerDetails = req.body.passengerDetails;
+        // var class =
+        console.log(data.status);
+        res.send(data.status);
+      }
+         // payment successful
+         // create reservation in database
+         // get booking reference number and send it back to the user
+      });
+
+  });
 
 };

@@ -1,8 +1,22 @@
 /**
  * Main Controller
  */
-App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
+App.controller('mainCtrl', function($scope, $http, API, FlightsSrv, $location) {
+  //  Stripe.setPublishableKey('pk_test_yNAnTNKDpawM5MfTomMji98b');
 
+  //  Stripe.card.createToken({
+  //      number: "4242424242424242",
+  //      cvc: "222",
+  //      exp_month: "12",
+  //      exp_year: "2017"
+  //  }, function(status, response) {
+  //      console.log(status, response);
+  //      console.log(response.id)
+  //      var token = response.id
+  //      //$http.post('/booking', { "token":token, "cost":"10000"});
+   //
+   //
+  //  });
   /*----------- Angular Bootstrap Datepicker -----------*/
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'MM/dd/yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
@@ -58,10 +72,15 @@ App.controller('mainCtrl', function($scope, FlightsSrv, $location) {
   $scope.SetOtherAirlines= function(otherAirlines) {
    FlightsSrv.setSelectedAirlines(otherAirlines);
  };
+ $scope.SetNumberOfSeats= function(s) {
+  FlightsSrv.setNumberOfSeats(s);
+  API.setNumberOfSeats(s);
+};
 
   /* Find All Available Flights  */
   $scope.SearchFlights = function() {
         $scope.SetOutgoingDate($scope.outDate);
+        $scope.SetNumberOfSeats($scope.seats);
         $scope.SetIncomingDate($scope.inDate);
         $scope.SetRoundTrip($scope.roundTrip);
         $scope.SetOtherAirlines($scope.otherAirlines);
