@@ -121,6 +121,18 @@
 
                     </div>
 
+                    <!-- <script>//javascript code
+                    totalCost = flight.inFlight.cost + flight.outFlight.cost
+                    console.log(totalCost)
+                    </script> -->
+
+                    <div class="form-group">
+                        <label for="fname">Total Cost:</label>
+                        <div class="row confirm">
+                            <h3 class="confirm-text">{{totalCost | currency}}</h3>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="fname">First Name:</label>
                         <div class="row confirm">
@@ -167,7 +179,7 @@
                     </div>
 
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="psprt">Credit Card Type:</label>
                         <div class="row confirm">
                             <h3 class="confirm-text">{{user.ccType}}</h3>
@@ -196,7 +208,7 @@
                         <div class="row confirm">
                             <h3 class="confirm-text">{{user.ccName}}</h3>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="form-group">
@@ -254,12 +266,6 @@
                     <!-- </div> -->
 
 
-                    <!-- <div class="form-group">
-          <label for="passport">Passport Number:</label>
-          <textarea class="form-control" rows="5" id="passport"></textarea>
-        </div> -->
-
-
 
                     <div class="col-xs-12" style="height:10px;"></div>
 
@@ -272,9 +278,26 @@
                     <label>
                         <input type="checkbox" ng-model="checked"> All of my information is correct.</label>
                     <br/>
+
+                    <div>
+                        <!-- <button type="button" class="btn btn-primary" id='btnPayment' ng-click='showPaymentScreen()'>Pay</button> -->
+                    <!-- <form action="/booking" method="POST">
+                      <script
+                      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+                      data-key="pk_test_yNAnTNKDpawM5MfTomMji98b"
+                      data-amount={{totalCost*100}}
+                      data-name="Swiss Airlines"
+                      data-description="Ticket Payment"
+                      data-image="/images/flag.png"
+                      data-locale="auto"
+                      data-email={{user.email}}>
+                      </script>
+                    </form> -->
+                  </div>
+
                     <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
                     <div class="col-xs-12" style="height:25px;"></div>
-                    <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="user.button='true'; SubmitBooking()" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'">Send Tickets!</button>
+                    <button style="margin-bottom: 30px;" ng-model="user.button" ng-click="showPaymentScreen()" class="btn btn-primary" id='btnSend' ng-disabled="!checked || user.button == 'true'">Pay</button>
                     <!-- <button type="button" class="btn btn-primary" id='btnSearch' disabled ng-click='SearchFlights()'>Send Tickets!</button> -->
 
                     <div class="alert alert-success fade in" ng-show="user.button == 'true'">

@@ -33,3 +33,17 @@ $('.datepicker').pickadate({
 </script>
 <input type="date" class="datepicker" ng-model="testDate">
 <h1>{{testDate}} 3</h1>
+
+
+<a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' ng-model="optionTest" class='dropdown-content'>
+    <option value="BY">Belarus</option>
+    <li ng-model="optionTest" ng-value="two"><a>two</a></li>
+    <li class="divider"></li>
+    <li><a ng-model="optionTest" ng-value="two">three</a></li>
+  </ul>
+<p>
+  {{optionTest}} 4
+</p>

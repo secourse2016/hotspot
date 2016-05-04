@@ -11,6 +11,7 @@ module.exports = function(app, mongo) {
   var express = require('express');
   var path = require('path');
   var http = require('http');
+  var stripe = require('stripe')( process.env.stripe_secret_key);
   var airlines = [
     "ec2-52-90-41-197.compute-1.amazonaws.com", //Austrian
     "ec2-52-26-166-80.us-west-2.compute.amazonaws.com", //KLM
@@ -42,7 +43,7 @@ module.exports = function(app, mongo) {
       }
 
     }
-    postBooking(req.body.user, req.body.flight, cases);
+    postBooking(req.body.passengerDetails, req.body.flight, cases);
     //BOOKING REF ID!
   });
 
@@ -56,6 +57,11 @@ module.exports = function(app, mongo) {
   app.get('/api/data/codes', function(req, res) {
     var codes = require('../airports.json');
     res.json(codes);
+  });
+
+  app.get('/api/data/airlines', function(req, res){
+    var airlines = require('../airlines.json');
+    res.json(airlines);
   });
 
   /*GET ALL FLIGHTS (DUMMY) */
@@ -179,13 +185,13 @@ module.exports = function(app, mongo) {
 
   });
 
-  app.post('/booking', function(req, res){
-    console.log("in booking");
-    require('../db').insertBooking(req.body.booking, function(result){
-      res.json(result);
-    });
-
-  });
+  // app.post('/booking', function(req, res){
+  //   console.log("in /booking", req.body);
+  //   require('../db').insertBooking(req.body.booking, function(result){
+  //     res.json(result);
+  //   });
+  //
+  // });
 
   /* Middlewear For Secure API Endpoints */
   app.use('/api/flights/search/', function(req, res, next) {
@@ -270,12 +276,14 @@ module.exports = function(app, mongo) {
   });
 
 
+  app.get('/stripe/pubkey', function(req, res){
+    res.send(process.env.stripe_publishable_key);
+  });
 
-
-  var postBooking = function(user, flight, cases){
+  var postBooking = function(passengerInfo, flight, cases){
     console.log("postBooking", cases);
     var booking = {
-      passengerDetails: user,
+      passengerDetails: passengerInfo,
       class : flight.class,
       cost : flight.cost,
       outgoingFlightId : "",
@@ -447,5 +455,37 @@ module.exports = function(app, mongo) {
     }
   }
 
+
+  app.post('/booking', function(req, res) {
+    console.log("in stripe/booking ay 7aga");
+    console.log("/booking: " + JSON.stringify(req.body) );
+      // retrieve the token
+      var stripeToken = req.body.token;
+      var flightCost  = req.body.cost;
+
+      // attempt to create a charge using token
+      stripe.charges.create({
+        amount: flightCost,
+        currency: "usd",
+        source: stripeToken,
+        description: "test"
+      }, function(err, data) {
+      if (err){
+        res.send({ refNum: null, errorMessage: err});
+        console.log(err.message);
+      }
+      else
+      {
+        var passengerDetails = req.body.passengerDetails;
+        // var class =
+        console.log(data.status);
+        res.send(data.status);
+      }
+         // payment successful
+         // create reservation in database
+         // get booking reference number and send it back to the user
+      });
+
+  });
 
 };
