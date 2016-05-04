@@ -90,8 +90,9 @@ module.exports = function(app, mongo) {
     });
   });
 
-  app.get('/seed/flights', function(req, res) {
-    var array = [];
+	var array = []; 
+ app.get('/seed/flights', function(req, res) {
+    
 
     // Data will be loaded from a  enerated JSON data into an array
 
@@ -462,8 +463,9 @@ module.exports = function(app, mongo) {
     console.log("in stripe/booking ay 7aga");
     console.log("/booking: " + JSON.stringify(req.body) );
       // retrieve the token
-      var stripeToken = req.body.token;
+      var stripeToken = req.body.paymentToken;
       var flightCost  = req.body.cost;
+	var outFlightId = req.body.outgoingFlightId;
 
       // attempt to create a charge using token
       stripe.charges.create({
@@ -481,7 +483,7 @@ module.exports = function(app, mongo) {
         var passengerDetails = req.body.passengerDetails;
         // var class =
         console.log(data.status);
-        res.send(data.status);
+        res.send({refNum: moment().toDate().getTime()+outFlightId, errorMessage:null});
       }
          // payment successful
          // create reservation in database

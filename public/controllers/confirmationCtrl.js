@@ -70,7 +70,7 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
             if (response.id != undefined) {
               var token = response.id
               console.log("token in handler = ", token);
-              $http.post('http://' + URL + '/booking?wt=' + jwtoken, {
+              $http.post( URL + '/booking?wt=' + jwtoken, {
                 "passengerDetails": $scope.passengerDetails,
                 "class": $scope.class,
                 "outgoingFlightId": $scope.flight.outFlight._id,
@@ -120,7 +120,7 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
             if (response.id != undefined) {
               var token = response.id
               console.log("token in handler = ", token);
-              $http.post('http://' + URL1 + '/booking?wt=' + jwtoken, {
+              $http.post( URL1 + '/booking?wt=' + jwtoken, {
                 "passengerDetails": $scope.passengerDetails,
                 "class": $scope.class,
                 "outgoingFlightId": $scope.flight.outFlight._id,
@@ -164,7 +164,7 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
             if (response.id != undefined) {
               var token = response.id
               console.log("token in handler = ", token);
-              $http.post('http://' + URL2 + '/booking?wt=' + jwtoken, {
+              $http.post( URL2 + '/booking?wt=' + jwtoken, {
                 "passengerDetails": $scope.passengerDetails,
                 "class": $scope.class,
                 "outgoingFlightId": $scope.flight.inFlight._id,

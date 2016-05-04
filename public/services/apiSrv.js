@@ -75,7 +75,7 @@ var token  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzI
       });
     },
     getPublicKey: function(url, cb){
-      var URL = 'http://'+url+ '/stripe/pubkey' + "?wt=" + token;
+      var URL = url+ '/stripe/pubkey' + "?wt=" + token;
       console.log(URL);
       $http.get(URL).success(function(res){
         console.log("getPublicKey ", res);
