@@ -503,7 +503,8 @@ module.exports = function(app, mongo) {
         // var class =
         console.log(data.status);
         require('../db').insertBooking(booking, function(result){
-            res.json(result);
+           	console.log("result in routes.js/booking", result);
+		 res.json(result);
           });
         // res.send({
         //   refNum: moment().toDate().getTime() + outFlightId,
