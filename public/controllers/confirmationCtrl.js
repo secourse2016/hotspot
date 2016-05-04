@@ -80,8 +80,9 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
                 "cost": $scope.totalCost * 100
               }).success(function(res) {
                 console.log("res in showPaymentScreen", res);
-
-                if (res == "succeeded") {
+		var dta = "Reference Number: " + res.refNum;
+                alert(dta);
+		if (res == "succeeded") {
                   // $scope.SubmitBooking();
                   $scope.user.button = 'true';
 
@@ -130,7 +131,8 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
                 "cost": $scope.totalCost * 100
               }).success(function(res) {
                 console.log("res in showPaymentScreen", res);
-
+		var dta = "Reference Number: " + res.refNum;
+		alert(dta);
                 if (res == "succeeded") {
 
                   // $scope.SubmitBooking();
@@ -174,7 +176,8 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
                 "cost": $scope.flight.inFlight.cost * 100
               }).success(function(res) {
                 console.log("res in showPaymentScreen", res);
-
+		var dta = "Reference Number: " + res.refNum ;
+		alert(dta);
                 if (res == "succeeded") {
 
                   // $scope.SubmitBooking();
