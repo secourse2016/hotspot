@@ -11,7 +11,7 @@ module.exports = function(app, mongo) {
   var express = require('express');
   var path = require('path');
   var http = require('http');
-  var stripe = require('stripe')( process.env.stripe_secret_key);
+  var stripe = require('stripe')(process.env.stripe_secret_key);
   var airlines = [
     "ec2-52-90-41-197.compute-1.amazonaws.com", //Austrian
     "ec2-52-26-166-80.us-west-2.compute.amazonaws.com", //KLM
@@ -33,12 +33,10 @@ module.exports = function(app, mongo) {
     console.log(req.body.flight.tripType);
     if (req.body.flight.tripType !== 'Round trip') {
       var cases = 0;
-    }
-    else {
+    } else {
       if (req.body.flight.outFlight.Airline == req.body.flight.inFlight.Airline) {
         var cases = 1;
-      }
-      else{
+      } else {
         var cases = 2;
       }
 
@@ -59,7 +57,7 @@ module.exports = function(app, mongo) {
     res.json(codes);
   });
 
-  app.get('/api/data/airlines', function(req, res){
+  app.get('/api/data/airlines', function(req, res) {
     var airlines = require('../airlines.json');
     res.json(airlines);
   });
@@ -90,9 +88,9 @@ module.exports = function(app, mongo) {
     });
   });
 
-	var array = []; 
- app.get('/seed/flights', function(req, res) {
-    
+  var array = [];
+  app.get('/seed/flights', function(req, res) {
+
 
     // Data will be loaded from a  enerated JSON data into an array
 
@@ -279,87 +277,93 @@ module.exports = function(app, mongo) {
   });
 
 
-  app.get('/stripe/pubkey', function(req, res){
+  app.get('/stripe/pubkey', function(req, res) {
     res.send(process.env.stripe_publishable_key);
   });
 
-  var postBooking = function(passengerInfo, flight, cases){
+  var postBooking = function(passengerInfo, flight, cases) {
     console.log("postBooking", cases);
     var booking = {
       passengerDetails: passengerInfo,
-      class : flight.class,
-      cost : flight.cost,
-      outgoingFlightId : "",
-      returnFlightId : "",
+      class: flight.class,
+      cost: flight.cost,
+      outgoingFlightId: "",
+      returnFlightId: "",
       paymentToken: "Stripe"
     }
-    switch(cases){
-      case 0: {
-        booking.outgoingFlightId = flight.outFlight._id;
-        var options = {
-          hostname : findAirline(flight.outFlight.Airline),
-          path : '/booking' + "?wt=" + jwtoken,
-          method : 'POST',
-          headers : {
-            'x-access-token': jwtoken
-          },
-          body : booking
+    switch (cases) {
+      case 0:
+        {
+          booking.outgoingFlightId = flight.outFlight._id;
+          var options = {
+            hostname: findAirline(flight.outFlight.Airline),
+            path: '/booking' + "?wt=" + jwtoken,
+            method: 'POST',
+            headers: {
+              'x-access-token': jwtoken
+            },
+            body: booking
+          }
+          http.request(options, function(res) {
+            console.log("res in postBooking", res);
+          });
         }
-        http.request(options, function(res){
-          console.log("res in postBooking", res);
-        });
-      } break;
-      case 1: {
-        booking.outgoingFlightId = flight.outFlight._id;
-        booking.returnFlightId = flight.inFlight._id;
-        var options = {
-          hostname : findAirline(flight.outFlight.Airline),
-          path : '/booking' + "?wt=" + jwtoken,
-          method : 'POST',
-          headers : {
-            'x-access-token': jwtoken
-          },
-          body : booking
-        }
-        http.request(options, function(res){
-          console.log("res in postBooking", res);
-        });
+        break;
+      case 1:
+        {
+          booking.outgoingFlightId = flight.outFlight._id;
+          booking.returnFlightId = flight.inFlight._id;
+          var options = {
+            hostname: findAirline(flight.outFlight.Airline),
+            path: '/booking' + "?wt=" + jwtoken,
+            method: 'POST',
+            headers: {
+              'x-access-token': jwtoken
+            },
+            body: booking
+          }
+          http.request(options, function(res) {
+            console.log("res in postBooking", res);
+          });
 
-      }break;
-      case 2:{
-        booking.outgoingFlightId = flight.outFlight._id;
-        var options = {
-          hostname : findAirline(flight.outFlight.Airline),
-          path : '/booking' + "?wt=" + jwtoken,
-          method : 'POST',
-          headers : {
-            'x-access-token': jwtoken
-          },
-          body : booking
         }
-        http.request(options, function(res){
-          console.log("res in postBooking", res);
-        });
-        booking.outgoingFlightId = flight.inFlight._id;
-        var options2 = {
-          hostname : findAirline(flight.infFlight.Airline),
-          path : '/booking' + "?wt=" + jwtoken,
-          method : 'POST',
-          headers : {
-            'x-access-token': jwtoken
-          },
-          body : booking
+        break;
+      case 2:
+        {
+          booking.outgoingFlightId = flight.outFlight._id;
+          var options = {
+            hostname: findAirline(flight.outFlight.Airline),
+            path: '/booking' + "?wt=" + jwtoken,
+            method: 'POST',
+            headers: {
+              'x-access-token': jwtoken
+            },
+            body: booking
+          }
+          http.request(options, function(res) {
+            console.log("res in postBooking", res);
+          });
+          booking.outgoingFlightId = flight.inFlight._id;
+          var options2 = {
+            hostname: findAirline(flight.infFlight.Airline),
+            path: '/booking' + "?wt=" + jwtoken,
+            method: 'POST',
+            headers: {
+              'x-access-token': jwtoken
+            },
+            body: booking
+          }
+          http.request(options, function(res) {
+            console.log("res in postBooking", res);
+          });
         }
-        http.request(options, function(res){
-          console.log("res in postBooking", res);
-        });
-      }break;
+        break;
+    }
   }
-}
 
-  var findAirline = function(airlineName){
+  var findAirline = function(airlineName) {
     for (var i = 0; i < airlinesToUrl.length; i++) {
-      if(airlinesToUrl[i].name == airlineName)
+      if (airlinesToUrl[i].name == airlineName)
         return airlinesToUrl[i].ip;
     }
     return null;
@@ -461,34 +465,55 @@ module.exports = function(app, mongo) {
 
   app.post('/booking', function(req, res) {
     console.log("in stripe/booking ay 7aga");
-    console.log("/booking: " + JSON.stringify(req.body) );
-      // retrieve the token
-      var stripeToken = req.body.paymentToken;
-      var flightCost  = req.body.cost;
-	var outFlightId = req.body.outgoingFlightId;
+    console.log("/booking: " + JSON.stringify(req.body));
+    // retrieve the token
+    var stripeToken = req.body.paymentToken;
+    var flightCost = req.body.cost;
+    var outFlightId = req.body.outgoingFlightId;
+    var retFlightId = req.body.returnFlightId;
+    var flightClass = req.body.class;
+    var passengerDetails = req.body.passengerDetails;
 
-      // attempt to create a charge using token
-      stripe.charges.create({
-        amount: flightCost,
-        currency: "usd",
-        source: stripeToken,
-        description: "test"
-      }, function(err, data) {
-      if (err){
-        res.send({ refNum: null, errorMessage: err});
+    var booking = {
+
+    stripeToken : req.body.paymentToken,
+    flightCost : req.body.cost,
+    outFlightId : req.body.outgoingFlightId,
+    retFlightId : req.body.returnFlightId,
+    flightClass : req.body.class,
+    passengerDetails : req.body.passengerDetails
+  };
+
+    // attempt to create a charge using token
+    stripe.charges.create({
+      amount: flightCost,
+      currency: "usd",
+      source: stripeToken,
+      description: "test"
+    }, function(err, data) {
+      if (err) {
+        res.send({
+          refNum: null,
+          errorMessage: err
+        });
         console.log(err.message);
-      }
-      else
-      {
+      } else {
         var passengerDetails = req.body.passengerDetails;
+
         // var class =
         console.log(data.status);
-        res.send({refNum: moment().toDate().getTime()+outFlightId, errorMessage:null});
+        require('../db').insertBooking(booking, function(result){
+            res.json(result);
+          });
+        // res.send({
+        //   refNum: moment().toDate().getTime() + outFlightId,
+        //   errorMessage: null
+        // });
       }
-         // payment successful
-         // create reservation in database
-         // get booking reference number and send it back to the user
-      });
+      // payment successful
+      // create reservation in database
+      // get booking reference number and send it back to the user
+    });
 
   });
 

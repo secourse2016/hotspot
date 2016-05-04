@@ -1,3 +1,5 @@
+<link type="text/css" rel="stylesheet" href="/styles/materialize.min.css" media="screen,projection" />
+<script type="text/javascript" src="js/materialize.min.js"></script>
 <form name="flightform" ng-submit='GoToPayment(flightDetails)' novalidate>
   <div class="row">
     <div class="jumbotron banner">
@@ -10,7 +12,7 @@
               </div>
 
               <div class="panel-body">
-                <h2>Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}}, on {{outGoingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{outGoingflight.class}}</h2>
+                <h4>Flights from {{outGoingflight.origin}} to {{outGoingflight.destination}}, on {{outGoingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{outGoingflight.class}}</h4>
                 <div class="col-xs-12" style="height:20px"></div>
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -32,7 +34,7 @@
                       <form action="#">
                         <p>
                           <input type="radio" id = "{{$index}}" class="form-control" name="outFlight" ng-model="flightDetails.outFlight" ng-value="f">
-                          <label for="{{$index}}">{{$index}}</label>
+                          <label for="{{$index}}"></label>
                         </p>
                       </form>
                     </td>
@@ -73,7 +75,7 @@
 
               <div class="panel-body">
                 <div ng-show="flightDetails.tripType== 'Round trip'">
-                  <h2>Flights from {{inComingflight.origin}} to {{inComingflight.destination}}, on {{inComingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{inComingflight.class}}</h2>
+                  <h4>Flights from {{inComingflight.origin}} to {{inComingflight.destination}}, on {{inComingflight.date | date : 'EEEE, MMMM d, y'}}, Flying Class: {{inComingflight.class}}</h4>
                 </div>
                 <table class="table table-bordered table-hover" ng-show="flightDetails.tripType =='Round trip'">
                   <thead>
@@ -94,7 +96,7 @@
                       <form action="#">
                         <p>
                           <input type="radio" id = "inFlight"+"{{$index}}" class="form-control" name="inFlight" ng-model="flightDetails.inFlight" ng-value="f">
-                          <label for="inFlight"+"{{$index}}">{{$index}}</label>
+                          <label for="inFlight"+"{{$index}}"></label>
                         </p>
                       </form>
                     </td>

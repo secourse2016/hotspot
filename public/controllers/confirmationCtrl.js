@@ -2,6 +2,7 @@ App.controller('confirmationCtrl', function($scope, PaymentSrv, $location, Fligh
   var jwtoken  = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTd2lzc0FpcmxpbmVzIiwiaWF0IjoxNDYxMDMxNDEwLCJleHAiOjE0OTI1Njc0MTcsImF1ZCI6Ind3dy5zd2lzc2FpcmxpbmVzLmNvbSIsInN1YiI6ImhvdHNwb3QifQ.1ofRxR5MfGQ1uxojSKVQrr0vIZE7Nb276BcKMSzf5Lw";
   $scope.passengerDetails = PaymentSrv.getPassengerDetails();
   $scope.flight = FlightsSrv.getFlightInfo();
+
   $scope.totalCost = 0;
   $scope.class = FlightsSrv.getFlightInfo().outFlight.class;
   $scope.airlinesToUrl = [];

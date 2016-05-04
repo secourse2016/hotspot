@@ -30,7 +30,7 @@
           console.log('error');
         }
         else {
-          response.refNum = booking.outgoingFlightId;
+          response.refNum = booking.outgoingFlightId + moment().toDate().getTime();
           cb(response);
           console.log('insert BOOKING successful');
         }

@@ -1,26 +1,25 @@
+<link type="text/css" rel="stylesheet" href="/styles/materialize.min.css"  media="screen,projection"/>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 <div class="row ">
 
-    <div class="col-md-1">
-    </div>
+  <div class="col-md-1"></div>
 
     <div class="col-md-10">
-        <div class="jumbotron main-banner">
+      <div class="jumbotron main-banner">
 
+        <div class="page-header">
+          <h1>Confirm Details</h1>
+        </div>
 
-            <div class="page-header">
-                <h1>Confirm Details</h1></div>
             <div class="col-xs-12" style="height:20px;"></div>
+
             <div class="row">
-
-                <div class="col-md-1">
-
-                </div>
+              <div class="col-md-1"></div>
 
                 <div class="col-md-10">
-
                     <!-- form -->
                     <div class="panel-body">
-                        <label for="fname">Outgoing Flight:</label>
+                        <label style="color : black" for="fname">Outgoing Flight:</label>
 
                         <table style="background-color: white " class="table table-bordered">
                             <thead style="background-color: #FF8080">
@@ -72,7 +71,7 @@
 
 
                     <div ng-show="flight.tripType =='Round trip'">
-                        <label for="fname">Return Flight:</label>
+                        <label style="color : black" for="fname">Return Flight:</label>
 
                         <table style="background-color: white " class="table table-bordered">
                             <thead style="background-color: #FF8080">
@@ -120,151 +119,88 @@
                         </table>
 
                     </div>
+                  </div>
 
-                    <!-- <script>//javascript code
-                    totalCost = flight.inFlight.cost + flight.outFlight.cost
-                    console.log(totalCost)
-                    </script> -->
+                    <div class="col-md-1"></div>
 
-                    <div class="form-group">
-                        <label for="fname">Total Cost:</label>
+                    <div class="col-md-10">
+                      <div class="form-group">
+                        <label style="color : black" for="fname">Total Cost:</label>
                         <div class="row confirm">
-                            <h3 class="confirm-text">{{totalCost | currency}}</h3>
+                          <h5 class="confirm-text">{{totalCost | currency}}</h5>
                         </div>
-                    </div>
+                      </div>
+                      <ul class="collapsible popout" data-collapsible="accordion">
+                        <li ng-repeat="p in passengerDetails">
+                          <div class="collapsible-header">Passenger Number {{$index +1}} Information</div>
+                          <div class="collapsible-body">
+                            <p>
+                              <div class="container">
 
-                    <div class="form-group">
-                        <label for="fname">First Name:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.fname}}</h3>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                  <label style="color : black" for="fname">First Name:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.firstName}}</h5>
+                                  </div>
+                                </div>
 
-                    <div class="form-group">
-                        <label for="lname">Last Name:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.lname}}</h3>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                  <label style="color : black" for="lname">Last Name:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.lastName}}</h5>
+                                  </div>
+                                </div>
 
-                    <div class="form-group">
-                        <label for="dob">Date of Birth:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.dob | date :'EEEE, MMMM d, y'}}</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="psprt">Passport Number:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.passport}}</h3>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                  <label style="color : black" for="dob">Date of Birth:</label>
+                                  <div class="row confirm" id ="dob">
+                                    <h5 class="confirm-text">{{p.dateOfBirth | date :'EEEE, MMMM d, y'}}</h5>
+                                  </div>
+                                </div>
 
 
-                    <div class="form-group">
-                        <label for="psprt">Passport Issue Date:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.passportIssueDate | date :'EEEE, MMMM d, y'}}</h3>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                  <label style="color : black" for="psprt">Passport Number:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.passportNum}}</h5>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label style="color : black" for="psprt">Passport Expiry Date:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h5>
+                                  </div>
+                                </div>
 
 
-                    <div class="form-group">
-                        <label for="psprt">Passport Expiry Date:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.passportExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
-                        </div>
-                    </div>
 
 
-                    <!-- <div class="form-group">
-                        <label for="psprt">Credit Card Type:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.ccType}}</h3>
-                        </div>
-                    </div>
+
+                                <div class="form-group">
+                                  <label style="color : black" for="psprt">Email:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.email}}</h5>
+                                  </div>
+                                </div>
 
 
-                    <div class="form-group">
-                        <label for="psprt">Credit Card Number:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.ccNumber}}</h3>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                  <label style="color : black" for="psprt">Nationality:</label>
+                                  <div class="row confirm">
+                                    <h5 class="confirm-text">{{p.nationality}}</h5>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
 
 
-                    <div class="form-group">
-                        <label for="psprt">Credit Card Expiry Date:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.ccExpiryDate | date :'EEEE, MMMM d, y'}}</h3>
-                        </div>
-                    </div>
 
-
-                    <div class="form-group">
-                        <label for="psprt">Name on Credit Card:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.ccName}}</h3>
-                        </div>
-                    </div> -->
-
-
-                    <div class="form-group">
-                        <label for="psprt">Email:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.email}}</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="psprt">Nationality:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.country}}</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="psprt">Address 1:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.add1}}</h3>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="psprt">Address 2:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.add2}}</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="psprt">State:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.state}}</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="psprt">City:</label>
-                        <div class="row confirm">
-                            <h3 class="confirm-text">{{user.city}}</h3>
-                        </div>
-                    </div>
-
-
-                    <!-- <div class="well"> -->
-                    <label for="psprt">Contact Number:</label>
-                    <div class="row well" style="text-align:left">
-                        <h3 class="">{{user.contactNumber}}</h3>
-                    </div>
-                    <!-- </div> -->
-
+                  </div>
 
 
                     <div class="col-xs-12" style="height:10px;"></div>
@@ -275,25 +211,16 @@
 
                     <div class="col-xs-12" style="height:30px;"></div>
 
-                    <label>
-                        <input type="checkbox" ng-model="checked"> All of my information is correct.</label>
+
+                    <form  action="#">
+                      <p>
+                        <input type="checkbox" id="checkbox1" ng-model="checked">
+                        <label style="color : black" for="checkbox1">All of my information is correct.</label>
+                      </p>
+                      </form>
                     <br/>
 
-                    <div>
-                        <!-- <button type="button" class="btn btn-primary" id='btnPayment' ng-click='showPaymentScreen()'>Pay</button> -->
-                    <!-- <form action="/booking" method="POST">
-                      <script
-                      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
-                      data-key="pk_test_yNAnTNKDpawM5MfTomMji98b"
-                      data-amount={{totalCost*100}}
-                      data-name="Swiss Airlines"
-                      data-description="Ticket Payment"
-                      data-image="/images/flag.png"
-                      data-locale="auto"
-                      data-email={{user.email}}>
-                      </script>
-                    </form> -->
-                  </div>
+
 
                     <!-- <button ng-model="button" ng-disabled="checked">Button</button> -->
                     <div class="col-xs-12" style="height:25px;"></div>
@@ -310,7 +237,6 @@
                     <div class="col-xs-12" style="height:15px;"></div>
                     <button ng-model="button" ng-show="user.button == 'true'" class="btn btn-primary" id='btnFinish' ng-click='GoToMain()'>Back to Home</button>
 
-                </div>
             </div>
         </div>
     </div>
